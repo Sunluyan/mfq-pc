@@ -1,0 +1,148 @@
+*{outline: none; font-family: "Microsoft Yahei",Helvetica,Arial,sans-serif;border:0px;}
+body,ul,li{margin: 0;padding: 0;font-size: 14px;}
+h1,h2,h3,h4,h5,h6,p{margin: 0;padding: 0;}
+li{list-style: none;}
+a{text-decoration: none;}
+header,footer{display: block;}
+/* 返回顶部 */
+.backToTop-box{ position: fixed;right: 10px; bottom:20px; z-index: 10;}
+.backToTop{width: 40px; height: 40px;display: block;}
+.backToTopImg{width: 100%; height: 100%;background-size: 40px 40px;background-image: url(http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-backToTop-01.png);}
+.backToTopImg:hover{cursor:pointer;background-image: url(http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-backToTop-02.png);}
+.download-APP{ margin-top: 10px; width: 40px; height: 72px; display: block;}
+.downImg{width: 100%; height: 100%;border:0px;background-size: 40px 70px;background-image: url(http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-download-APP-01.png);}
+.downImg:hover{background-image: url(http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-download-APP-02.png)}
+/* 返回顶部 end */
+/* 顶部 */
+header{width: 1100px;margin: 0 auto;overflow: hidden;}
+header img{border:0px;}
+header a{float: left;margin: 10px 40px 10px 0;}
+header form{float: left;margin:24px;}
+header .search{width: 318px; height: 30px;line-height:26px;border:solid 1px #ff6ba3;padding-left:10px;
+	border-radius: 5px 0 0 5px;}
+header .submit{width: 78px;height: 34px;line-height: 28px; background-color: #ff6ba3;
+	border-radius: 0 5px 5px 0; color: white; margin-left: -5px; vertical-align: top; border: 0px;}
+header .tell{ float:right; margin: 24px 0;}
+header .tell img{width: 16px; height: 16px; padding-top: 6px; margin-left: 5px; float: left;
+	vertical-align: middle;}
+header .tell span{color:#969696; font-size: 16px; padding-top: 3px; margin-left: 5px; float: left;}
+header .tell a{color: #969696; margin: 4px 10px 0 0; float: left;}
+header strong{color:#ff6ba3; font-size: 20px; padding-top: 1px; float: left;}
+#login{ color: #ff6ba3;cursor:pointer;}
+/* 顶部 end */
+/* 登录 */
+form{margin-top: -20px;}
+.close{margin: -40px 0 20px 350px;}
+.login-box{width: 100%; height: 100%; background-color:rgba(0,0,0,0.3); position: fixed; z-index: 1000;
+	display: none;}
+.login-small-box{width: 400px; height: 430px; background-color: #f9f9f9; border-radius: 5px;
+	margin: 60px auto 0 auto; box-shadow: 0px 0px 30px #505050; padding:60px 0;cursor: pointer;}
+.login-small-box h2{text-align: center; color: #ff6ba3; margin-bottom: 50px;}
+.accountNumber{width: 280px; height: 50px; border: solid 1px #f4f4f4; margin: 20px auto; padding: 0 10px;
+	line-height: 50px; background-color: #fff;}
+.login-small-box .forgetPassword{display: block; margin: 20px 0 0 280px; color: #969696;}
+.login-btn input{width: 300px; height: 50px; margin: 20px auto;line-height: 48px;background-color: #ff6ba3;
+	color: white; font-size: 20px; display: block;}
+.login-btn input:hover{background-color:#f25691;}
+.login-small-box .register{display: block; margin: 20px auto; color: #969696;border: 1px solid #dcdcdc;
+	line-height: 30px; border-radius: 3px; width: 50px; text-align: center;}
+.login-small-box .register:hover{background-color: #f4f4f4;}
+/* 登录 end */
+/* 注册 */
+.register-box{width: 100%; height: 100%; background-color:rgba(0,0,0,0.3); position: fixed; z-index: 1000;
+ 	display: none;}
+.register-small-box{width: 400px; height: 430px; background-color: #f9f9f9; border-radius: 5px;
+	margin: 60px auto 0 auto; box-shadow: 0px 0px 30px #505050; padding:60px 0;}
+.register-small-box h2{text-align: center; color: #ff6ba3; margin-bottom: 20px;}
+.accountNumber{width: 280px; height: 50px; border: solid 1px #f4f4f4; margin: 20px auto; padding: 0 10px;
+	background-color: #fff;}
+.accountNumber input{width: 280px; line-height: 48px;}
+.close-box{overflow: hidden; width: 360px;margin: -35px auto 20px auto;}
+.close-box a{cursor: pointer;}
+.close-box .returnIcon{float: left;}
+.close-box .closeIcon{float: right;}
+.verificationCodema{width: 300px; margin: 20px auto 0 auto; overflow: hidden;}
+.verificationCodema .verificationCode01{float: left; height: 50px;line-height: 50px; background-color: #fff; display: block;
+	width: 150px; border: solid 1px #f4f4f4; padding-left: 10px;}
+.verificationCodema .verificationCode02{float: right; line-height: 50px; background-color: #74dfe3;
+	display: block; width: 130px; border: solid 1px #f4f4f4; color: white; font-size: 16px;}
+.verificationCodema .verificationCode02:hover{ background-color: #5dd2d6;}
+#registerPa{margin:20px auto 10px auto;}
+#mimaPrompt{font-size: 10px;color: #dcdcdc; margin-left: 50px;}
+#invitationCode-box{margin:10px auto 20px auto;}
+#register-btn{width: 300px; height: 50px; margin: 20px auto;line-height: 48px;background-color: #ff6ba3;
+	color: white; font-size: 20px; display: block;}
+#register-btn:hover{background-color:#f25691;}
+.tongyi-box{margin-left: 50px;}
+.tongyi{color: #969696;}
+#checkbox{vertical-align: middle; margin-top: -1px;}
+/* 注册 end */
+/* 找回密码 */
+.retrievePassword-box{width: 100%; height: 100%; background-color:rgba(0,0,0,0.3); position: fixed; z-index: 1000;
+ 	display: none;}
+.retrievePassword-small-box{width: 400px; height: 430px; background-color: #f9f9f9; border-radius: 5px;
+	margin: 60px auto 0 auto; box-shadow: 0px 0px 30px #505050; padding:60px 0;}
+.retrievePassword-small-box h2{text-align: center; color: #ff6ba3; margin-bottom: 20px;}
+.accountNumber{width: 280px; height: 50px; border: solid 1px #f4f4f4; margin: 20px auto; padding: 0 10px;
+	background-color: #fff;}
+.accountNumber input{width: 280px; line-height: 48px;}
+.close-box{overflow: hidden; width: 360px;margin: -35px auto 20px auto;}
+.close-box .returnIcon{float: left;}
+.close-box .closeIcon{float: right;}
+.verificationCode{width: 300px; margin: 20px auto 0 auto; overflow: hidden;}
+.verificationCode .verificationCode01{float: left; height: 50px;line-height: 50px; background-color: #fff; display: block;
+	width: 150px; border: solid 1px #f4f4f4; padding-left: 10px;}
+.verificationCode .verificationCode02{float: right; line-height: 50px; background-color: #74dfe3;
+	display: block; width: 130px; border: solid 1px #f4f4f4; color: white; font-size: 16px;}
+.verificationCode .verificationCode02:hover{ background-color: #5dd2d6;}
+#retrievePasswordPa{margin:20px auto 10px auto;}
+#mimaPrompt{color: #dcdcdc; margin-left: 50px;}
+#invitationCode-box{margin:10px auto 20px auto;}
+.retrievePassword-btn input{width: 300px; height: 50px; margin: 20px auto;line-height: 48px;background-color: #ff6ba3;
+	color: white; font-size: 20px; display: block;}
+.retrievePassword-btn input:hover{background-color:#f25691;}
+.tongyi-box{margin-left: 50px;}
+.tongyi{color: #969696;}
+#checkbox{vertical-align: middle; margin-top: -1px;}
+#retrievePassword-btn{width: 300px; height: 50px; margin: 20px auto;line-height: 48px;background-color: #ff6ba3;
+	color: white; font-size: 20px; display: block;}
+#retrievePassword-btn:hover{background-color:#f25691;}
+/* 找回密码 end */
+/* nav */
+.nav-box{width: 100%; background-color: #ff6ba3;text-align: center; margin-bottom: 20px;}
+.nav-box ul{width: 1100px;overflow: hidden;margin: 0 auto;}
+.nav-box ul li{float: left;width: 220px;height: 50px;line-height: 50px;font-size: 20px;color: white;
+	background-color: #ff6ba3;}
+#download{background-color: #74dfe3;}
+.nav-box a{color: white; display: block;}
+.nav-box a:hover{width: 220px; height: 50px; line-height: 50px; background-color: #f25691;}
+.nav-box li #download:hover{background-color: #5dd2d6;}
+/* nav end */
+.title{margin: 0 auto; display: block;}
+/* 合作医院 */
+.tit-box{width: 1100px; margin: 0 auto; overflow: hidden;}
+.tit-left .strong-tit{width: 160px; height: 40px; line-height: 40px; background-color: #ff6ba3; float: left;
+	color: white;text-align: center;font-size: 20px;}
+.tit-right{width: 940px; height: 38px; border-bottom: 2px solid #ff6ba3; float: left;}
+.hospital-list-box{width: 1100px;margin: 0 auto; overflow: hidden;}
+.hospital-list-box .solid-dcdcdc{margin-top: 15px;}
+.hospital-list-box .small-box{margin: 10px 0;}
+.yuan{border: solid 2px #dcdcdc; border-radius: 100px; width: 143px; height: 143px; padding: 5px; float: left;
+	margin-right: 20px;}
+.grade-box{margin-bottom: 10px;}
+.small-yuan{ border-radius: 100px; width: 143px; height: 143px; background-image: url(http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-hospital-img.jpg);}
+.hospital-title-box h2{ margin: 0 0 10px 0;}
+.hospital-title-box a{color: #969696;}
+.hospital-title-box{margin-top: 40px; float: left;}
+.hospital-list-box .num a{float: left;}
+.hospital-list-box .num{color: #969696;font-size: 20px; float: left;margin-top: 50px; margin-left: 350px;}
+.hospital-list-box .num strong{font-size: 40px; color: #ff6ba3; margin-right: 10px;}
+.hospital-list-box .num .btn{display: block; width: 120px; height: 40px; line-height: 40px; background-color: #74dfe3;
+	float: left; margin-left: 20px; margin-top: 5px; text-align: center;color: white; font-size: 20px;
+	border-radius: 3px;}
+.hospital-list-box .num .btn:hover{background-color: #5dd2d6;}
+/* 合作医院 end */
+/* footer */
+footer{width: 100%;height: 100px; background-color: #323232;text-align: center;color: #dcdcdc; font-size: 16px;
+	line-height: 40px;padding-top:20px; margin-top: 30px;}
+/* footer end */
