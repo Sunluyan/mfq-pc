@@ -60,7 +60,11 @@ public class FeedbackController {
             ret = JsonUtil.toJson(ErrorCodes.CORE_ERROR, "系统异常", null);
         }
         logger.info("Feedback_submitFeedback_Ret is:{}", ret);
+        logger.info("Feedback_submitFeedback_Ret is:{}", ret);
+        logger.info("Feedback_submitFeedback_Ret is:{}", ret);
+        logger.info("Feedback_submitFeedback_Ret is:{}", ret);
         return ret;
+
     }
 
 }
