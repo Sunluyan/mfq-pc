@@ -1,27 +1,33 @@
 package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
-import com.mfq.bean.notification.Notification;
+import com.mfq.bean.Notification;
+import com.mfq.bean.example.NotificationExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @MFQDao
-@Component
 public interface NotificationMapper {
-    
-    public List<Notification> queryNotificationByUid(@Param("start") int start, @Param("size") int size, @Param("uid") long uid, @Param("type") int type);
-    
-    public List<Notification> queryNotificationByType(@Param("start") int start, @Param("size") int size, @Param("type") int type);
-    
-    public int updateNotificationStatus(@Param("msgId") long msg_id, @Param("status") int status);
+    int countByExample(NotificationExample example);
 
-	public long queryNotificationCountByType(@Param("uid") long uid, @Param("type") int type);
+    int deleteByExample(NotificationExample example);
 
-    public List<Notification> queryNotificationByTypeAndUid(@Param("type") int i, @Param("uid") long uid);
+    int deleteByPrimaryKey(Long id);
 
-    public List<Notification> queryAll(@Param("uid") long uid, @Param("start") int start, @Param("pagesize") int pagesize);
+    int insert(Notification record);
 
-    public long queryCountAll(@Param("uid") long uid);
+    int insertSelective(Notification record);
+
+    List<Notification> selectByExample(NotificationExample example);
+
+    Notification selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Notification record, @Param("example") NotificationExample example);
+
+    int updateByExample(@Param("record") Notification record, @Param("example") NotificationExample example);
+
+    int updateByPrimaryKeySelective(Notification record);
+
+    int updateByPrimaryKey(Notification record);
 }

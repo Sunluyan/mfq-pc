@@ -1,7 +1,4 @@
 package com.mfq.dataservice.context;
-
-import com.mfq.service.NotificationService;
-
 /**
  * 用户id的线程上下文
  * @author xingyongshan
@@ -47,8 +44,4 @@ public class UserIdHolder {
         return getLongUid() > 0;
     }
 
-	public static void updateChannelId(long uid, String mobileChannelId, String mobileType) {
-		NotificationService service = (NotificationService)SpringWrapper.getBean("notificationService");
-		service.updateChannelId(uid, mobileChannelId, mobileType);
-	}
 }

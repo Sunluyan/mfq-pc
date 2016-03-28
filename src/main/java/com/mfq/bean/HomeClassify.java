@@ -1,59 +1,43 @@
 package com.mfq.bean;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 public class HomeClassify {
-	long id; // ID
-	String name;
-	String url;
-	int index;
-	
-	public HomeClassify(long id, String name, String url){
-		this.id = id;
-		this.name = name;
-		this.url = url;
-		this.index = 0;
+    private Integer id;
 
-	}
-	
-	public HomeClassify(){
-		
-	}
-	
-	public long getId() {
-		return id;
-	}
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private String url;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private Integer index;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getIndex() {
-		return index;
-	}
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 }

@@ -1,6 +1,7 @@
 package com.mfq.handler;
 
-import com.mfq.bean.user.Status;
+
+import com.mfq.bean.Status;
 
 public class UserStatusEnumHandler extends EnumOrdinalTypeHandler<Status> {
 

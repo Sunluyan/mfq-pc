@@ -1,121 +1,126 @@
 package com.mfq.bean;
 
 import com.mfq.constants.BannerType;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.Date;
 
 public class HomeBanner {
-	long id; // ID
-	String img;
-	String name;
-	String url;
-	BannerType pType;
-	long pId;
-	int index;
-	int type;
-	int flag;
-	Date createdAt;
-	
-	public HomeBanner(long id, String img, String name, BannerType pType, long pId, String url){
-		this.id = id;
-		this.img = img;
-		this.name = name;
-		this.pType = pType;
-		this.pId = pId;
-		this.url = url;
-		this.index = 0;
-		this.type = 0;
-		this.flag = 0;
-		this.createdAt = new Date();
-	}
-	
-	public HomeBanner(){
-		
-	}
-	
-	public long getId() {
-		return id;
-	}
+    private Long id;
 
-	public String getName() {
-		return name;
-	}
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String img;
 
-	public BannerType getpType() {
-		return pType;
-	}
+    BannerType pType;
 
-	public void setpType(BannerType pType) {
-		this.pType = pType;
-	}
+    private Long pId;
 
-	public long getpId() {
-		return pId;
-	}
+    private String url;
 
-	public void setpId(long pId) {
-		this.pId = pId;
-	}
+    private Integer index;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private Integer type;
 
-	public String getImg() {
-		return img;
-	}
+    private Integer flag;
 
-	public void setImg(String img) {
-		this.img = img;
-	}
+    private Date createdAt;
 
-	public String getUrl() {
-		return url;
-	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
-	public int getIndex() {
-		return index;
-	}
+    public HomeBanner(long id, String img, String name, BannerType pType, long pId, String url){
+        this.id = id;
+        this.img = img;
+        this.name = name;
+        this.pType = pType;
+        this.pId = pId;
+        this.url = url;
+        this.index = 0;
+        this.type = 0;
+        this.flag = 0;
+        this.createdAt = new Date();
+    }
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
+    public HomeBanner() {
+        super();
+    }
 
-	public int getType() {
-		return type;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setType(int type) {
-		this.type = type;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public int getFlag() {
-		return flag;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public String getImg() {
+        return img;
+    }
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public BannerType getpType() {
+        return pType;
+    }
+
+    public void setpType(BannerType pType) {
+        this.pType = pType;
+    }
+
+    public Long getpId() {
+        return pId;
+    }
+
+    public void setpId(Long pId) {
+        this.pId = pId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

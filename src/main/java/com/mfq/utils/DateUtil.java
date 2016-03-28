@@ -11,7 +11,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public final class DateUtil {
+public class DateUtil {
+
 
     private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 
@@ -28,9 +29,6 @@ public final class DateUtil {
             "HH:mm:ss");
     private static final SimpleDateFormat[] formatYYYYMMDDHHMMSS = createDateFormat(
             "yyyyMMddHHmmss");
-    
-    public static final SimpleDateFormat[] formatCZYYYYMMDD = createDateFormat(
-            "yyyy年MM月dd日");
 
     private static int currentIndex = 0; // 不需要考虑多线程问题，节省性能开销。
 
@@ -66,13 +64,10 @@ public final class DateUtil {
         }
     }
 
-    public static String formatCZYYYYMMDD(Date date) {
-        SimpleDateFormat fmt = formatCZYYYYMMDD[getIndex()];
-        synchronized (fmt) {
-            return fmt.format(date);
-        }
+    public static void main(String[] args) {
+        System.out.println(formatYYYYMMDDHHMMSS(new Date()));
     }
-    
+
     public static Date convertYYYYMMDDHHMMSS(String strDate) {
         if (strDate == null || strDate.indexOf("null") >= 0)
             return null;
@@ -266,8 +261,6 @@ public final class DateUtil {
     /**
      * 取得时间间隔,相差的时间，XX小时XX分钟
      * 
-     * @param d1
-     * @param d2
      * @return 不会超过24小时
      */
     public static String getTimeBetween(String time1, String time2) {
@@ -339,11 +332,6 @@ public final class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         return sdf.format(date);
     }
-    
-    public static Date long2Date(long msec) {
-        Date date = new Date(msec);
-        return date;
-    }
 
     public static Date getGoodSendDateTime(Date date) {
         long hour = DateUtils.getFragmentInHours(date, Calendar.DAY_OF_YEAR);
@@ -358,19 +346,30 @@ public final class DateUtil {
         }
         return null;
     }
-    
+
     public static Date getGoodSendDateTime() {
         return getGoodSendDateTime(new Date());
     }
-    
+
     /**
-     * 
-     * @param date 毫秒数
+     * 返回昨天的日期,格式为 yyMMdd
      * @return
      */
-    public static Date getDateTimeBySeconds(String date) {
-    	long msgCreateTime = Long.parseLong(date) * 1000L;   
-	    return new Date(msgCreateTime);
+    public static Date getYesterday() throws ParseException {
+        Date yesterday = new Date();
+        yesterday.setDate(yesterday.getDate()-1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        yesterday = sdf.parse(sdf.format(yesterday));
+        return yesterday;
     }
-    
+    /**
+     * 返回今天的日期,格式为 yyMMdd
+     * @return
+     */
+    public static Date getToday() throws ParseException {
+        Date today = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        today = sdf.parse(sdf.format(today));
+        return today;
+    }
 }

@@ -1,24 +1,33 @@
 package com.mfq.dao;
 
-import com.mfq.annotation.MFQDao;
 import com.mfq.bean.HomeClassify;
+import com.mfq.bean.example.HomeClassifyExample;
+import com.mfq.annotation.MFQDao;;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @MFQDao
-@Component
 public interface HomeClassifyMapper {
+    int countByExample(HomeClassifyExample example);
 
-    public long insertHomeClassify(HomeClassify classify);
-    
-    public HomeClassify findById(@Param("id") long id);
-    
-    public List<HomeClassify> queryAll();
-    
-    public long updateHomeClassify(HomeClassify model);
-    
-    public long deleteHomeClassify(@Param("id") long id);
-    
+    int deleteByExample(HomeClassifyExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(HomeClassify record);
+
+    int insertSelective(HomeClassify record);
+
+    List<HomeClassify> selectByExample(HomeClassifyExample example);
+
+    HomeClassify selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") HomeClassify record, @Param("example") HomeClassifyExample example);
+
+    int updateByExample(@Param("record") HomeClassify record, @Param("example") HomeClassifyExample example);
+
+    int updateByPrimaryKeySelective(HomeClassify record);
+
+    int updateByPrimaryKey(HomeClassify record);
 }

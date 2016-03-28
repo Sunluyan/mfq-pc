@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +33,7 @@ pageEncoding="UTF-8"%>
 		<a><img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-close-icon-before.png" height="30" width="30" class="close" id="close01" draggable="false"></a>
 		<form action="javascrpit:void(0)">
 			<h2>账号登录</h2>
+
 			<div class="accountNumber" id="accountNumber"><input type="text" maxlength="11" placeholder="手机号/账号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" id="mobile"></div>
 			<div class="accountNumber" id="passwordBg"><input type="password" placeholder="密码" id="password"></div>
 			<a class="forgetPassword" id="forgetPassword">忘记密码？</a>
@@ -60,8 +62,8 @@ pageEncoding="UTF-8"%>
 			<script type="text/javascript">  
 			/**********获取验证码倒计时事件**********************************/
 				var wait=60;  
-				function time(o) {  
-					if(wait == 0){  
+				function time(o) {
+					if(wait == 0){
 						o.removeAttribute("disabled");            
 						o.value="获取验证码"; 
 						document.getElementById("obtain").disabled = false;
@@ -72,7 +74,7 @@ pageEncoding="UTF-8"%>
 						document.getElementById("obtain").disabled = true;  
 						wait--;  
 						setTimeout(function() {  
-							time(o)  
+							time(o)
 						},1000)  
 					}  
 				}  
@@ -174,6 +176,7 @@ pageEncoding="UTF-8"%>
 			<!-- 项目 小导航 -->
 			<div class="nav-02" id="nav-02">
 				<ul>
+
 					<li class="li" index="0"><a href="search" target="_blank">鼻部</a></li>
 					<li class="li" index="1"><a href="search" target="_blank">眉眼</a></li>
 					<li class="li" index="2"><a href="search" target="_blank">面部</a></li>
@@ -216,8 +219,6 @@ pageEncoding="UTF-8"%>
 					</li>
 				</ul>
 			</div>
-			<!-- <a href="javascript:;" class="ctrl-slide ck-prev">上一张</a>
-			<a href="javascript:;" class="ctrl-slide ck-next">下一张</a> -->
 			<div class="ck-slidebox">
 				<div class="slideWrap">
 					<ul class="dot-wrap">
@@ -245,144 +246,64 @@ pageEncoding="UTF-8"%>
 		<div class="tit-right"></div>
 	</div>
 	<ul>
-		<li class="first-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>	
-				<span class="originalPrice">￥5333</span>
+		<c:forEach items="${products}" var="pro" varStatus="status" begin="0" end="3">
+			<c:if test="${status.index != 0}">
+				<li class="details-li" style="background-image: url(${pro.img});background-repeat: no-repeat;background-size: 560px 240px;background-position: center 0;">
+			</c:if>
+			<c:if test="${status.index == 0}" >
+				<li class="first-li details-li" style="background-image: url(${pro.img});background-repeat: no-repeat;background-size: 560px 240px;background-position: center 0;">
+			</c:if>
+
+				<div class="details-bg">
+					<div class="small-titie">
+						<h3>${pro.name}</h3>
+						<p class="details">
+							${pro.desc}
+						</p>
+					</div>
+					<span class="fu">￥</span>
+					<strong>${pro.price}</strong>
+					<span class="originalPrice">￥${pro.marketPrice}</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
+					<span class="subsidyPrice">￥${pro.butie}</span>
 				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
-		<li class="second-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
+					<div class="line-dcdcdc"></div>
+					<a href="/product/${pro.pid}" target="_blank">查看详情</a>
 				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
-		<li class="third-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
-		<li class="fourth-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
+			</li>
+		</c:forEach>
+
+
 	</ul>
 	<ul>
-		<li class="first-li details-li">
+		<c:forEach items="${products}" var="pro" varStatus="status" begin="4" end="7">
+			<c:if test="${status.index != 4}">
+				<li class="details-li"style="background-image: url(${pro.img});background-repeat: no-repeat;background-size: 560px 240px;background-position: center 0;">
+			</c:if>
+			<c:if test="${status.index == 4}">
+				<li class="first-li details-li"style="background-image: url(${pro.img});background-repeat: no-repeat;background-size: 560px 240px;background-position: center 0;">
+			</c:if>
+
 			<div class="details-bg">
 				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
+					<h3>${pro.name}</h3>
+					<p class="details">
+							${pro.desc}
+					</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
+				<strong>${pro.price}</strong>
+				<span class="originalPrice">￥${pro.marketPrice}</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
+					<span class="subsidyPrice">￥${pro.butie}</span>
 				</span>
 				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
+				<a href="/product/${pro.pid}" target="_blank">查看详情</a>
 			</div>
-		</li>
-		<li class="second-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
-		<li class="third-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
-		<li class="fourth-li details-li">
-			<div class="details-bg">
-				<div class="small-titie">
-					<h3>纯韩双眼皮</h3>
-					<p class="details">纯韩无痕媚眼术</p>
-				</div>
-				<span class="fu">￥</span>
-				<strong>4800</strong>		
-				<span class="originalPrice">￥5333</span>
-				<span class="subsidy">
-					<span class="subsidyPriceBg">补贴</span>
-					<span class="subsidyPrice">￥533</span>
-				</span>
-				<div class="line-dcdcdc"></div>
-				<a href="product" target="_blank">查看详情</a>
-			</div>
-		</li>
+			</li>
+		</c:forEach>
 	</ul>
 </div>
 <!-- 畅享9折 end -->

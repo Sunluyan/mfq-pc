@@ -2,7 +2,6 @@ package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
 import com.mfq.bean.coupon.Coupon;
-import com.mfq.constants.CouponStatus;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -19,16 +18,15 @@ public interface CouponMapper {
     public List<Coupon> findByUid(@Param("uid") long uid);
 
     public List<Coupon> findUserValid(@Param("uid") long uid,
-                                      @Param("status") CouponStatus status,
+                                      @Param("status") int status,
                                       @Param("list") List<Long> list);
 
-    public long updateStatus(@Param("couponNum") String couponNum, @Param("status") CouponStatus status);
+    public long updateStatus(@Param("couponNum") String couponNum, @Param("status") int status);
 
     public Coupon findByUserAndNum(@Param("uid") long uid, @Param("couponNum") String couponNum);
 
     public long delCoupon(@Param("couponNum") String couponNum);
 
-	public List<Coupon> findCouponsByUidAndStatus(@Param("uid") long uid, @Param("status") CouponStatus couponStatus);
+	public List<Coupon> findCouponsByUidAndStatus(@Param("uid") long uid, @Param("status") int couponStatus);
 
-    List<Coupon> findByUidAndBatchId(@Param("uid") long uid, @Param("batchId") long batchId, @Param("status") Integer status);
 }

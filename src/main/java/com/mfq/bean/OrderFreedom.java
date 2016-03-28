@@ -34,9 +34,6 @@ public class OrderFreedom {
 
     private Date serviceTime;
 
-
-
-
     public Long getId() {
         return id;
     }
@@ -197,25 +194,5 @@ public class OrderFreedom {
     }
     public OrderFreedom(){
         super();
-    }
-
-
-    public OrderFreedom(OrderInfo info, Product product, String hospitalName){
-        this.id = info.getId();
-        this.uid = info.getUid();
-        this.orderNo = info.getOrderNo();
-        this.hospitalId = product.getHospitalId();
-        this.proname = hospitalName;
-        this.price = info.getPrice();
-        this.status = info.getStatus();
-        this.couponNum = info.getCouponNum();
-        this.onlinePay = info.getOnlinePay();
-        this.securityCode = info.getSecurityCode();
-        this.policyStatus = info.getPolicyStatus().getId();
-        this.createTime = info.getCreatedAt();
-        this.payTime = info.getUpdatedAt();
-        this.updateTime = info.getUpdatedAt();
-        this.serviceTime = info.getServiceStartTime();
-
     }
 }

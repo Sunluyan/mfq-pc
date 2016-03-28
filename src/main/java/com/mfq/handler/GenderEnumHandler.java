@@ -1,6 +1,6 @@
 package com.mfq.handler;
 
-import com.mfq.bean.user.Gender;
+import com.mfq.bean.Gender;
 
 public class GenderEnumHandler extends EnumOrdinalTypeHandler<Gender> {
 

@@ -2,45 +2,81 @@ package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
 import com.mfq.bean.OrderInfo;
-import com.mfq.constants.OrderStatus;
-import com.mfq.constants.PolicyStatus;
-import com.mfq.constants.ProductType;
+import com.mfq.bean.example.OrderInfoExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @MFQDao
 @Component
 public interface OrderInfoMapper {
+    int countByExample(OrderInfoExample example);
 
-    public List<OrderInfo> findByTypeAndStatus(@Param("type") ProductType type,
-                                               @Param("status") OrderStatus status);
+    int deleteByExample(OrderInfoExample example);
 
-    public OrderInfo findByOrderNo(@Param("orderNo") String orderNo);
+    int deleteByPrimaryKey(Integer id);
 
-    public long insertOrder(OrderInfo order);
+    int insert(OrderInfo record);
 
-    public long updateOrderInfo(OrderInfo orderInfo);
+    int insertSelective(OrderInfo record);
 
-    public List<OrderInfo> findByUid(@Param("uid") long uid);
+    List<OrderInfo> selectByExample(OrderInfoExample example);
 
-    public List<OrderInfo> findByUidAndStatus(@Param("uid") long uid, @Param("status") Integer status);
+    OrderInfo selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") OrderInfo record, @Param("example") OrderInfoExample example);
+
+    int updateByExample(@Param("record") OrderInfo record, @Param("example") OrderInfoExample example);
+
+    int updateByPrimaryKeySelective(OrderInfo record);
+
+    int updateByPrimaryKey(OrderInfo record);
+
+
+
+
+    public long findCount(@Param("orderNo") String orderNo,
+                          @Param("uid") Long uid, @Param("securityCode") String securityCode,
+                          @Param("status") int status, @Param("ob") String ob,
+                          @Param("oe") String oe, @Param("start") long start,
+                          @Param("pagesize") long pagesize);
+
+    public List<OrderInfo> findByPage(@Param("orderNo") String orderNo,
+                                      @Param("uid") Long uid, @Param("securityCode") String securityCode,
+                                      @Param("status") int status, @Param("ob") String ob,
+                                      @Param("oe") String oe, @Param("start") long start,
+                                      @Param("pagesize") long pagesize);
+
+
+
+    public List<OrderInfo> findByPageByHospital(@Param("orderNo") String orderNo,
+                                                @Param("uid") Long uid, @Param("securityCode") String securityCode,
+                                                @Param("status") int status, @Param("ob") String ob,
+                                                @Param("oe") String oe, @Param("start") long start,
+                                                @Param("hospitalId") long hospitalId, @Param("pagesize") long pagesize);
 
     public long updateOrderStatusSafe(@Param("id") long id,
                                       @Param("oldStatus") int oldStatus,
                                       @Param("newStatus") int newStatus);
-    
-	public List<OrderInfo> findByUidAndProductType(@Param("uid") long uid, @Param("type") ProductType type);
-	
-	public long findByUidAndPayTypeAndPid(@Param("uid") long uid, @Param("type") int type, @Param("pid") long pid);
-	
 
-	public long updateByPrimaryKeySelective(OrderInfo record);
+    public OrderInfo findById(@Param("id") long id);
 
-	public int updateOnlinepayByOrderNo(@Param("orderNo") String orderNo, @Param("onlinePay") BigDecimal onlinePay);
+    public OrderInfo findByOrderNo(@Param("orderNo") String orderNo);
 
-	public int updatePolicyStatusByStatus(@Param("newStatus") PolicyStatus insureEffect, @Param("oldStatus") PolicyStatus auditing, @Param("orderNo") String orderNo);
+    public long findCountByFinanceOrder(@Param("orderNo") String orderNo,
+                                        @Param("mobile") String mobile, @Param("hospitalName") String hospitalName, @Param("payType") int payType,
+                                        @Param("payApi") String payApi, @Param("status") int status, @Param("ob") String ob, @Param("oe") String oe,
+                                        @Param("start") long start, @Param("pagesize") long pagesize);
+
+    public List<Map<String,Object>> findByFinancePage(@Param("orderNo") String orderNo,
+                                                      @Param("mobile") String mobile, @Param("hospitalName") String hospitalName, @Param("payType") int payType,
+                                                      @Param("payApi") String payApi, @Param("status") int[] status, @Param("ob") String ob, @Param("oe") String oe,
+                                                      @Param("start") long start, @Param("pagesize") long pageSize);
+
+    public List<Map<String,Object>> findStatusByUid(@Param("uids") List<String> uids);
+
+    public List<OrderInfo> findByPageOfLiu(@Param("example") OrderInfoExample example, @Param("start") long start,
+                                           @Param("pagesize") long pagesize);
 }
-

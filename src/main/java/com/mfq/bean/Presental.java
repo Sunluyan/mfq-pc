@@ -32,4 +32,13 @@ public class Presental {
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
     }
+
+    @Override
+    public String toString() {
+        return "Presental{" +
+                "code='" + code + '\'' +
+                ", uid=" + uid +
+                ", updatetime=" + updatetime +
+                '}';
+    }
 }
