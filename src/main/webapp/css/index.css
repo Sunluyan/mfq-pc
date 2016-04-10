@@ -1,4 +1,6 @@
-*{outline: none; font-family: "Microsoft Yahei",Helvetica,Arial,sans-serif;border:0px;}
+*{outline: none; font-family: "Microsoft Yahei",Helvetica,Arial,sans-serif;border:0px;
+
+}
 body,ul,li{margin: 0;padding: 0;font-size: 14px;}
 h1,h2,h3,h4,h5,h6,p{margin: 0;padding: 0;}
 li{list-style: none;}
@@ -16,19 +18,34 @@ header,footer{display: block;}
 /* 顶部 */
 header{width: 1100px;margin: 0 auto;overflow: hidden;}
 header img{border:0px;}
-header a{float: left;margin: 10px 40px 10px 0;}
+header .logo{float: left;margin: 10px 40px 10px 0;}
 header form{float: left;margin:24px;}
 header .search{width: 318px; height: 30px;line-height:26px;border:solid 1px #ff6ba3;padding-left:10px;
 	border-radius: 5px 0 0 5px;}
 header .submit{width: 78px;height: 34px;line-height: 28px; background-color: #ff6ba3;
 	border-radius: 0 5px 5px 0; color: white; margin-left: -5px; vertical-align: top; border: 0px;}
-header .tell{ float:right; margin: 24px 0;}
-header .tell img{width: 16px; height: 16px; padding-top: 6px; margin-left: 5px; float: left;
+header .tell{ float:right;height:83px;margin-right: 20px;}
+header .tell img{width: 16px; height: 16px; padding-top: 6px; margin-left: 15px; float: left;
 	vertical-align: middle;}
-header .tell span{color:#969696; font-size: 16px; padding-top: 3px; margin-left: 5px; float: left;}
-header .tell a{color: #969696; margin: 4px 10px 0 0; float: left;}
-header strong{color:#ff6ba3; font-size: 20px; padding-top: 1px; float: left;}
-#login{ color: #ff6ba3;cursor:pointer;}
+header .tell .not-login{color:#969696; font-size: 16px; padding-top: 3px; margin-left: 5px; float: left;line-height: 83px;}
+header strong{color:#ff6ba3; font-size: 20px; float: left;margin-left: 3px;}
+#login{ color: #ff6ba3;cursor:pointer;float:left;}
+.logined{
+	line-height: 83px;
+}
+.logined span{
+	font-size: 13px;
+}
+.username{
+	color:#666;
+}
+.exit{
+	font-size: 13px;
+	color:#666;
+}
+.phone{
+	margin-top: 26px;
+}
 /* 顶部 end */
 /* 登录 */
 form{margin-top: -20px;}
@@ -195,3 +212,18 @@ form{margin-top: -20px;}
 footer{width: 100%;height: 100px; background-color: #323232;text-align: center;color: #dcdcdc;
 	font-size: 16px;line-height: 40px;padding-top:20px;}
 /* footer end */
+
+
+.QR{
+	width:100%;
+	height:100%;
+	text-align: center;
+	position: fixed;
+	top:0;
+	background:rgba(0,0,0,0.3);
+	z-index: 1000;
+	display:none;
+}
+.QR img{
+	margin-top: 200px;
+}

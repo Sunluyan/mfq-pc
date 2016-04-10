@@ -1,7 +1,7 @@
 package com.mfq.utils;
 
 import com.google.common.collect.Maps;
-import com.mfq.bean.UserQuota;
+import com.mfq.bean.user.UserQuota;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

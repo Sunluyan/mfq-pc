@@ -3,12 +3,14 @@ package com.mfq.dao;
 import com.mfq.annotation.MFQDao;
 import com.mfq.bean.coupon.CouponBatchInfo;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @MFQDao
+@Component
 public interface CouponBatchInfoMapper {
-	
+
     public long insertOne(CouponBatchInfo couponBatchInfo);
     
     public CouponBatchInfo findById(@Param("id") long id);

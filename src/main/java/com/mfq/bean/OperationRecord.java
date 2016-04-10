@@ -1,8 +1,12 @@
 package com.mfq.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OperationRecord {
+public class OperationRecord implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
     private Long id;
 
     private Long uid;
@@ -59,7 +63,20 @@ public class OperationRecord {
         return keyword;
     }
 
-    public void setKeyword(String keyword) {
+    public void setKeyword(String keyword)
+    {
         this.keyword = keyword == null ? null : keyword.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "OperationRecord{" +
+                "id=" + id +
+                ", uid=" + uid +
+                ", proId=" + proId +
+                ", typeId=" + typeId +
+                ", operationDate=" + operationDate +
+                ", keyword='" + keyword + '\'' +
+                '}';
     }
 }

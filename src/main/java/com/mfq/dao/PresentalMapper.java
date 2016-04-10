@@ -2,12 +2,14 @@ package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
 import com.mfq.bean.Presental;
-import com.mfq.bean.example.PresentalExample;
+import com.mfq.bean.PresentalExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @MFQDao
+@Component
 public interface PresentalMapper {
     int countByExample(PresentalExample example);
 

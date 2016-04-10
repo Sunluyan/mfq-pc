@@ -1,63 +1,64 @@
 package com.mfq.bean;
 
+import com.mfq.constants.CardType;
+import com.mfq.constants.OrderType;
+import com.mfq.constants.PayStatus;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 支付记录
+ * 
+ * @author xingyongshan
+ *
+ */
 public class PayRecord {
-    private Long id;
 
-    private Integer orderType;
+    long id; // 支付ID
+    OrderType orderType; // 支付类型
+    String tradeNo; // 交易流水号
+    String orderNo; // 订单号
+    BigDecimal amount; // 交易金额
+    BigDecimal balance; // 使用余额
+    BigDecimal present; // 使用赠送
+    long uid; // user id
+    String tpp; // 支付平台
+    String bankCode; // 支付银行
+    CardType cardType; // 卡类型，1借记卡，2信用卡
+    String cardNo; // 银行卡号－可能不是全部－只有部分展示
+    PayStatus status; // 充值状态
+    Date payAt; // 支付时间
+    Date callbackAt; // 回调时间
+    Date updatedAt; // 最后更新时间
 
-    private String tradeNo;
+    public PayRecord() {
 
-    private String orderNo;
+    }
 
-    private BigDecimal amount;
-
-    private BigDecimal balance;
-
-    private BigDecimal present;
-
-    private Long uid;
-
-    private String tpp;
-
-    private String bankCode;
-
-    private Integer cardType;
-
-    private String cardNo;
-
-    private Integer status;
-
-    private Date payAt;
-
-    private Date callbackAt;
-
-    private Date updatedAt;
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
+    
+    public OrderType getOrderType() {
+		return orderType;
+	}
 
-    public Integer getOrderType() {
-        return orderType;
-    }
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
+	}
 
-    public void setOrderType(Integer orderType) {
-        this.orderType = orderType;
-    }
-
-    public String getTradeNo() {
+	public String getTradeNo() {
         return tradeNo;
     }
 
     public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
+        this.tradeNo = tradeNo;
     }
 
     public String getOrderNo() {
@@ -65,7 +66,7 @@ public class PayRecord {
     }
 
     public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
+        this.orderNo = orderNo;
     }
 
     public BigDecimal getAmount() {
@@ -92,11 +93,11 @@ public class PayRecord {
         this.present = present;
     }
 
-    public Long getUid() {
+    public long getUid() {
         return uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
@@ -105,7 +106,7 @@ public class PayRecord {
     }
 
     public void setTpp(String tpp) {
-        this.tpp = tpp == null ? null : tpp.trim();
+        this.tpp = tpp;
     }
 
     public String getBankCode() {
@@ -113,14 +114,14 @@ public class PayRecord {
     }
 
     public void setBankCode(String bankCode) {
-        this.bankCode = bankCode == null ? null : bankCode.trim();
+        this.bankCode = bankCode;
     }
 
-    public Integer getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 
-    public void setCardType(Integer cardType) {
+    public void setCardType(CardType cardType) {
         this.cardType = cardType;
     }
 
@@ -129,14 +130,14 @@ public class PayRecord {
     }
 
     public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
+        this.cardNo = cardNo;
     }
 
-    public Integer getStatus() {
+    public PayStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(PayStatus status) {
         this.status = status;
     }
 
@@ -166,23 +167,6 @@ public class PayRecord {
 
     @Override
     public String toString() {
-        return "PayRecord{" +
-                "id=" + id +
-                ", orderType=" + orderType +
-                ", tradeNo='" + tradeNo + '\'' +
-                ", orderNo='" + orderNo + '\'' +
-                ", amount=" + amount +
-                ", balance=" + balance +
-                ", present=" + present +
-                ", uid=" + uid +
-                ", tpp='" + tpp + '\'' +
-                ", bankCode='" + bankCode + '\'' +
-                ", cardType=" + cardType +
-                ", cardNo='" + cardNo + '\'' +
-                ", status=" + status +
-                ", payAt=" + payAt +
-                ", callbackAt=" + callbackAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

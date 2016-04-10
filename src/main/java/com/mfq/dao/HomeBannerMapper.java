@@ -1,34 +1,24 @@
 package com.mfq.dao;
 
-//import com.mfq.annotation.MFQDao;
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.HomeBanner;
-import com.mfq.bean.example.HomeBannerExample;
-import com.mfq.annotation.MFQDao;;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @MFQDao
+@Component
 public interface HomeBannerMapper {
-    int countByExample(HomeBannerExample example);
 
-    int deleteByExample(HomeBannerExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(HomeBanner record);
-
-    int insertSelective(HomeBanner record);
-
-    List<HomeBanner> selectByExample(HomeBannerExample example);
-
-    HomeBanner selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") HomeBanner record, @Param("example") HomeBannerExample example);
-
-    int updateByExample(@Param("record") HomeBanner record, @Param("example") HomeBannerExample example);
-
-    int updateByPrimaryKeySelective(HomeBanner record);
-
-    int updateByPrimaryKey(HomeBanner record);
+    public long insertHomeBanner(HomeBanner banner);
+    
+    public HomeBanner findById(@Param("id") long id);
+    
+    public List<HomeBanner> queryAll();
+    
+    public long updateHomeBanner(HomeBanner model);
+    
+    public long deleteHomeBanner(@Param("id") long id);
+    
 }

@@ -1,8 +1,7 @@
 package com.mfq.controller;
 
 import com.mfq.bean.Product;
-import com.mfq.services.ProductService;
-import org.apache.http.HttpResponse;
+import com.mfq.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ import java.util.Map;
 public class PageController {
 
     private static final Logger logger = LoggerFactory
-            .getLogger(PageController.class);
+            .getLogger(InterViewController.class);
 
     @Resource
     ProductService service;
@@ -62,16 +61,19 @@ public class PageController {
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public String search(){
-
         return "search";
     }
     @RequestMapping(value = "/product/{proId}",method = RequestMethod.GET)
     public String product(@PathVariable int proId){
+
         return "product";
-    }
-    @RequestMapping(value = "download-app.html")
-    public String download(){
-        return "download-app";
     }
 
 }
+
+
+
+
+
+
+

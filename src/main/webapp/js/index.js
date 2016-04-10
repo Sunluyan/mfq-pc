@@ -1,7 +1,6 @@
 function switch_background(index){
      document.getElementById("bg-color").style.backgroundColor= g_background_colors[index];
 }
-var fingerprint = new Fingerprint({canvas: true}).get();
 var g_background_colors = ["#aacaa4","#ececf0","#e4e3ed"];
 var g_current_color_idx = 0;
 
@@ -12,10 +11,6 @@ $(function(){
         dir: 'x',//默认效果淡隐淡出，x为水平移动，y 为垂直滚动
         interval:3000//默认间隔2000毫秒   
     });
-    
-    // window.onload = function(){
-    //  setInterval(switch_background, 5000);
-    // }
     
     // 导航一级二级
     var hideorshow = 0;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,26 +59,80 @@ pageEncoding="UTF-8"%>
 				<input class="verificationCode01" type="text" maxlength="4" placeholder="输入验证码" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 				<input class="verificationCode02" type="submit" value="获取验证码" id="obtain">
 			</div>
-			<script type="text/javascript">  
-			/**********获取验证码倒计时事件**********************************/
-				var wait=60;  
+			<script type="text/javascript">
+				/**********获取验证码倒计时事件**********************************/
+				var wait=60;
 				function time(o) {
-					if(wait == 0){
-						o.removeAttribute("disabled");            
-						o.value="获取验证码"; 
-						document.getElementById("obtain").disabled = false;
-						wait = 60;  
-					}else {  
-						o.setAttribute("disabled", true);  
-						o.value="重新发送(" + wait + ")";
-						document.getElementById("obtain").disabled = true;  
-						wait--;  
-						setTimeout(function() {  
-							time(o)
-						},1000)  
-					}  
-				}  
-				document.getElementById("obtain").onclick=function(){time(this);} 
+					var mobile = "";
+					if(o.getAttribute("id") == "obtain"){
+						mobile = $("#registerMobile").val()
+                        $.ajax({
+                            url:"/vcode/send",
+                            data:{
+                                mobile:mobile
+                            },
+                            type:"post",
+                            dataType:"json",
+                            success:function(json){
+                                if(json.code == 0){
+                                    timeIt(o);
+                                }else{
+                                    alert("发送短信错误")
+                                }
+                            }
+                        })
+					}else{
+						mobile = $("#retrievePasswordMobile").val()
+                        $.ajax({
+                            url:"/a/password/reset/mobile/"+mobile+"/",
+                            type:"post",
+                            dataType:"json",
+                            success:function(json){
+                                alert(json);
+                                console.log(json)
+                            }
+                        })
+					}
+
+				}
+				function timeIt(o){
+					if(o.id == "obtain"){
+
+						if(wait == 0){
+							o.removeAttribute("disabled");
+							o.value="获取验证码";
+							document.getElementById("obtain").disabled = false;
+							wait = 60;
+						}else {
+							o.setAttribute("disabled", true);
+							o.value="重新发送(" + wait + ")";
+							document.getElementById("obtain").disabled = true;
+							wait--;
+							setTimeout(function() {
+								timeIt(o)
+							},1000)
+						}
+
+					}else{
+
+						if(wait == 0){
+							o.removeAttribute("disabled");
+							o.value="获取验证码";
+							document.getElementById("obtain01").disabled = false;
+							wait = 60;
+						}else {
+							o.setAttribute("disabled", true);
+							o.value="重新发送(" + wait + ")";
+							document.getElementById("obtain01").disabled = true;
+							wait--;
+							setTimeout(function() {
+								timeIt(o)
+							},1000)
+						}
+					}
+
+				}
+				document.getElementById("obtain").onclick=function(){time(this);}
 			</script>
 			<div class="accountNumber" id="registerPa">
 				<input type="password" placeholder="密码" id="registerPassword">
@@ -111,26 +165,11 @@ pageEncoding="UTF-8"%>
 				<input class="verificationCode01" type="text" maxlength="4" placeholder="输入验证码" maxlength="4" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 				<input class="verificationCode02" type="submit" value="获取验证码" id="obtain01">
 			</div>
-			<script type="text/javascript">  
-			/**********获取验证码倒计时事件**********************************/
-				var wait=60;  
-				function time(o) {  
-					if(wait == 0){  
-						o.removeAttribute("disabled");            
-						o.value="获取验证码"; 
-						document.getElementById("obtain01").disabled = false;
-						wait = 60;  
-					}else {  
-						o.setAttribute("disabled", true);  
-						o.value="重新发送(" + wait + ")";
-						document.getElementById("obtain01").disabled = true;  
-						wait--;  
-						setTimeout(function() {  
-							time(o)  
-						},1000)
-					}
-				}
-				document.getElementById("obtain01").onclick=function(){time(this);} 
+			<script type="text/javascript">
+				/**********获取验证码倒计时事件**********************************/
+				var wait=60;
+
+				document.getElementById("obtain01").onclick=function(){time(this);}
 			</script>
 			<div class="accountNumber" id="retrievePasswordPa">
 				<input type="password" placeholder="新密码" id="retrievePasswordPassword">
@@ -143,16 +182,22 @@ pageEncoding="UTF-8"%>
 <!-- 登录 end -->
 <!-- 顶部 -->
 <header>
-	<a href="/index"><img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-logo.png" height="60" width="244" alt="美分期logo"></a>
+	<a href="/index" class="logo"><img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-logo.png" height="60" width="244" alt="美分期logo"></a>
 	<form method="" action="">
 		<input name="search" type="text" placeholder="搜索" class="search">
 		<input type="submit" value="搜索" class="submit">
 	</form>
 	<div class="tell">
-		<a id="login">登录</a><a>|</a>
-		<img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-tell.png" height="18" width="20">
-		<span>咨询电话：</span>
-		<strong>010-64399899</strong>
+		<div class="logined"  style="display: none;">
+			<span class="username">刘志国</span>
+			<a class="exit" href="javascript:void(0)">&nbsp;退出</a>
+		</div>
+		<div class="not-login" >
+			<a id="login">登录</a>
+			<img class="phone" src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-tell.png" height="18" width="20">
+			<strong>010-64399899</strong>
+		</div>
+
 	</div>
 </header>
 <!-- 顶部 end -->
@@ -203,9 +248,9 @@ pageEncoding="UTF-8"%>
 			<div class="small-box">
 				<ul class="ck-slide-wrapper">
 					<li class="banner-li">
-       	     	    	<a href="javascript:">
-       	     	    		<img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-banner-0yuanfenqi.jpg" height="350" width="1100" draggable="false">
-       	     	    	</a>
+						<a href="javascript:">
+							<img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-banner-0yuanfenqi.jpg" height="350" width="1100" draggable="false">
+						</a>
 					</li>
 					<li style="display:none" class="banner-li">
 						<a href="javascript:">
@@ -254,23 +299,23 @@ pageEncoding="UTF-8"%>
 				<li class="first-li details-li" style="background-image: url(${pro.img});background-repeat: no-repeat;background-size: 560px 240px;background-position: center 0;">
 			</c:if>
 
-				<div class="details-bg">
-					<div class="small-titie">
-						<h3>${pro.name}</h3>
-						<p class="details">
+			<div class="details-bg">
+				<div class="small-titie">
+					<h3>${pro.name}</h3>
+					<p class="details">
 							${pro.desc}
-						</p>
-					</div>
-					<span class="fu">￥</span>
-					<strong>${pro.price}</strong>
-					<span class="originalPrice">￥${pro.marketPrice}</span>
+					</p>
+				</div>
+				<span class="fu">￥</span>
+				<strong>${pro.price}</strong>
+				<span class="originalPrice">￥${pro.marketPrice}</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
 					<span class="subsidyPrice">￥${pro.butie}</span>
 				</span>
-					<div class="line-dcdcdc"></div>
-					<a href="/product/${pro.pid}" target="_blank">查看详情</a>
-				</div>
+				<div class="line-dcdcdc"></div>
+				<a href="/product/${pro.pid}" target="_blank">查看详情</a>
+			</div>
 			</li>
 		</c:forEach>
 
@@ -322,7 +367,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -340,7 +385,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -358,7 +403,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -376,7 +421,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -396,7 +441,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -414,7 +459,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -432,7 +477,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -450,7 +495,7 @@ pageEncoding="UTF-8"%>
 					<p class="details">纯韩无痕媚眼术</p>
 				</div>
 				<span class="fu">￥</span>
-				<strong>4800</strong>		
+				<strong>4800</strong>
 				<span class="originalPrice">￥5333</span>
 				<span class="subsidy">
 					<span class="subsidyPriceBg">补贴</span>
@@ -492,6 +537,9 @@ pageEncoding="UTF-8"%>
 		</li>
 	</ul>
 </div>
+<div class="QR">
+    <img src="http://7xlcaq.com2.z0.glb.qiniucdn.com/1459245716.png" alt="LOGO"width="300" height="300" />
+</div>
 <!-- 关于我们 end -->
 <!-- footer -->
 <footer>
@@ -502,7 +550,6 @@ pageEncoding="UTF-8"%>
 </body>
 
 <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
-<script src="http://cdn.bootcss.com/fingerprintjs/v0.5.1/fingerprint.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
 <script type="text/javascript" src="/js/slide.min.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>

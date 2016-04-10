@@ -4,7 +4,7 @@ import com.mfq.bean.OrderInfo;
 import com.mfq.net.wukongbao.pojo.*;
 import com.mfq.net.wukongbao.pojo.PolicyBack.PolicyBackRequest;
 import com.mfq.net.wukongbao.pojo.TimeSync.TimeSyncRequest;
-import com.mfq.services.UserQuotaService;
+import com.mfq.service.user.UserQuotaService;
 import com.mfq.utils.*;
 import com.wkb.openapi.security.signature.SignatureUtils;
 import net.sf.json.JSONObject;

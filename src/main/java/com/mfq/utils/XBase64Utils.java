@@ -269,7 +269,7 @@ public class XBase64Utils {
         try {
             // ObjectOutputStream -> (GZIP) -> Base64 -> ByteArrayOutputStream
             baos = new java.io.ByteArrayOutputStream();
-            b64os = new XBase64Utils.OutputStream(baos, ENCODE | dontBreakLines);
+            b64os = new OutputStream(baos, ENCODE | dontBreakLines);
 
             // GZip?
             if (gzip == GZIP) {
@@ -404,12 +404,12 @@ public class XBase64Utils {
         if (gzip == GZIP) {
             java.io.ByteArrayOutputStream baos = null;
             java.util.zip.GZIPOutputStream gzos = null;
-            XBase64Utils.OutputStream b64os = null;
+            OutputStream b64os = null;
 
             try {
                 // GZip -> Base64 -> ByteArray
                 baos = new java.io.ByteArrayOutputStream();
-                b64os = new XBase64Utils.OutputStream(baos, ENCODE | dontBreakLines);
+                b64os = new OutputStream(baos, ENCODE | dontBreakLines);
                 gzos = new java.util.zip.GZIPOutputStream(b64os);
 
                 gzos.write(source, off, len);
@@ -732,9 +732,9 @@ public class XBase64Utils {
      */
     public static boolean encodeToFile(byte[] dataToEncode, String filename) {
         boolean success = false;
-        XBase64Utils.OutputStream bos = null;
+        OutputStream bos = null;
         try {
-            bos = new XBase64Utils.OutputStream(new java.io.FileOutputStream(filename), XBase64Utils.ENCODE);
+            bos = new OutputStream(new java.io.FileOutputStream(filename), XBase64Utils.ENCODE);
             bos.write(dataToEncode);
             success = true;
         } // end try
@@ -765,9 +765,9 @@ public class XBase64Utils {
      */
     public static boolean decodeToFile(String dataToDecode, String filename) {
         boolean success = false;
-        XBase64Utils.OutputStream bos = null;
+        OutputStream bos = null;
         try {
-            bos = new XBase64Utils.OutputStream(new java.io.FileOutputStream(filename), XBase64Utils.DECODE);
+            bos = new OutputStream(new java.io.FileOutputStream(filename), XBase64Utils.DECODE);
             bos.write(dataToDecode.getBytes(PREFERRED_ENCODING));
             success = true;
         } // end try
@@ -795,7 +795,7 @@ public class XBase64Utils {
      */
     public static byte[] decodeFromFile(String filename) {
         byte[] decodedData = null;
-        XBase64Utils.InputStream bis = null;
+        InputStream bis = null;
         try {
             // Set up some useful variables
             java.io.File file = new java.io.File(filename);
@@ -810,7 +810,7 @@ public class XBase64Utils {
             buffer = new byte[(int) file.length()];
 
             // Open a stream
-            bis = new XBase64Utils.InputStream(new java.io.BufferedInputStream(new java.io.FileInputStream(file)), XBase64Utils.DECODE);
+            bis = new InputStream(new java.io.BufferedInputStream(new java.io.FileInputStream(file)), XBase64Utils.DECODE);
 
             // Read until done
             while ((numBytes = bis.read(buffer, length, 4096)) >= 0)
@@ -847,7 +847,7 @@ public class XBase64Utils {
      */
     public static String encodeFromFile(String filename) {
         String encodedData = null;
-        XBase64Utils.InputStream bis = null;
+        InputStream bis = null;
         try {
             // Set up some useful variables
             java.io.File file = new java.io.File(filename);
@@ -856,7 +856,7 @@ public class XBase64Utils {
             int numBytes = 0;
 
             // Open a stream
-            bis = new XBase64Utils.InputStream(new java.io.BufferedInputStream(new java.io.FileInputStream(file)), XBase64Utils.ENCODE);
+            bis = new InputStream(new java.io.BufferedInputStream(new java.io.FileInputStream(file)), XBase64Utils.ENCODE);
 
             // Read until done
             while ((numBytes = bis.read(buffer, length, 4096)) >= 0)
@@ -882,7 +882,7 @@ public class XBase64Utils {
     /* ******** I N N E R C L A S S I N P U T S T R E A M ******** */
 
     /**
-     * A {@link XBase64Utils.InputStream} will read data from another <tt>java.io.InputStream</tt>, given in the constructor, and encode/decode to/from Base64
+     * A {@link InputStream} will read data from another <tt>java.io.InputStream</tt>, given in the constructor, and encode/decode to/from Base64
      * notation on the fly.
      * 
      * @see XBase64Utils
@@ -898,7 +898,7 @@ public class XBase64Utils {
         private boolean breakLines; // Break lines at less than 80 characters
 
         /**
-         * Constructs a {@link XBase64Utils.InputStream} in DECODE mode.
+         * Constructs a {@link InputStream} in DECODE mode.
          * 
          * @param in
          *            the <tt>java.io.InputStream</tt> from which to read data.
@@ -909,7 +909,7 @@ public class XBase64Utils {
         } // end constructor
 
         /**
-         * Constructs a {@link XBase64Utils.InputStream} in either ENCODE or DECODE mode.
+         * Constructs a {@link InputStream} in either ENCODE or DECODE mode.
          * <p>
          * Valid options:
          * 
@@ -1084,7 +1084,7 @@ public class XBase64Utils {
     /* ******** I N N E R C L A S S O U T P U T S T R E A M ******** */
 
     /**
-     * A {@link XBase64Utils.OutputStream} will write data to another <tt>java.io.OutputStream</tt>, given in the constructor, and encode/decode to/from Base64
+     * A {@link OutputStream} will write data to another <tt>java.io.OutputStream</tt>, given in the constructor, and encode/decode to/from Base64
      * notation on the fly.
      * 
      * @see XBase64Utils
@@ -1101,7 +1101,7 @@ public class XBase64Utils {
         private boolean suspendEncoding;
 
         /**
-         * Constructs a {@link XBase64Utils.OutputStream} in ENCODE mode.
+         * Constructs a {@link OutputStream} in ENCODE mode.
          * 
          * @param out
          *            the <tt>java.io.OutputStream</tt> to which data will be written.
@@ -1112,7 +1112,7 @@ public class XBase64Utils {
         } // end constructor
 
         /**
-         * Constructs a {@link XBase64Utils.OutputStream} in either ENCODE or DECODE mode.
+         * Constructs a {@link OutputStream} in either ENCODE or DECODE mode.
          * <p>
          * Valid options:
          * 

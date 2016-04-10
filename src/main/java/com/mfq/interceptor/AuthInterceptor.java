@@ -4,7 +4,7 @@ import com.mfq.annotation.LoginRequired;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.UserIdHolder;
-import com.mfq.services.UserService;
+import com.mfq.service.user.UserService;
 import com.mfq.utils.JsonUtil;
 import com.mfq.utils.RequestUtils;
 import org.slf4j.Logger;

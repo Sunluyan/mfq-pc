@@ -2,41 +2,24 @@ package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
 import com.mfq.bean.PayRecord;
-import com.mfq.bean.example.PayRecordExample;
+import com.mfq.constants.OrderType;
+import com.mfq.constants.PayStatus;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
-
 @MFQDao
-@Component
 public interface PayRecordMapper {
-	int countByExample(PayRecordExample example);
 
-    int deleteByExample(PayRecordExample example);
+    public PayRecord findById(@Param("id") long id);
 
-    int deleteByPrimaryKey(Long id);
+    public PayRecord findByOrderNo(@Param("orderNo") String orderNo);
 
-    int insert(PayRecord record);
-
-    int insertSelective(PayRecord record);
-
-    List<PayRecord> selectByExample(PayRecordExample example);
+    public List<PayRecord> findByUId(@Param("orderType") OrderType orderType, @Param("uid") long uid,
+                                     @Param("status") PayStatus status);
     
-    List<PayRecord> selectByExamplePage(PayRecordExample example);
+    public long insertOne(PayRecord record);
 
-    PayRecord selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") PayRecord record, @Param("example") PayRecordExample example);
-
-    int updateByExample(@Param("record") PayRecord record, @Param("example") PayRecordExample example);
-
-    int updateByPrimaryKeySelective(PayRecord record);
-
-    int updateByPrimaryKey(PayRecord record);
-
-    List<Long> queryByUpDateAndGroupByUid(@Param("ob") Date ob, @Param("oe") Date oe, @Param("status") int status, @Param("start") Integer start, @Param("size") Integer size);
-
+    public long updateOne(PayRecord record);
+    
 }

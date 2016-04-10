@@ -1,12 +1,16 @@
 package com.mfq.servlet;
 
-import com.mfq.bean.User;
+import com.mfq.bean.passport.Passport;
+import com.mfq.bean.user.User;
+import com.mfq.cache.TicketCacheUtils;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.AppContext;
 import com.mfq.dataservice.context.UserIdHolder;
+import com.mfq.helper.MobileHelper;
 import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.MDC;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

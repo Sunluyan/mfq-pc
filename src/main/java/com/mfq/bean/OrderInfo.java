@@ -1,52 +1,83 @@
 package com.mfq.bean;
 
+import com.mfq.constants.PolicyStatus;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * OrderInfo
+ * 
+ * @author yongshan.xing
+ *
+ */
 public class OrderInfo {
-    private Integer id;
 
-    private String orderNo;
+    long id; // 订单ID
+    String orderNo; // 订单号
+    BigDecimal price; // 总价
+    long uid; // user id
+    long pid; // product id
+    /**
+     * @See payType
+     */
+    int payType; // 订单类型；2分期付款，1在线＋到院，0全额付款
+    BigDecimal periodPay; // 每期还款金额，默认不分期为0
+    int period; // 期数，默认不分期为0
+    BigDecimal onlinePay; // 在线支付－－暂时可以使用优惠券
+    BigDecimal hospitalPay; // 到院支付
+    BigDecimal useBalance;  //使用余额部分
+    String couponNum; // 优惠券号码
+    String securityCode; // 医院使用的安全码
+    Date serviceStartTime;  //预约就医时间
+    PolicyStatus policyStatus;  //保单状态
+    /**
+     * @See OrderStatus
+     */
+    int status; // 订单状态
+    int refundType; // 退款方式
+    Date createdAt; // 订单创建时间
+    Date updatedAt; // 最后更新时间
 
-    private BigDecimal price;
+    public OrderInfo() {
 
-    private Long uid;
+    }
 
-    private Long pid;
+//    public OrderInfo(OrderFreedom freedom){
+//        this.id = freedom.getId();
+//        this.orderNo = freedom.getOrderNo();
+//        this.price = freedom.getPrice();
+//        this.uid = freedom.getUid();
+//        this.pid = freedom.getp
+//    }
 
-    private Integer payType;
+    public OrderInfo(String orderNo, BigDecimal price, long uid, long pid,
+            int payType, int period, BigDecimal periodPay, int status,
+            BigDecimal onlinePay, BigDecimal hospitalPay, String couponNum, BigDecimal useBalance, Date serviceStartTime) {
+        this.orderNo = orderNo;
+        this.price = price;
+        this.uid = uid;
+        this.pid = pid;
+        this.payType = payType;
+        this.period = period;
+        this.periodPay = periodPay;
+        this.status = status;
+        this.onlinePay = onlinePay;
+        this.hospitalPay = hospitalPay;
+        this.couponNum = couponNum;
+        this.useBalance = useBalance;
+        this.policyStatus = PolicyStatus.WITHOUT;
+        this.serviceStartTime = serviceStartTime;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
 
-    private BigDecimal periodPay;
-
-    private Integer period;
-
-    private BigDecimal onlinePay;
-
-    private BigDecimal hospitalPay;
-
-    private BigDecimal useBalance;
-
-    private String couponNum;
-
-    private String securityCode;
-
-    private Integer policyStatus;
-
-    private Integer status;
-
-    private Integer refundType;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
-    private Date serviceStartTime;
-
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -55,7 +86,7 @@ public class OrderInfo {
     }
 
     public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
+        this.orderNo = orderNo;
     }
 
     public BigDecimal getPrice() {
@@ -66,27 +97,27 @@ public class OrderInfo {
         this.price = price;
     }
 
-    public Long getUid() {
+    public long getUid() {
         return uid;
     }
 
-    public void setUid(Long uid) {
+    public void setUid(long uid) {
         this.uid = uid;
     }
 
-    public Long getPid() {
+    public long getPid() {
         return pid;
     }
 
-    public void setPid(Long pid) {
+    public void setPid(long pid) {
         this.pid = pid;
     }
 
-    public Integer getPayType() {
+    public int getPayType() {
         return payType;
     }
 
-    public void setPayType(Integer payType) {
+    public void setPayType(int payType) {
         this.payType = payType;
     }
 
@@ -98,20 +129,12 @@ public class OrderInfo {
         this.periodPay = periodPay;
     }
 
-    public Integer getPeriod() {
+    public int getPeriod() {
         return period;
     }
 
-    public void setPeriod(Integer period) {
+    public void setPeriod(int period) {
         this.period = period;
-    }
-
-    public BigDecimal getOnlinePay() {
-        return onlinePay;
-    }
-
-    public void setOnlinePay(BigDecimal onlinePay) {
-        this.onlinePay = onlinePay;
     }
 
     public BigDecimal getHospitalPay() {
@@ -123,19 +146,35 @@ public class OrderInfo {
     }
 
     public BigDecimal getUseBalance() {
-        return useBalance;
+		return useBalance;
+	}
+
+	public void setUseBalance(BigDecimal useBalance) {
+		this.useBalance = useBalance;
+	}
+
+	public BigDecimal getOnlinePay() {
+        return onlinePay;
     }
 
-    public void setUseBalance(BigDecimal useBalance) {
-        this.useBalance = useBalance;
+    public void setOnlinePay(BigDecimal onlinePay) {
+        this.onlinePay = onlinePay;
     }
 
     public String getCouponNum() {
         return couponNum;
     }
 
-    public void setCouponNum(String couponNum) {
-        this.couponNum = couponNum == null ? null : couponNum.trim();
+	public PolicyStatus getPolicyStatus() {
+		return policyStatus;
+	}
+
+	public void setPolicyStatus(PolicyStatus policyStatus) {
+		this.policyStatus = policyStatus;
+	}
+
+	public void setCouponNum(String couponNum) {
+        this.couponNum = couponNum;
     }
 
     public String getSecurityCode() {
@@ -143,30 +182,22 @@ public class OrderInfo {
     }
 
     public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode == null ? null : securityCode.trim();
+        this.securityCode = securityCode;
     }
 
-    public Integer getPolicyStatus() {
-        return policyStatus;
-    }
-
-    public void setPolicyStatus(Integer policyStatus) {
-        this.policyStatus = policyStatus;
-    }
-
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public Integer getRefundType() {
+    public int getRefundType() {
         return refundType;
     }
 
-    public void setRefundType(Integer refundType) {
+    public void setRefundType(int refundType) {
         this.refundType = refundType;
     }
 
@@ -185,12 +216,19 @@ public class OrderInfo {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    
     public Date getServiceStartTime() {
-        return serviceStartTime;
-    }
+		return serviceStartTime;
+	}
 
-    public void setServiceStartTime(Date serviceStartTime) {
-        this.serviceStartTime = serviceStartTime;
+	public void setServiceStartTime(Date serviceStartTime) {
+		this.serviceStartTime = serviceStartTime;
+	}
+	
+	
+
+	@Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

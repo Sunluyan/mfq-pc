@@ -1,11 +1,15 @@
 package com.mfq.dao;
 
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.InviteMoney;
 import com.mfq.bean.InviteMoneyExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@MFQDao
+@Component
 public interface InviteMoneyMapper {
     int countByExample(InviteMoneyExample example);
 

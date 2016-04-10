@@ -1,6 +1,6 @@
 package com.mfq.utils;
 
-import com.mfq.bean.AreaCity;
+import com.mfq.bean.area.City;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -72,6 +72,7 @@ public class ListSortUtil<T> {
 	
 	/**
 	* 求Map<K,V>中Value(值)的最小值
+	* @param map
 	* @return
 	*/
 	public static BigDecimal getMinValue(Object o) {
@@ -84,7 +85,7 @@ public class ListSortUtil<T> {
 		return (BigDecimal)obj[0];
 	}
 
-	public static List<AreaCity> qcf(List<AreaCity> list){
+	public static List<City> qcf(List<City> list){
 		for (int i = 0; i < list.size() - 1; i++) {                             //循环遍历集体中的元素
 			for (int j = list.size() - 1; j > i; j--) {                         //这里非常巧妙，这里是倒序的是比较
 				if (list.get(j).getId()==list.get(i).getId()) {

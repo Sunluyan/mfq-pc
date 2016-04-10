@@ -1,8 +1,9 @@
 package com.mfq.dao;
 
 import com.mfq.annotation.MFQDao;
+import com.mfq.bean.Hospital;
 import com.mfq.bean.Product;
-import com.mfq.bean.example.ProductExample;
+import com.mfq.constants.ProductType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -11,36 +12,27 @@ import java.util.List;
 @MFQDao
 @Component
 public interface ProductMapper {
-    int countByExample(ProductExample example);
 
-    int deleteByExample(ProductExample example);
+	Product findById(@Param("id") long id);
+    
+	long insertProduct(Product p);
+    
+	List<Product> findByClass(@Param("city_id") int city, @Param("list") List<Integer> list, @Param("type") ProductType type);
 
-    int deleteByPrimaryKey(Long id);
+	List<Product> findByFlag(@Param("city_id") int city, @Param("flag") int flag, @Param("type") ProductType type);
 
-    int insert(Product record);
+	long updateViewNum(@Param("pid") long pidNo);
 
-    int insertSelective(Product record);
+	List<Product> queryProductsByType(@Param("type") ProductType type);
 
-    List<Product> selectByExample(ProductExample example);
+	long updateProductRemain(@Param("pid") long pid, @Param("num") int num, @Param("remain") long remainNum);
 
-    Product selectByPrimaryKey(Long id);
+	long updateProcuctSaleNum(@Param("pid") long pid);
 
-    int updateByExampleSelective(@Param("record") Product record, @Param("example") ProductExample example);
+	List<Product> selectByHospitals(@Param("hospitals") List<Hospital> hospitals);
 
-    int updateByExample(@Param("record") Product record, @Param("example") ProductExample example);
+	List<Product> selectByKeywordsAndHospitalIds(@Param("keywords") String[] keywords, @Param("hospitals") List<Hospital> hospitals,
+												 @Param("start") long start, @Param("pagesize") long pagesize);
 
-    int updateByPrimaryKeySelective(Product record);
-
-    int updateByPrimaryKey(Product record);
-
-    public List<Product> findByPage(@Param("start") long start, @Param("pagesize") long pagesize);
-
-    List<Product> findByPageAndExample(@Param("start") long start,
-                                       @Param("pagesize") long pagesize,
-                                       @Param("example") ProductExample example,
-                                       @Param("orderby") String orderby);
-
-    long findByPageAndExampleCount(@Param("example") ProductExample example);
-
-
+	List<Product> findByPage(@Param("start") long start, @Param("pagesize") long pagesize);
 }

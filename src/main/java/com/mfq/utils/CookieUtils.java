@@ -1,6 +1,6 @@
 package com.mfq.utils;
 
-import com.mfq.bean.SysPassport;
+import com.mfq.bean.passport.Passport;
 import com.mfq.dataservice.context.AppContext;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class CookieUtils {
      * @param domain    cookie域名，默认是'.5imfq.com'
      */
     public static void setLoginCookie(HttpServletRequest req, HttpServletResponse resp,
-                                      SysPassport passport, boolean autoLogin) throws Exception{
+                                      Passport passport, boolean autoLogin) throws Exception{
         String xid = Base62.encode(passport.getUid());
         String sessionValue = passport.getTicket() + "-" + xid;
         int maxAge = !autoLogin ? -1 : (int) ((passport.getExpiredAt().getTime() - System.currentTimeMillis()) / 1000);
@@ -144,15 +144,15 @@ public class CookieUtils {
      * @return 登录票据（仅包含未验证有效性uid/ticket两个字段,无cookie或错误cookie返回null)
      * @see #readPassport(HttpServletRequest)
      */
-    public static SysPassport parsePassport(String cookie_mm) {
+    public static Passport parsePassport(String cookie_mm) {
         if (!StringUtils.isEmpty(cookie_mm)) {
             String[] fs = cookie_mm.split("-");
             if (fs.length == 2) {
                 try {
                     int uid = (int) Base62.decode(fs[1]);
                     String ticket = fs[0];
-                    SysPassport pt = new SysPassport();
-                    pt.setUid((long)uid);
+                    Passport pt = new Passport();
+                    pt.setUid(uid);
                     pt.setTicket(ticket);
                     return pt;
                 } catch (Exception ex) {
@@ -169,7 +169,7 @@ public class CookieUtils {
      * @param request HTTP 请求
      * @return 登录票据（仅包含uid/ticket两个字段)
      */
-    public static SysPassport readPassport(HttpServletRequest request) {
+    public static Passport readPassport(HttpServletRequest request) {
         return parsePassport(getCookieValue(request, COOKIE_MM));
     }
 

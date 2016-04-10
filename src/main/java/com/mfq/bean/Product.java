@@ -5,273 +5,176 @@ import com.mfq.constants.ProductType;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
-    private Long id;
-
-    private String name;
-
-    private Integer tid;
-
-    private Long hospitalId;
-
-    private Integer cityId;
-
-    private Integer flag;
-
-    private String img;
-
-    private Integer orderNo;
-
-    private BigDecimal hospitalPay;
-
-    private ProductType type;
-
-    private String type2;
-
-    private Boolean isFq;
-
-    private BigDecimal onlinePay;
-
-    private BigDecimal price;
-
-    private BigDecimal marketPrice;
-
-    private BigDecimal pPrice;
-
-    private Integer pNum;
-
-    private Date dateStart;
-
-    private Date dateEnd;
-
-    private Long remainNum;
-
-    private Long totalNum;
-
-    private Long viewNum;
-
-    private Long saleNum;
-
-    private Boolean online;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
-    public Product(){
-        this.orderNo= 1;
-        this.saleNum = 0l;
-        this.viewNum = 0l;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-    }
-
-    public Long getId() {
+public class Product implements Comparable{
+    long id;            // 产品ID
+    String name;        // 产品名称
+    int tid;            // 产品类别
+    int hospitalId;     // 医院ID
+    BigDecimal price;   // 团购总价格
+    BigDecimal marketPrice; //市场价
+    BigDecimal onlinePay;  // 定金-在线支付
+    BigDecimal hospitalPay; //到院支付
+    BigDecimal pPrice;  // 分期价格,只记录一个基准的？
+    ProductType type;           //类别
+    int pNum;           // 分期数，只记录一个最大的？
+    Date dateStart;     // 有效期开始时间
+    Date dateEnd;       // 有效期结束时间
+    long totalNum;            //产品总量
+    long remainNum;      //剩余数量
+    long viewNum;       // 浏览量
+    long saleNum;       // 销量
+    int cityId;         //城市id
+    int flag;           // 推荐
+    String img;         // 产品图片
+    long orderNo;         //排序码
+    boolean online;      // 产品状态,default true
+    Date createdAt;     // 创建日期
+    Date updatedAt;     // 最后更新时间
+    
+    public long getId() {
         return id;
     }
-
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
-
-    public Integer getTid() {
+    public int getTid() {
         return tid;
     }
-
-    public void setTid(Integer tid) {
+    public void setTid(int tid) {
         this.tid = tid;
     }
-
-    public Long getHospitalId() {
+    public int getHospitalId() {
         return hospitalId;
     }
-
-    public void setHospitalId(Long hospitalId) {
+    public void setHospitalId(int hospitalId) {
         this.hospitalId = hospitalId;
     }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img == null ? null : img.trim();
-    }
-
-    public Integer getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(Integer orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public BigDecimal getHospitalPay() {
-        return hospitalPay;
-    }
-
-    public void setHospitalPay(BigDecimal hospitalPay) {
-        this.hospitalPay = hospitalPay;
-    }
-
-    public ProductType getType() {
-        return type;
-    }
-
-    public void setType(ProductType type) {
-        this.type = type;
-    }
-
-    public String getType2() {
-        return type2;
-    }
-
-    public void setType2(String type2) {
-        this.type2 = type2 == null ? null : type2.trim();
-    }
-
-    public Boolean getIsFq() {
-        return isFq;
-    }
-
-    public void setIsFq(Boolean isFq) {
-        this.isFq = isFq;
-    }
-
-    public BigDecimal getOnlinePay() {
-        return onlinePay;
-    }
-
-    public void setOnlinePay(BigDecimal onlinePay) {
-        this.onlinePay = onlinePay;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
-
-    public void setPrice(BigDecimal price) {
+    public BigDecimal getMarketPrice() {
+		return marketPrice;
+	}
+	public void setMarketPrice(BigDecimal marketPrice) {
+		this.marketPrice = marketPrice;
+	}
+	public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    public BigDecimal getMarketPrice() {
-        return marketPrice;
+	public BigDecimal getOnlinePay() {
+        return onlinePay;
     }
-
-    public void setMarketPrice(BigDecimal marketPrice) {
-        this.marketPrice = marketPrice;
+    public void setOnlinePay(BigDecimal onlinePay) {
+        this.onlinePay = onlinePay;
     }
-
-    public BigDecimal getpPrice() {
+    public BigDecimal getHospitalPay() {
+		return hospitalPay;
+	}
+	public void setHospitalPay(BigDecimal hospitalPay) {
+		this.hospitalPay = hospitalPay;
+	}
+	public ProductType getType() {
+		return type;
+	}
+	public void setType(ProductType type) {
+		this.type = type;
+	}
+	public BigDecimal getpPrice() {
         return pPrice;
     }
-
     public void setpPrice(BigDecimal pPrice) {
         this.pPrice = pPrice;
     }
-
-    public Integer getpNum() {
+    public int getpNum() {
         return pNum;
     }
-
-    public void setpNum(Integer pNum) {
+    public void setpNum(int pNum) {
         this.pNum = pNum;
     }
-
     public Date getDateStart() {
         return dateStart;
     }
-
     public void setDateStart(Date dateStart) {
         this.dateStart = dateStart;
     }
-
     public Date getDateEnd() {
         return dateEnd;
     }
-
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
-
-    public Long getRemainNum() {
-        return remainNum;
-    }
-
-    public void setRemainNum(Long remainNum) {
-        this.remainNum = remainNum;
-    }
-
-    public Long getTotalNum() {
-        return totalNum;
-    }
-
-    public void setTotalNum(Long totalNum) {
-        this.totalNum = totalNum;
-    }
-
-    public Long getViewNum() {
+	public long getTotalNum() {
+		return totalNum;
+	}
+	public void setTotalNum(long totalNum) {
+		this.totalNum = totalNum;
+	}
+	public long getRemainNum() {
+		return remainNum;
+	}
+	public void setRemainNum(long remainNum) {
+		this.remainNum = remainNum;
+	}
+	public long getViewNum() {
         return viewNum;
     }
-
-    public void setViewNum(Long viewNum) {
+    public void setViewNum(long viewNum) {
         this.viewNum = viewNum;
     }
-
-    public Long getSaleNum() {
+    public long getSaleNum() {
         return saleNum;
     }
-
-    public void setSaleNum(Long saleNum) {
+    public void setSaleNum(long saleNum) {
         this.saleNum = saleNum;
     }
-
-    public Boolean getOnline() {
+	public int getCityId() {
+		return cityId;
+	}
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public long getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(long orderNo) {
+		this.orderNo = orderNo;
+	}
+	public boolean isOnline() {
         return online;
     }
-
-    public void setOnline(Boolean online) {
+    public void setOnline(boolean online) {
         this.online = online;
     }
-
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+
     }
 
     @Override
@@ -281,28 +184,42 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", tid=" + tid +
                 ", hospitalId=" + hospitalId +
+                ", price=" + price +
+                ", marketPrice=" + marketPrice +
+                ", onlinePay=" + onlinePay +
+                ", hospitalPay=" + hospitalPay +
+                ", pPrice=" + pPrice +
+                ", type=" + type +
+                ", pNum=" + pNum +
+                ", dateStart=" + dateStart +
+                ", dateEnd=" + dateEnd +
+                ", totalNum=" + totalNum +
+                ", remainNum=" + remainNum +
+                ", viewNum=" + viewNum +
+                ", saleNum=" + saleNum +
                 ", cityId=" + cityId +
                 ", flag=" + flag +
                 ", img='" + img + '\'' +
                 ", orderNo=" + orderNo +
-                ", hospitalPay=" + hospitalPay +
-                ", type=" + type +
-                ", type2='" + type2 + '\'' +
-                ", isFq=" + isFq +
-                ", onlinePay=" + onlinePay +
-                ", price=" + price +
-                ", marketPrice=" + marketPrice +
-                ", pPrice=" + pPrice +
-                ", pNum=" + pNum +
-                ", dateStart=" + dateStart +
-                ", dateEnd=" + dateEnd +
-                ", remainNum=" + remainNum +
-                ", totalNum=" + totalNum +
-                ", viewNum=" + viewNum +
-                ", saleNum=" + saleNum +
                 ", online=" + online +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(!(o instanceof Product))
+            throw new RuntimeException("对象不正确！！");
+        Product product = (Product)o;
+
+        if(this.saleNum>product.saleNum){
+            return -1;
+        }else if(this.saleNum < product.saleNum){
+            return 1;
+        }else if(this.id == product.id){
+            return 0;
+        }
+        return 1;
     }
 }

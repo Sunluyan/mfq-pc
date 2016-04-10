@@ -1,4 +1,6 @@
 $(function(){
+    
+    
 //登录框
     $("#close01").hover(function(){
         $("#close01").attr("src", "http://7xlcaq.com2.z0.glb.qiniucdn.com/ry-close-icon-after.png");  
@@ -55,6 +57,51 @@ $(function(){
         $(".register-box").hide()
         $(".retrievePassword-box").show()
     })
+    
+    $.ajax({
+        url:"/web/isLogin",
+        type:"get",
+        dataType:"json",
+        success:function(json){
+            if(json.code != 0){
+
+                return false;
+            }
+            $(".not-login").hide()
+            $(".logined").show();
+        }
+    })
+
+    $(".exit").click(function(){
+        $.ajax({
+            url:"/logout",
+            type:"get",
+            dataType:"json",
+            success:function(json){
+                console.log(json)
+                if(json.code == 0){
+                    $(".not-login").show()
+                    $(".logined").hide();
+                    return false;
+                }
+                else{
+                    alert("退出登录出错")
+                }
+            }
+        })
+    })
+
+
+    $("#download").click(function(){
+        $(".QR").fadeIn(300);
+    })
+
+    $(".QR img").click(function(){
+        return false;
+    })
+    $(".QR").click(function(){
+        $(".QR").fadeOut(250)
+    })
 })
 
 // 登录
@@ -71,6 +118,25 @@ $(function(){
             var passwordBg = document.getElementById('passwordBg')
                 passwordBg.style.border="solid 1px red"
         }
+        
+        $.ajax({
+            url:"/web/login",
+            data:{
+                username:num,
+                password:password
+            },
+            dataType:"json",
+            type:"post",
+            success:function(json){
+                if(json.code!=0){
+                    alert(json.msg);
+                    return false;
+                }
+                $(".close").click();
+                $(".not-login").hide();
+                $(".logined").show();
+            }
+        })
     }
     // 注册
     function register(){
@@ -86,6 +152,26 @@ $(function(){
             var registerPa = document.getElementById('registerPa')
                 registerPa.style.border="solid 1px red"
         }
+        var vcode = $(".verificationCode01").val().trim()
+        var invitationCode = $("#invitationCode").val().trim()
+        $.ajax({
+            url:"/web/register",
+            data:{
+                mobile:registerMobile,
+                password:registerPassword,
+                vcode:vcode,
+                p_code:invitationCode
+            },
+            type:"post",
+            dataType:"json",
+            success:function(json){
+                if(json.code != 0){
+                    alert(json.msg);
+                    return false;
+                }
+                console.log(json)
+            }
+        })
     }
     // 找回密码
     function retrievePassword(){
