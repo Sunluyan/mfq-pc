@@ -1,13 +1,10 @@
 package com.mfq.controller.wechat;
 
 import com.google.common.collect.Maps;
-import com.mfq.bean.CodeMsg;
-import com.mfq.bean.Vcode;
 import com.mfq.bean.user.User;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.helper.SignHelper;
-import com.mfq.service.VcodeService;
 import com.mfq.service.sms.SMSService;
 import com.mfq.service.user.UserService;
 import com.mfq.service.wechat.WeChatService;

@@ -40,4 +40,13 @@
 		)
 	</insert>
 
+	<select id="findAll" resultType="ProductClassify">
+		select
+		<include refid="selectsql" />
+		from product_classify
+		where flag = 1
+
+
+	</select>
+
 </mapper>

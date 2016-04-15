@@ -23,7 +23,11 @@
 
 	<!-- 在最后初始化，保证 getBean。Deprecated -->
 	<bean class="com.mfq.dataservice.context.SpringWrapper" />
-	
+
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
 	<!-- 任务调度  采用注解方式-->
 	<task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
     <task:scheduler id="qbScheduler" pool-size="10"/> 

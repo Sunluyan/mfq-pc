@@ -120,4 +120,14 @@
 		limit #{start},#{pagesize}
 	</select>
 
+	<select id="findByPage" resultType="Product">
+		select
+		id, name, tid, hospital_id as hospitalId, city_id as
+		cityId, type2, price, market_price as marketPrice, p_price as pPrice, type, online_pay as onlinePay,
+		hospital_pay as hospitalPay, p_num as pNum, date_start as dateStart, is_fq as isFq, flag,
+		date_end as dateEnd, total_num as totalNum, remain_num as remainNum, view_num as viewNum, sale_num as saleNum,
+		online, img, created_at as createdAt, updated_at as updatedAt
+		from product order by id desc limit #{start}, #{pagesize}
+	</select>
+
 </mapper>

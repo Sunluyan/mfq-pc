@@ -10,11 +10,13 @@ import com.mfq.utils.Config;
 import com.mfq.utils.DateUtil;
 import com.qiniu.common.QiniuException;
 import com.qiniu.storage.BucketManager;
+import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
@@ -37,6 +39,9 @@ public class QiniuManipulater {
     private static final String SECRET_KEY = Config.getItem("qiniu_secret_key");
 
     private static Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+
+    private static UploadManager uploadManager = new UploadManager();
+
 
     // 用于资源管理
     private static BucketManager bucketManager = new BucketManager(auth);
@@ -118,13 +123,11 @@ public class QiniuManipulater {
      *            空间名
      * @param key
      *            key，可为 null,若非null则表示覆盖上传
-     * @param expires
      *            有效时长，单位秒。默认3600s
-     * @param policy
+     *
      *            上传策略的其它参数，如 new StringMap().put("endUser",
      *            "uid").putNotEmpty("returnBody", "")。 scope通过
      *            bucket、key间接设置，deadline 通过 expires 间接设置
-     * @param strict
      *            是否去除非限定的策略字段，默认true
      * @return 生成的上传token
      */
@@ -167,4 +170,50 @@ public class QiniuManipulater {
             logger.error("QINIU_DELETE_FILE_WRONG", e);
         }
     }
+
+
+    public static Map<String, String> getProdImgUpToken2() {
+        String key = buildProdKey();
+        String token = getUpToken(QiniuBucketEnum.IMG1, null, key);
+        Map<String, String> map = Maps.newHashMap();
+        map.put("domain", QiniuBucketEnum.IMG1.getDomain());
+        map.put("key", key);
+        map.put("token", token);
+        return map;
+    }
+
+
+    private static String buildProdKey() {
+        return QiniuBucketEnum.IMG1.getBucket() + "/"
+                + ImageType.PROD_PIC.getFlag() + "/"
+                + DateUtil.formatShort(new Date()) + "/"
+                + System.currentTimeMillis() + RandomUtil.getRandom(3) + ".jpg";
+    }
+
+
+    public static String qiniuUploadProdImg(File file) {
+        String url = null;
+        if (file != null && file.exists()) {
+            Map<String, String> prodMap = getProdImgUpToken2();
+            logger.info("file is:{}, prodMap is:{}", file, prodMap);
+            try {
+                uploadManager.put(file, prodMap.get("key"),
+                        prodMap.get("token"));
+            } catch (QiniuException ex) {
+                logger.warn("IGNORE_NULL_WRONG");
+            }
+            logger.info("qiniu upload is end");
+            // 默认不抛其它异常，暂定为上传成功，这里有坑！！！！！！！！
+
+            // delete local file
+            file.delete();
+
+            // 域名使用prod的
+            url = QiniuBucketEnum.IMG1.getDomain() + prodMap.get("key");
+        }
+        logger.info("----Alter upload2Qiniu,delete local file, new file url={}",
+                url);
+        return url;
+    }
+
 }

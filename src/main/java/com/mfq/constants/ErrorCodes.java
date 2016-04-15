@@ -60,6 +60,7 @@ public class ErrorCodes {
     public static final int CORE_DATEFORMAT = 9908; // 日期格式错误或者日期已经过期
     public static final int CORE_JSON_RENDER_ERR = 9909; // JSON数据渲染错误
     public static final int CORE_PIC_ERROR = 9910; // 图片处理错误
+    public static final int WECHAT_REQUIRED = 9911; // 需要登录
     public static final int CORE_ERROR = 9999; //系统错误(未知异常）
     
     

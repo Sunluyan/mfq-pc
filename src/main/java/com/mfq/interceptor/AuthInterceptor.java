@@ -1,6 +1,8 @@
 package com.mfq.interceptor;
 
 import com.mfq.annotation.LoginRequired;
+import com.mfq.annotation.WechatRequired;
+import com.mfq.bean.user.User;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.UserIdHolder;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Spring 认证拦截器 
@@ -46,15 +49,22 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         String serverName = request.getServerName();
         logger.info("requestServerName:{}", serverName);
         String domainSuffix = Constants.COOKIE_DOMAIN;
-        if (!serverName.endsWith(domainSuffix)) {
-            // response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/plain; charset=UTF-8");
-            response.getWriter().append("域名错误(必须*" + domainSuffix + ")");
-            return false;
-        }
-        if (!checkLoginRequired(request, response, handler)) {
-            return false;
-        }
+//        if (!serverName.endsWith(domainSuffix)) {
+//            // response.setCharacterEncoding("UTF-8");
+//            response.setContentType("text/plain; charset=UTF-8");
+//            response.getWriter().append("域名错误(必须*" + domainSuffix + ")");
+//            return false;
+//        }
+
+//        if (!checkWechat(request, response, handler)) {
+//            return false;
+//        }
+//        if (!checkLoginRequired(request, response, handler)) {
+//            return false;
+//        }
+
+
+
         return true;
     }
     
@@ -65,9 +75,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
 			throws Exception {
     	System.out.println("ret ...");
 	}
-    
-    
-    
+
+
+
 
 
     /**
@@ -80,7 +90,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
      * @throws Exception
      */
     private boolean checkLoginRequired(HttpServletRequest request,
-            HttpServletResponse response, Object handler) throws Exception {
+                                       HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof org.springframework.web.servlet.resource.ResourceHttpRequestHandler) {
             return true;
         }
@@ -93,12 +103,66 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         }
         if (loginRequired != null && !UserIdHolder.isLogin()) {
             // 需要登录 但 未登录!!!!!
+//            RequestUtils.writeResponse(request, response,
+//                    JsonUtil.toJson(ErrorCodes.CORE_NEED_LOGIN, "需要登录", null));
+            request.getRequestDispatcher("/login").forward(request,response);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 检查环境
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return true表示OK，false表示登录失败，已经跳转到登录页面或者ajax结果
+     * @throws Exception
+     */
+    private boolean checkWechat(HttpServletRequest request,
+                                       HttpServletResponse response, Object handler) throws Exception {
+        if (handler instanceof org.springframework.web.servlet.resource.ResourceHttpRequestHandler) {
+            return true;
+        }
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        WechatRequired WechatRequired = handlerMethod
+                .getMethodAnnotation(WechatRequired.class);
+        if (WechatRequired == null) {
+            WechatRequired = handlerMethod.getBeanType()
+                    .getAnnotation(WechatRequired.class);
+        }
+        if (WechatRequired != null && getOpenId(request)==null) {
+            // 需要微信环境但没有 openid .
             RequestUtils.writeResponse(request, response,
-                    JsonUtil.toJson(ErrorCodes.CORE_NEED_LOGIN, "需要登录", null));
+                    JsonUtil.toJson(ErrorCodes.WECHAT_REQUIRED, "请在微信浏览器内打开", null));
             return false;
         }
         return true;
     }
+
+    /**
+     * 获取每次连接是否有 openid ,如果没有的话,返回null.
+     * 目前这里需要修改.
+     * @param request
+     * @return
+     */
+    private String getOpenId(HttpServletRequest request){
+        String openId = request.getAttribute("openid") != null ? request.getAttribute("openid").toString():null;
+        HttpSession session = request.getSession();
+        if(openId != null){
+            session.setAttribute("openid",openId);
+            return openId;
+        }
+        openId = request.getParameter("openid") != null ? request.getParameter("openid").toString():null;
+        if(openId != null){
+            session.setAttribute("openid",openId);
+            return openId;
+        }
+        return null;
+    }
+
     
     
     

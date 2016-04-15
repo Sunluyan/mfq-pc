@@ -32,14 +32,17 @@
 		resource requests to the container's default Servlet -->
 	<mvc:default-servlet-handler />
 
-	<bean id="handlerMapping"
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="interceptors">
-			<list>
-				<bean class="com.mfq.interceptor.AuthInterceptor" />
-			</list>
-		</property>
-	</bean>
+	<!--<bean id="handlerMapping"-->
+		<!--class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">-->
+		<!--<property name="interceptors">-->
+			<!--<list>-->
+				<!--<bean class="com.mfq.interceptor.AuthInterceptor" />-->
+			<!--</list>-->
+		<!--</property>-->
+	<!--</bean>-->
+	<mvc:interceptors>
+		<bean class="com.mfq.interceptor.AuthInterceptor"/>
+	</mvc:interceptors>
 
 	<!-- 配置静态文件访问 -->
 	<mvc:resources mapping="/images/**" location="/images/" cache-period="1800" />

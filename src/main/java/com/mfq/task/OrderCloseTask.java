@@ -1,6 +1,5 @@
 package com.mfq.task;
 
-import com.mfq.service.OrderCloseService;
 import com.mfq.task.base.DefaultTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

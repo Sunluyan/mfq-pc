@@ -4,12 +4,16 @@
 	<sql id="selectsql">
 		uid, status, nick, email, mobile, gender, location, location_id as locationId, icon, img, pic, 
 		birthday, intro, interest, career, created_at as createdAt, 
-		updated_at as updatedAt, sign
+		updated_at as updatedAt, sign,openid
 	</sql>
-	
+
 	<sql id="insertsql">
 		status, nick, email, mobile, gender, location, location_id, icon, img, pic,
 		birthday, intro, interest, career, created_at, updated_at, sign
+	</sql>
+	<sql id="insertsqlAndOpenid">
+		status, nick, email, mobile, gender, location, location_id, icon, img, pic,
+		birthday, intro, interest, career, created_at, updated_at, sign,openid
 	</sql>
 
 	<insert id="insertUser" parameterType="User"
@@ -18,10 +22,10 @@
 			SELECT LAST_INSERT_ID() AS uid
 		</selectKey>
 		insert into users(
-		<include refid="insertsql" />
+		<include refid="insertsqlAndOpenid" />
 		)values (
 		#{status}, #{nick}, #{email}, #{mobile}, #{gender}, #{location}, #{locationId}, #{icon}, #{img}, #{pic},
-		#{birthday}, #{intro}, #{interest},  #{career}, now(), now(), #{sign}
+		#{birthday}, #{intro}, #{interest},  #{career}, now(), now(), #{sign},#{openid}
 		)
 	</insert>
 
@@ -86,5 +90,11 @@
 		select
 		<include refid="selectsql" />
 		from users where status in (0,1)
+	</select>
+
+	<select id="queryUserByOpenId" resultType="User">
+		select
+		<include refid="selectsql" />
+		from users where openid=#{openid}
 	</select>
 </mapper>

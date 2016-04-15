@@ -10,6 +10,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/Career.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/CardType.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/PolicyInsureExample.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/OpenidUid.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/BannerType.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/InviteMoneyExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/controller/NotificationController.java
@@ -38,6 +39,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/task/MailTask.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/handler/ConnectSiteEnumHandler.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/ProductDetailMapper.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/annotation/WechatRequired.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/annotation/MFQDao.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/ActivityRecordExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/controller/VcodeController.java
@@ -84,6 +86,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/wechat/message/MusicMessage.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/TemplateSMS.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/Feedback.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/TestService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/sms/provider/NullMessageProvider.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/user/UserLogin.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/cache/MsgTmplContext.java
@@ -98,6 +101,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/InviteMoney.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/PolicyInsureMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/OrderStatus.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/OpenidUidExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/handler/BannerTypeEnumHandler.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/net/wukongbao/WukongBaoClient2.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/BillStatus.java
@@ -350,6 +354,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/VcodeMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/PolicyInfoMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/net/wukongbao/WukongBaoClient.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/OpenidUidMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/OrderFreedomMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/HomeBannerService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/FinancePaymentRecord.java

@@ -1,46 +1,30 @@
 package com.mfq.dao;
 
-import com.mfq.annotation.MFQDao;
 import com.mfq.bean.OrderInfo;
-import com.mfq.constants.OrderStatus;
-import com.mfq.constants.PolicyStatus;
-import com.mfq.constants.ProductType;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
+import com.mfq.bean.OrderInfoExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-@MFQDao
-@Component
 public interface OrderInfoMapper {
+    int countByExample(OrderInfoExample example);
 
-    public List<OrderInfo> findByTypeAndStatus(@Param("type") ProductType type,
-                                               @Param("status") OrderStatus status);
+    int deleteByExample(OrderInfoExample example);
 
-    public OrderInfo findByOrderNo(@Param("orderNo") String orderNo);
+    int deleteByPrimaryKey(Integer id);
 
-    public long insertOrder(OrderInfo order);
+    int insert(OrderInfo record);
 
-    public long updateOrderInfo(OrderInfo orderInfo);
+    int insertSelective(OrderInfo record);
 
-    public List<OrderInfo> findByUid(@Param("uid") long uid);
+    List<OrderInfo> selectByExample(OrderInfoExample example);
 
-    public List<OrderInfo> findByUidAndStatus(@Param("uid") long uid, @Param("status") Integer status);
+    OrderInfo selectByPrimaryKey(Integer id);
 
-    public long updateOrderStatusSafe(@Param("id") long id,
-                                      @Param("oldStatus") int oldStatus,
-                                      @Param("newStatus") int newStatus);
-    
-	public List<OrderInfo> findByUidAndProductType(@Param("uid") long uid, @Param("type") ProductType type);
-	
-	public long findByUidAndPayTypeAndPid(@Param("uid") long uid, @Param("type") int type, @Param("pid") long pid);
-	
+    int updateByExampleSelective(@Param("record") OrderInfo record, @Param("example") OrderInfoExample example);
 
-	public long updateByPrimaryKeySelective(OrderInfo record);
+    int updateByExample(@Param("record") OrderInfo record, @Param("example") OrderInfoExample example);
 
-	public int updateOnlinepayByOrderNo(@Param("orderNo") String orderNo, @Param("onlinePay") BigDecimal onlinePay);
+    int updateByPrimaryKeySelective(OrderInfo record);
 
-	public int updatePolicyStatusByStatus(@Param("newStatus") PolicyStatus insureEffect, @Param("oldStatus") PolicyStatus auditing, @Param("orderNo") String orderNo);
+    int updateByPrimaryKey(OrderInfo record);
 }
-

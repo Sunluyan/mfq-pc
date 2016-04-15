@@ -1,25 +1,30 @@
 package com.mfq.dao;
 
-import com.mfq.annotation.MFQDao;
 import com.mfq.bean.PayRecord;
-import com.mfq.constants.OrderType;
-import com.mfq.constants.PayStatus;
+import com.mfq.bean.PayRecordExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-@MFQDao
 public interface PayRecordMapper {
+    int countByExample(PayRecordExample example);
 
-    public PayRecord findById(@Param("id") long id);
+    int deleteByExample(PayRecordExample example);
 
-    public PayRecord findByOrderNo(@Param("orderNo") String orderNo);
+    int deleteByPrimaryKey(Long id);
 
-    public List<PayRecord> findByUId(@Param("orderType") OrderType orderType, @Param("uid") long uid,
-                                     @Param("status") PayStatus status);
-    
-    public long insertOne(PayRecord record);
+    int insert(PayRecord record);
 
-    public long updateOne(PayRecord record);
-    
+    int insertSelective(PayRecord record);
+
+    List<PayRecord> selectByExample(PayRecordExample example);
+
+    PayRecord selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") PayRecord record, @Param("example") PayRecordExample example);
+
+    int updateByExample(@Param("record") PayRecord record, @Param("example") PayRecordExample example);
+
+    int updateByPrimaryKeySelective(PayRecord record);
+
+    int updateByPrimaryKey(PayRecord record);
 }

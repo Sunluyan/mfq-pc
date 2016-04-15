@@ -1,7 +1,6 @@
 package com.mfq.task;
 
 import com.mfq.dataservice.context.SpringWrapper;
-import com.mfq.service.FinanceBillService;
 import com.mfq.task.base.DefaultTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

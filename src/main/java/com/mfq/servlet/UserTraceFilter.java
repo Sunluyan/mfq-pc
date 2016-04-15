@@ -1,7 +1,6 @@
 package com.mfq.servlet;
 
-import com.mfq.bean.passport.Passport;
-import com.mfq.bean.user.User;
+import com.mfq.bean.Users;
 import com.mfq.cache.TicketCacheUtils;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
@@ -12,6 +11,7 @@ import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.MDC;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,6 @@ public class UserTraceFilter implements Filter {
 
     private static final UserTraceLogger userTrace = UserTraceLogger
             .getLogger(UserTraceFilter.class);
-
 
     /**
      * 拦截需要做
@@ -46,7 +45,7 @@ public class UserTraceFilter implements Filter {
         AppContext.setUserTrace(needLog);
 
         HttpSession session = req.getSession();
-        User user = session.getAttribute("user")!=null?(User)session.getAttribute("user"):null;
+        Users user = session.getAttribute("user")!=null?(Users)session.getAttribute("user"):null;
         if(user != null ){
             if(user.getUid()!=0){
                 UserIdHolder.setUserId(user.getUid());
@@ -57,6 +56,16 @@ public class UserTraceFilter implements Filter {
                 return;
             }
         }
+//        if(needLog){ // 如果是需要微信环境下请求的资源,也就是 css,js等 除外
+//            String openId = getOpenId(req);
+//            if(openId == null){
+//                RequestUtils.writeResponse(req, resp,
+//                        JsonUtil.toJson(ErrorCodes.WECHAT_REQUIRED, "请在微信环境下打开网页", null));
+//                return;
+//            }
+//
+//        }
+
 
         try {
             chain.doFilter(request, response);
@@ -74,6 +83,9 @@ public class UserTraceFilter implements Filter {
         }
 
     }
+
+
+
 
     private String getIp(HttpServletRequest req) {
         String ip = req.getHeader("x-forwarded-for");

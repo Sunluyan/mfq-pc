@@ -1,24 +1,30 @@
 package com.mfq.dao;
 
-import com.mfq.annotation.MFQDao;
 import com.mfq.bean.Hospital;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-
+import com.mfq.bean.HospitalExample;
 import java.util.List;
-import java.util.Map;
+import org.apache.ibatis.annotations.Param;
 
-@MFQDao
-@Component
 public interface HospitalMapper {
+    int countByExample(HospitalExample example);
 
-    public Hospital findById(@Param("id") long id);
-    
-    public List<Hospital> findAll();
-    
-    public long insertHospital(Hospital hospital);  
-    
-    public List<Map<String,Object>> findProCount(@Param("hosid") List<Long> hosid);
+    int deleteByExample(HospitalExample example);
 
-    List<Hospital> selectByKeywords(@Param("keywords") String[] keywords);
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Hospital record);
+
+    int insertSelective(Hospital record);
+
+    List<Hospital> selectByExample(HospitalExample example);
+
+    Hospital selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Hospital record, @Param("example") HospitalExample example);
+
+    int updateByExample(@Param("record") Hospital record, @Param("example") HospitalExample example);
+
+    int updateByPrimaryKeySelective(Hospital record);
+
+    int updateByPrimaryKey(Hospital record);
 }

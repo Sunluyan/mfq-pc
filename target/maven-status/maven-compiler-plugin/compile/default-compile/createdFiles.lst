@@ -178,6 +178,7 @@ com/mfq/bean/user/UserDevice.class
 com/mfq/controller/PasswordController.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$32.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$4.class
+com/mfq/bean/OpenidUidExample.class
 com/mfq/controller/PaymentController.class
 com/mfq/net/wukongbao/pojo/TimeSync.class
 com/mfq/bean/OrderFreedomExample$Criteria.class
@@ -185,6 +186,7 @@ com/mfq/bean/PresentalExample.class
 com/mfq/constants/ProductType.class
 com/mfq/bean/DeviceExample$GeneratedCriteria.class
 com/mfq/dao/area/CityMapper.class
+com/mfq/bean/OpenidUid.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$31.class
 com/mfq/payment/impl/InnerServiceImpl.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$3.class
@@ -209,6 +211,7 @@ com/mfq/annotation/ForbiddenParam.class
 com/mfq/bean/DeviceExample.class
 com/mfq/bean/OrderFreedomExample$Criterion.class
 com/mfq/service/FinanceBillService.class
+com/mfq/bean/OpenidUidExample$Criterion.class
 com/mfq/controller/CouponController.class
 com/mfq/utils/MessageUtil.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$25.class
@@ -219,6 +222,7 @@ com/mfq/controller/wechat/WeChatController.class
 com/mfq/dao/DeviceMapper.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$68.class
 com/mfq/handler/EnumOrdinalTypeHandler.class
+com/mfq/bean/OpenidUidExample$Criteria.class
 com/mfq/payment/util/wechat/HttpsUtil.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$2.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$30.class
@@ -250,6 +254,7 @@ com/mfq/bean/user/User.class
 com/mfq/service/user/PresentRecordService.class
 com/mfq/service/user/UserInfoService.class
 com/mfq/bean/user/Oauth.class
+com/mfq/dao/OpenidUidMapper.class
 com/mfq/net/tongdun/pojo/FraudApiResponse.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$18.class
 com/mfq/dao/CouponMapper.class
@@ -289,6 +294,7 @@ com/mfq/dataservice/cache/impl/RedisCacheManipulater$61.class
 com/mfq/servlet/RobotsServlet.class
 com/mfq/controller/InterViewController.class
 com/mfq/bean/PolicyInfoExample$GeneratedCriteria.class
+com/mfq/bean/OpenidUidExample$GeneratedCriteria.class
 com/mfq/utils/RunnerUtils$2.class
 com/mfq/controller/UserController.class
 com/mfq/listener/StartListener$1.class
@@ -434,6 +440,7 @@ com/mfq/controller/PolicyController.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$49.class
 com/mfq/bean/sms/SMSLog.class
 com/mfq/handler/SMSSendStatusEnumHandler.class
+com/mfq/annotation/WechatRequired.class
 com/mfq/helper/SignHelper.class
 com/mfq/service/NotificationService.class
 com/mfq/utils/SecretDesUtils.class
@@ -449,6 +456,7 @@ com/mfq/bean/InviteRecord.class
 com/mfq/dao/OperationRecordMapper.class
 com/mfq/dao/PassportOauthMapper.class
 com/mfq/dao/NurseMapper.class
+com/mfq/service/TestService.class
 com/mfq/handler/ProductTypeEnumHandler.class
 com/mfq/bean/app/ProductInfoItem.class
 com/mfq/bean/OperationRecordExample$Criterion.class

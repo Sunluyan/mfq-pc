@@ -1,10 +1,6 @@
 package com.mfq.controller;
 
 import com.mfq.annotation.LoginRequired;
-import com.mfq.bean.CodeMsg;
-import com.mfq.bean.Hospital;
-import com.mfq.bean.Product;
-import com.mfq.bean.ProductDetail;
 import com.mfq.bean.app.ProductInfoItem;
 import com.mfq.bean.user.User;
 import com.mfq.bean.user.UserQuota;
@@ -12,10 +8,6 @@ import com.mfq.constants.ErrorCodes;
 import com.mfq.constants.ProductType;
 import com.mfq.dataservice.context.UserIdHolder;
 import com.mfq.helper.SignHelper;
-import com.mfq.service.ActivityService;
-import com.mfq.service.HospitalService;
-import com.mfq.service.ProductService;
-import com.mfq.service.VcodeService;
 import com.mfq.service.sms.SMSService;
 import com.mfq.service.user.UserQuotaService;
 import com.mfq.service.user.UserService;

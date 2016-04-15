@@ -1,7 +1,5 @@
 package com.mfq.dataservice.context;
 
-import com.mfq.service.NotificationService;
-
 /**
  * 用户id的线程上下文
  * @author xingyongshan

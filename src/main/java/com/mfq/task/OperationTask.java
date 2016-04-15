@@ -1,7 +1,5 @@
 package com.mfq.task;
 
-import com.mfq.bean.OperationRecord;
-import com.mfq.cache.UserOperationUtil;
 import com.mfq.dao.OperationRecordMapper;
 import com.mfq.task.base.DefaultTask;
 import org.slf4j.Logger;
