@@ -1,52 +1,41 @@
 package com.mfq.bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderInfo {
-    private Integer id;
+    private Long id;
 
     private String orderNo;
 
-    private BigDecimal price;
-
     private Long uid;
 
-    private Long pid;
+    private String name;
 
-    private Byte payType;
+    private Long price;
 
-    private BigDecimal periodPay;
+    private Integer orderType;
+
+    private Integer status;
 
     private Integer period;
 
-    private BigDecimal onlinePay;
-
-    private BigDecimal hospitalPay;
-
-    private BigDecimal useBalance;
-
-    private String couponNum;
-
-    private String securityCode;
-
-    private Byte policyStatus;
-
-    private Byte status;
-
-    private Byte refundType;
+    private String img;
 
     private Date createdAt;
 
     private Date updatedAt;
 
-    private Date serviceStartTime;
+    private Date payAt;
 
-    public Integer getId() {
+    private Date cancelAt;
+
+    private Date completeAt;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,14 +47,6 @@ public class OrderInfo {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public Long getUid() {
         return uid;
     }
@@ -74,28 +55,36 @@ public class OrderInfo {
         this.uid = uid;
     }
 
-    public Long getPid() {
-        return pid;
+    public String getName() {
+        return name;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public Byte getPayType() {
-        return payType;
+    public Long getPrice() {
+        return price;
     }
 
-    public void setPayType(Byte payType) {
-        this.payType = payType;
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
-    public BigDecimal getPeriodPay() {
-        return periodPay;
+    public Integer getOrderType() {
+        return orderType;
     }
 
-    public void setPeriodPay(BigDecimal periodPay) {
-        this.periodPay = periodPay;
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getPeriod() {
@@ -106,68 +95,12 @@ public class OrderInfo {
         this.period = period;
     }
 
-    public BigDecimal getOnlinePay() {
-        return onlinePay;
+    public String getImg() {
+        return img;
     }
 
-    public void setOnlinePay(BigDecimal onlinePay) {
-        this.onlinePay = onlinePay;
-    }
-
-    public BigDecimal getHospitalPay() {
-        return hospitalPay;
-    }
-
-    public void setHospitalPay(BigDecimal hospitalPay) {
-        this.hospitalPay = hospitalPay;
-    }
-
-    public BigDecimal getUseBalance() {
-        return useBalance;
-    }
-
-    public void setUseBalance(BigDecimal useBalance) {
-        this.useBalance = useBalance;
-    }
-
-    public String getCouponNum() {
-        return couponNum;
-    }
-
-    public void setCouponNum(String couponNum) {
-        this.couponNum = couponNum == null ? null : couponNum.trim();
-    }
-
-    public String getSecurityCode() {
-        return securityCode;
-    }
-
-    public void setSecurityCode(String securityCode) {
-        this.securityCode = securityCode == null ? null : securityCode.trim();
-    }
-
-    public Byte getPolicyStatus() {
-        return policyStatus;
-    }
-
-    public void setPolicyStatus(Byte policyStatus) {
-        this.policyStatus = policyStatus;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
-    public Byte getRefundType() {
-        return refundType;
-    }
-
-    public void setRefundType(Byte refundType) {
-        this.refundType = refundType;
+    public void setImg(String img) {
+        this.img = img == null ? null : img.trim();
     }
 
     public Date getCreatedAt() {
@@ -186,11 +119,27 @@ public class OrderInfo {
         this.updatedAt = updatedAt;
     }
 
-    public Date getServiceStartTime() {
-        return serviceStartTime;
+    public Date getPayAt() {
+        return payAt;
     }
 
-    public void setServiceStartTime(Date serviceStartTime) {
-        this.serviceStartTime = serviceStartTime;
+    public void setPayAt(Date payAt) {
+        this.payAt = payAt;
+    }
+
+    public Date getCancelAt() {
+        return cancelAt;
+    }
+
+    public void setCancelAt(Date cancelAt) {
+        this.cancelAt = cancelAt;
+    }
+
+    public Date getCompleteAt() {
+        return completeAt;
+    }
+
+    public void setCompleteAt(Date completeAt) {
+        this.completeAt = completeAt;
     }
 }

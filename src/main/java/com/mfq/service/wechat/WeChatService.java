@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.mfq.bean.user.SignIndex;
-import com.mfq.bean.user.Status;
-import com.mfq.bean.user.User;
+import com.mfq.bean.SysConfig;
+import com.mfq.bean.SysConfigExample;
 import com.mfq.bean.wechat.WeChatMsg;
 import com.mfq.bean.wechat.message.AccessToken;
 import com.mfq.cache.WeChatJsApiTicketCacheUtils;
@@ -16,9 +15,6 @@ import com.mfq.constants.ErrorCodes;
 import com.mfq.dao.SysConfigMapper;
 import com.mfq.dao.WeChatMsgMapper;
 import com.mfq.helper.SignHelper;
-import com.mfq.service.passport.PassportService;
-import com.mfq.service.user.UserQuotaService;
-import com.mfq.service.user.UserService;
 import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.ParseException;
@@ -31,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -38,21 +35,13 @@ import java.util.Random;
 public class WeChatService {
 
     private static final Logger log = LoggerFactory
-            .getLogger(LoginService.class);
+            .getLogger(WeChatService.class);
 	
     @Resource
-    UserService userService;
-    @Resource
-	UserQuotaService userQuotaService;
-    @Resource
-	CouponService couponService;
-    @Resource
-    PassportService passportService;
-    @Resource
 	WeChatMsgMapper weChatMsgMapper;
-    @Resource
-    SysConfigMapper sysConfigMapper;
-    
+	@Resource
+	SysConfigMapper sysConfigMapper;
+
 	public static final String ACCESS_TOKEN = "access_token";
 	
 	public static final String EXPIRES_IN = "expires_in";
@@ -61,114 +50,7 @@ public class WeChatService {
 	
 	public static final int TOKEN_IN = 7000;
     
-	/**
-	 * 微信注册 名字 ，手机号
-	 * @param name 名字
-	 * @param mobile 手机号
-	 */
-    public String registerWeChatUser(String passwd,String mobile,String vcode) throws Exception{
-  
-    	log.info("Wechat REG|{}|{}|{}", passwd, mobile, vcode);
-    	
-        int code = ErrorCodes.SUCCESS;
-        String msg = "注册成功";
-        
-        Map<String, Object> data = Maps.newHashMap();
-        
-        if (StringUtils.isBlank(passwd)) {
-            code = 1001;
-            msg = "密码格式错误";
-        }  else if (StringUtils.isNotBlank(mobile)
-                && !VerifyUtils.verifyMobile(mobile)) {
-            code = 1004;
-            msg = "手机号格式错误";
-        } else if (StringUtils.isNotBlank(mobile)
-                && userService.queryUserByMobile(mobile).getUid() != 0) {
-            code = 1104;
-            msg = "此手机号已注册";
-        }
-        if(code > 0){
-        	return JsonUtil.toJson(code, msg,data);
-        }
-    	long userId=userService.createUser(Status.NORMAL, null, "", null, mobile, Career.ELSE.getId(), "", new SignIndex[0]);
-    	if (userId <= 0) {
-            code = 9999;
-            msg = "创建用户失败";
-        } else {
-        	 passportService.createPassport(userId,
-        			 passwd);
-        }
-    	return JsonUtil.toJson(code, msg,data);
-    }
-    
-    
-	/**
-	 * 验证请求用户
-	 * @param name 名字
-	 * @param mobile 手机号
-	 */
-    public boolean checkRequestUser(HttpServletRequest request,String token){
-    	
-    	if(StringUtils.isBlank(token)){
-    		return false;
-    	}
-    	String vsign=(String)request.getSession().getAttribute("uid");
-    	if(token.equals(vsign)){
-    		return true;
-    	}
-    	return false;
-    	
-    }
-    
-    
-	/**
-	 * 扫描二维码送代金卷 （如果用户不存在 则创建)
-	 * @param vcode 验证码
-	 * @param mobile 手机号
-	 */
-	public String regAndGiveMoney(String name, String mobile, String vcode, String type, BigDecimal amount, int wish) throws Exception {
-		  
-    	log.info("Wechat REG|{}|{}",  mobile, vcode);
-    	
-        int code = ErrorCodes.SUCCESS;
-        String msg = "赠送成功";
-        
-        Map<String, Object> data = Maps.newHashMap();
-        
-        if (StringUtils.isNotBlank(name) && !VerifyUtils.verifyRealName(name)) {
-            code = 1001;
-            msg = "姓名格式错误";
-        } else if (StringUtils.isNotBlank(mobile)
-                && !VerifyUtils.verifyMobile(mobile)) {
-            code = 1004;
-            msg = "手机号格式错误";
-        } 
-        
-        long uid = 0;
-        User user = userService.queryUserByMobile(mobile);
-        if (StringUtils.isNotBlank(mobile)
-                && user.getUid() != 0) {
 
-        	userQuotaService.updateUserWish(user.getUid(), wish);
-
-        } else{
-        	uid=userService.createUser(Status.NORMAL, null, name, null, mobile, Career.ELSE.getId(), "", new SignIndex[0]);
-        	if (uid <= 0) {
-                code = 9999;
-                msg = "创建用户失败";
-            } else {
-            	passportService.createPassport(uid,
-            			genRandomPass());
-            	userQuotaService.updateUserWish(uid, wish);
-
-            }
-        }
-        if(code == ErrorCodes.SUCCESS){
-            couponService.makeAndSaveCouponByBatch(uid, 1);
-        }
-    	return JsonUtil.toJson(code, msg, data);
-	}
-	
 	//生成随机数
 	private static String genRandomPass(){
 		int i = (int) (Math.random() * 1000000 + 100000);
@@ -204,36 +86,65 @@ public class WeChatService {
 	 * @throws IOException
 	 */
 	public AccessToken getAccessToken() throws ParseException, IOException{
-		SysConfig config = sysConfigMapper.getConfig(Constants.WACHAT_TOKEN_KEY);
+		SysConfigExample example = new SysConfigExample();
+		example.or().andKeyEqualTo(Constants.WECHAT_TOKEN_KEY);
+		List<SysConfig> config = sysConfigMapper.selectByExample(example);
 		AccessToken token = new AccessToken();
-		if(config !=null && config.getValue() != null){
-			token = JsonUtil.toBean(config.getValue(), AccessToken.class);
+		if(config.size() != 0 && config.get(0).getValue() != null){
+			token = JsonUtil.toBean(config.get(0).getValue(), AccessToken.class);
 			if ((System.currentTimeMillis()- token.getCreateAt())/1000 < TOKEN_IN) {// 有效
 				return token;
 			}
 		}
-		token = httpAccessToken();
-		sysConfigMapper.updateConfigByKey(new SysConfig(Constants.WACHAT_TOKEN_KEY, JsonUtil.writeToJson(token)));
+		//两种情况,压根没有 和 有但是失效了
+		token = httpAccessToken(); //重新获取
+		if(config.size() == 0){
+			SysConfig sysConfig = new SysConfig();
+			sysConfig.setKey(Constants.WECHAT_TOKEN_KEY);
+			sysConfig.setValue(JsonUtil.writeToJson(token));
+			sysConfigMapper.insertSelective(sysConfig);
+		}else{
+			SysConfig sysConfig = new SysConfig();
+			sysConfig.setValue(JsonUtil.writeToJson(token));
+			SysConfigExample example1 = new SysConfigExample();
+			example1.or().andKeyEqualTo(Constants.WECHAT_TOKEN_KEY);
+			sysConfigMapper.updateByExampleSelective(sysConfig,example1);
+		}
 		return token;
 	}
-	
+
 	/**
 	 * 获取微信js token
 	 * @return
 	 * @throws IOException
 	 */
 	public JSONObject getJSToken() throws IOException{
-		SysConfig config = sysConfigMapper.getConfig("WX_JS");
+		SysConfigExample example = new SysConfigExample();
+		example.or().andKeyEqualTo("WX_JS");
+		List<SysConfig> config = sysConfigMapper.selectByExample(example);
+
 		JSONObject token;
-		if(config !=null && config.getValue() != null){
-			token = JSONObject.parseObject(config.getValue());
+		if(config.size() != 0 && config.get(0).getValue() != null){
+			token = JSONObject.parseObject(config.get(0).getValue());
 			if ((System.currentTimeMillis()- token.getLong("create_at"))/1000 < TOKEN_IN) {// 有效
 				return token;
 			}
 		}
 		token = httpJSToken();
 		token.put("create_at", System.currentTimeMillis()/1000);
-		sysConfigMapper.updateConfigByKey(new SysConfig("WX_JS", JsonUtil.writeToJson(token)));
+
+		if(config.size() == 0){
+			SysConfig sysConfig = new SysConfig();
+			sysConfig.setKey("WX_JS");
+			sysConfig.setValue(JsonUtil.writeToJson(token));
+			sysConfigMapper.insertSelective(sysConfig);
+		}else{
+			SysConfig sysConfig = new SysConfig();
+			sysConfig.setValue(JsonUtil.writeToJson(token));
+			SysConfigExample example1 = new SysConfigExample();
+			example1.or().andKeyEqualTo("WX_JS");
+			sysConfigMapper.updateByExampleSelective(sysConfig,example1);
+		}
 		return token;
 	}
 	
@@ -320,7 +231,6 @@ public class WeChatService {
 	
 	/**
 	 * 获取图片信息
-	 * @param openId
 	 * @return
 	 * @throws IOException 
 	 * @throws ParseException 

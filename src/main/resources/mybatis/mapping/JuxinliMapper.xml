@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mfq.dao.HospitalMapper" >
-  <resultMap id="BaseResultMap" type="com.mfq.bean.Hospital" >
+<mapper namespace="com.mfq.dao.JuxinliMapper" >
+  <resultMap id="BaseResultMap" type="com.mfq.bean.Juxinli" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="city_id" property="cityId" jdbcType="INTEGER" />
-    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="taobao" property="taobao" jdbcType="VARCHAR" />
+    <result column="jd" property="jd" jdbcType="VARCHAR" />
+    <result column="taobao_password" property="taobaoPassword" jdbcType="VARCHAR" />
+    <result column="jd_password" property="jdPassword" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="mobile_password" property="mobilePassword" jdbcType="VARCHAR" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
-    <result column="flag" property="flag" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,15 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, img, city_id, city_name, created_at, updated_at, flag
+    id, uid, taobao, jd, taobao_password, jd_password, mobile, mobile_password, created_at, 
+    updated_at
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.HospitalExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.JuxinliExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital
+    from juxinli
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,44 +92,55 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from hospital
+    from juxinli
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from hospital
+    delete from juxinli
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mfq.bean.HospitalExample" >
-    delete from hospital
+  <delete id="deleteByExample" parameterType="com.mfq.bean.JuxinliExample" >
+    delete from juxinli
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mfq.bean.Hospital" >
-    insert into hospital (id, name, img, 
-      city_id, city_name, created_at, 
-      updated_at, flag)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
-      #{cityId,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.mfq.bean.Juxinli" >
+    insert into juxinli (id, uid, taobao, 
+      jd, taobao_password, jd_password, 
+      mobile, mobile_password, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{taobao,jdbcType=VARCHAR}, 
+      #{jd,jdbcType=VARCHAR}, #{taobaoPassword,jdbcType=VARCHAR}, #{jdPassword,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{mobilePassword,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.mfq.bean.Hospital" >
-    insert into hospital
+  <insert id="insertSelective" parameterType="com.mfq.bean.Juxinli" >
+    insert into juxinli
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="uid != null" >
+        uid,
       </if>
-      <if test="img != null" >
-        img,
+      <if test="taobao != null" >
+        taobao,
       </if>
-      <if test="cityId != null" >
-        city_id,
+      <if test="jd != null" >
+        jd,
       </if>
-      <if test="cityName != null" >
-        city_name,
+      <if test="taobaoPassword != null" >
+        taobao_password,
+      </if>
+      <if test="jdPassword != null" >
+        jd_password,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="mobilePassword != null" >
+        mobile_password,
       </if>
       <if test="createdAt != null" >
         created_at,
@@ -134,25 +148,31 @@
       <if test="updatedAt != null" >
         updated_at,
       </if>
-      <if test="flag != null" >
-        flag,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="img != null" >
-        #{img,jdbcType=VARCHAR},
+      <if test="taobao != null" >
+        #{taobao,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=INTEGER},
+      <if test="jd != null" >
+        #{jd,jdbcType=VARCHAR},
       </if>
-      <if test="cityName != null" >
-        #{cityName,jdbcType=VARCHAR},
+      <if test="taobaoPassword != null" >
+        #{taobaoPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="jdPassword != null" >
+        #{jdPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePassword != null" >
+        #{mobilePassword,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         #{createdAt,jdbcType=TIMESTAMP},
@@ -160,34 +180,40 @@
       <if test="updatedAt != null" >
         #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="flag != null" >
-        #{flag,jdbcType=INTEGER},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mfq.bean.HospitalExample" resultType="java.lang.Integer" >
-    select count(*) from hospital
+  <select id="countByExample" parameterType="com.mfq.bean.JuxinliExample" resultType="java.lang.Integer" >
+    select count(*) from juxinli
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update hospital
+    update juxinli
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.img != null" >
-        img = #{record.img,jdbcType=VARCHAR},
+      <if test="record.taobao != null" >
+        taobao = #{record.taobao,jdbcType=VARCHAR},
       </if>
-      <if test="record.cityId != null" >
-        city_id = #{record.cityId,jdbcType=INTEGER},
+      <if test="record.jd != null" >
+        jd = #{record.jd,jdbcType=VARCHAR},
       </if>
-      <if test="record.cityName != null" >
-        city_name = #{record.cityName,jdbcType=VARCHAR},
+      <if test="record.taobaoPassword != null" >
+        taobao_password = #{record.taobaoPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jdPassword != null" >
+        jd_password = #{record.jdPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilePassword != null" >
+        mobile_password = #{record.mobilePassword,jdbcType=VARCHAR},
       </if>
       <if test="record.createdAt != null" >
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -195,42 +221,50 @@
       <if test="record.updatedAt != null" >
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.flag != null" >
-        flag = #{record.flag,jdbcType=INTEGER},
-      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update hospital
+    update juxinli
     set id = #{record.id,jdbcType=BIGINT},
-      name = #{record.name,jdbcType=VARCHAR},
-      img = #{record.img,jdbcType=VARCHAR},
-      city_id = #{record.cityId,jdbcType=INTEGER},
-      city_name = #{record.cityName,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=BIGINT},
+      taobao = #{record.taobao,jdbcType=VARCHAR},
+      jd = #{record.jd,jdbcType=VARCHAR},
+      taobao_password = #{record.taobaoPassword,jdbcType=VARCHAR},
+      jd_password = #{record.jdPassword,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mobile_password = #{record.mobilePassword,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      flag = #{record.flag,jdbcType=INTEGER}
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.Hospital" >
-    update hospital
+  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.Juxinli" >
+    update juxinli
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="img != null" >
-        img = #{img,jdbcType=VARCHAR},
+      <if test="taobao != null" >
+        taobao = #{taobao,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        city_id = #{cityId,jdbcType=INTEGER},
+      <if test="jd != null" >
+        jd = #{jd,jdbcType=VARCHAR},
       </if>
-      <if test="cityName != null" >
-        city_name = #{cityName,jdbcType=VARCHAR},
+      <if test="taobaoPassword != null" >
+        taobao_password = #{taobaoPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="jdPassword != null" >
+        jd_password = #{jdPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePassword != null" >
+        mobile_password = #{mobilePassword,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -238,21 +272,20 @@
       <if test="updatedAt != null" >
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="flag != null" >
-        flag = #{flag,jdbcType=INTEGER},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.Hospital" >
-    update hospital
-    set name = #{name,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      city_id = #{cityId,jdbcType=INTEGER},
-      city_name = #{cityName,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.Juxinli" >
+    update juxinli
+    set uid = #{uid,jdbcType=BIGINT},
+      taobao = #{taobao,jdbcType=VARCHAR},
+      jd = #{jd,jdbcType=VARCHAR},
+      taobao_password = #{taobaoPassword,jdbcType=VARCHAR},
+      jd_password = #{jdPassword,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_password = #{mobilePassword,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=INTEGER}
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

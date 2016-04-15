@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mfq.dao.BilltopayMapper" >
-  <resultMap id="BaseResultMap" type="com.mfq.bean.Billtopay" >
-    <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.mfq.bean.Billtopay" extends="BaseResultMap" >
-    <result column="bill_nos" property="billNos" jdbcType="LONGVARCHAR" />
+<mapper namespace="com.mfq.dao.OpenidUidMapper" >
+  <resultMap id="BaseResultMap" type="com.mfq.bean.OpenidUid" >
+    <id column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,20 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pay_no
+    openid, uid
   </sql>
-  <sql id="Blob_Column_List" >
-    bill_nos
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.mfq.bean.BilltopayExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.OpenidUidExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from billtopay
+    from openid_uid
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,82 +80,85 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.BilltopayExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
     <include refid="Base_Column_List" />
-    from billtopay
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
+    from openid_uid
+    where openid = #{openid,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByExample" parameterType="com.mfq.bean.BilltopayExample" >
-    delete from billtopay
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from openid_uid
+    where openid = #{openid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mfq.bean.OpenidUidExample" >
+    delete from openid_uid
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mfq.bean.Billtopay" >
-    insert into billtopay (pay_no, bill_nos)
-    values (#{payNo,jdbcType=VARCHAR}, #{billNos,jdbcType=LONGVARCHAR})
+  <insert id="insert" parameterType="com.mfq.bean.OpenidUid" >
+    insert into openid_uid (openid, uid)
+    values (#{openid,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.mfq.bean.Billtopay" >
-    insert into billtopay
+  <insert id="insertSelective" parameterType="com.mfq.bean.OpenidUid" >
+    insert into openid_uid
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="payNo != null" >
-        pay_no,
+      <if test="openid != null" >
+        openid,
       </if>
-      <if test="billNos != null" >
-        bill_nos,
+      <if test="uid != null" >
+        uid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="payNo != null" >
-        #{payNo,jdbcType=VARCHAR},
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="billNos != null" >
-        #{billNos,jdbcType=LONGVARCHAR},
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mfq.bean.BilltopayExample" resultType="java.lang.Integer" >
-    select count(*) from billtopay
+  <select id="countByExample" parameterType="com.mfq.bean.OpenidUidExample" resultType="java.lang.Integer" >
+    select count(*) from openid_uid
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update billtopay
+    update openid_uid
     <set >
-      <if test="record.payNo != null" >
-        pay_no = #{record.payNo,jdbcType=VARCHAR},
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
       </if>
-      <if test="record.billNos != null" >
-        bill_nos = #{record.billNos,jdbcType=LONGVARCHAR},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update billtopay
-    set pay_no = #{record.payNo,jdbcType=VARCHAR},
-      bill_nos = #{record.billNos,jdbcType=LONGVARCHAR}
+  <update id="updateByExample" parameterType="map" >
+    update openid_uid
+    set openid = #{record.openid,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
-    update billtopay
-    set pay_no = #{record.payNo,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.OpenidUid" >
+    update openid_uid
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where openid = #{openid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.OpenidUid" >
+    update openid_uid
+    set uid = #{uid,jdbcType=INTEGER}
+    where openid = #{openid,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -7,19 +7,17 @@ public class Hospital {
 
     private String name;
 
-    private Long cityId;
-
     private String img;
 
-    private String address;
+    private Integer cityId;
+
+    private String cityName;
 
     private Date createdAt;
 
     private Date updatedAt;
 
-    private String description;
-
-    private String details;
+    private Integer flag;
 
     public Long getId() {
         return id;
@@ -37,14 +35,6 @@ public class Hospital {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
     public String getImg() {
         return img;
     }
@@ -53,12 +43,20 @@ public class Hospital {
         this.img = img == null ? null : img.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getCityId() {
+        return cityId;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName == null ? null : cityName.trim();
     }
 
     public Date getCreatedAt() {
@@ -77,19 +75,11 @@ public class Hospital {
         this.updatedAt = updatedAt;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getFlag() {
+        return flag;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details == null ? null : details.trim();
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 }

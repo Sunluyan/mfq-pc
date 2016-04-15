@@ -62,7 +62,7 @@ public class Constants {
     public static final String APPID = "wx9df416d077b29b73";
 	public static final String APPSECRET = "54a8aa54296e229879761249720b1db7";
 	
-	public static final String WACHAT_TOKEN_KEY = "WECHAT_TOKEN";
+	public static final String WECHAT_TOKEN_KEY = "WECHAT_TOKEN";
 	
 	public static final int ACCESS_TOKEN_IN = 7200; //微信access token维持时间
 	

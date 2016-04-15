@@ -1,40 +1,27 @@
 package com.mfq.bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class PayRecord {
     private Long id;
 
-    private Byte orderType;
+    private Integer orderType;
 
-    private String tradeNo;
+    private String payNo;
 
-    private String orderNo;
-
-    private BigDecimal amount;
-
-    private BigDecimal balance;
-
-    private BigDecimal present;
+    private Long amount;
 
     private Long uid;
 
     private String tpp;
 
-    private String bankCode;
-
-    private Integer cardType;
-
-    private String cardNo;
-
     private Integer status;
 
-    private Date payAt;
-
-    private Date callbackAt;
+    private Date createdAt;
 
     private Date updatedAt;
+
+    private Date payAt;
 
     public Long getId() {
         return id;
@@ -44,52 +31,28 @@ public class PayRecord {
         this.id = id;
     }
 
-    public Byte getOrderType() {
+    public Integer getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(Byte orderType) {
+    public void setOrderType(Integer orderType) {
         this.orderType = orderType;
     }
 
-    public String getTradeNo() {
-        return tradeNo;
+    public String getPayNo() {
+        return payNo;
     }
 
-    public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
+    public void setPayNo(String payNo) {
+        this.payNo = payNo == null ? null : payNo.trim();
     }
 
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
-    }
-
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public BigDecimal getPresent() {
-        return present;
-    }
-
-    public void setPresent(BigDecimal present) {
-        this.present = present;
     }
 
     public Long getUid() {
@@ -108,30 +71,6 @@ public class PayRecord {
         this.tpp = tpp == null ? null : tpp.trim();
     }
 
-    public String getBankCode() {
-        return bankCode;
-    }
-
-    public void setBankCode(String bankCode) {
-        this.bankCode = bankCode == null ? null : bankCode.trim();
-    }
-
-    public Integer getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(Integer cardType) {
-        this.cardType = cardType;
-    }
-
-    public String getCardNo() {
-        return cardNo;
-    }
-
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -140,20 +79,12 @@ public class PayRecord {
         this.status = status;
     }
 
-    public Date getPayAt() {
-        return payAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPayAt(Date payAt) {
-        this.payAt = payAt;
-    }
-
-    public Date getCallbackAt() {
-        return callbackAt;
-    }
-
-    public void setCallbackAt(Date callbackAt) {
-        this.callbackAt = callbackAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {
@@ -162,5 +93,13 @@ public class PayRecord {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Date getPayAt() {
+        return payAt;
+    }
+
+    public void setPayAt(Date payAt) {
+        this.payAt = payAt;
     }
 }

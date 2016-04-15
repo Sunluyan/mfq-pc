@@ -1,13 +1,9 @@
 package com.mfq.bean;
 
-import java.util.Date;
-
 public class Billtopay {
     private String payNo;
 
-    private Date tim;
-
-    private String billNo;
+    private String billNos;
 
     public String getPayNo() {
         return payNo;
@@ -17,19 +13,11 @@ public class Billtopay {
         this.payNo = payNo == null ? null : payNo.trim();
     }
 
-    public Date getTim() {
-        return tim;
+    public String getBillNos() {
+        return billNos;
     }
 
-    public void setTim(Date tim) {
-        this.tim = tim;
-    }
-
-    public String getBillNo() {
-        return billNo;
-    }
-
-    public void setBillNo(String billNo) {
-        this.billNo = billNo == null ? null : billNo.trim();
+    public void setBillNos(String billNos) {
+        this.billNos = billNos == null ? null : billNos.trim();
     }
 }

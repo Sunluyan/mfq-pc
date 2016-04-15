@@ -3,20 +3,18 @@
 <mapper namespace="com.mfq.dao.FinanceBillMapper" >
   <resultMap id="BaseResultMap" type="com.mfq.bean.FinanceBill" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="uid" property="uid" jdbcType="BIGINT" />
-    <result column="bill_no" property="billNo" jdbcType="VARCHAR" />
     <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="new_balance" property="newBalance" jdbcType="DECIMAL" />
-    <result column="late_fee" property="lateFee" jdbcType="DECIMAL" />
-    <result column="cur_period" property="curPeriod" jdbcType="INTEGER" />
+    <result column="bill_no" property="billNo" jdbcType="VARCHAR" />
     <result column="all_period" property="allPeriod" jdbcType="INTEGER" />
+    <result column="current_period" property="currentPeriod" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="trade_at" property="tradeAt" jdbcType="TIMESTAMP" />
-    <result column="charge_at" property="chargeAt" jdbcType="TIMESTAMP" />
-    <result column="bill_at" property="billAt" jdbcType="TIMESTAMP" />
-    <result column="due_at" property="dueAt" jdbcType="TIMESTAMP" />
-    <result column="pay_at" property="payAt" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="late_fee" property="lateFee" jdbcType="DECIMAL" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="pay_at" property="payAt" jdbcType="TIMESTAMP" />
+    <result column="due_at" property="dueAt" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, uid, bill_no, order_no, new_balance, late_fee, cur_period, all_period, status, 
-    trade_at, charge_at, bill_at, due_at, pay_at, updated_at
+    id, order_no, bill_no, all_period, current_period, status, price, uid, late_fee, 
+    created_at, updated_at, pay_at, due_at
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.FinanceBillExample" >
     select
@@ -111,18 +109,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mfq.bean.FinanceBill" >
-    insert into finance_bill (id, uid, bill_no, 
-      order_no, new_balance, late_fee, 
-      cur_period, all_period, status, 
-      trade_at, charge_at, bill_at, 
-      due_at, pay_at, updated_at
-      )
-    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{billNo,jdbcType=VARCHAR}, 
-      #{orderNo,jdbcType=VARCHAR}, #{newBalance,jdbcType=DECIMAL}, #{lateFee,jdbcType=DECIMAL}, 
-      #{curPeriod,jdbcType=INTEGER}, #{allPeriod,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{tradeAt,jdbcType=TIMESTAMP}, #{chargeAt,jdbcType=TIMESTAMP}, #{billAt,jdbcType=TIMESTAMP}, 
-      #{dueAt,jdbcType=TIMESTAMP}, #{payAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+    insert into finance_bill (id, order_no, bill_no, 
+      all_period, current_period, status, 
+      price, uid, late_fee, 
+      created_at, updated_at, pay_at, 
+      due_at)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, 
+      #{allPeriod,jdbcType=INTEGER}, #{currentPeriod,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{uid,jdbcType=BIGINT}, #{lateFee,jdbcType=DECIMAL}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{payAt,jdbcType=TIMESTAMP}, 
+      #{dueAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.FinanceBill" >
     insert into finance_bill
@@ -130,94 +126,82 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="uid != null" >
-        uid,
+      <if test="orderNo != null" >
+        order_no,
       </if>
       <if test="billNo != null" >
         bill_no,
       </if>
-      <if test="orderNo != null" >
-        order_no,
-      </if>
-      <if test="newBalance != null" >
-        new_balance,
-      </if>
-      <if test="lateFee != null" >
-        late_fee,
-      </if>
-      <if test="curPeriod != null" >
-        cur_period,
-      </if>
       <if test="allPeriod != null" >
         all_period,
+      </if>
+      <if test="currentPeriod != null" >
+        current_period,
       </if>
       <if test="status != null" >
         status,
       </if>
-      <if test="tradeAt != null" >
-        trade_at,
+      <if test="price != null" >
+        price,
       </if>
-      <if test="chargeAt != null" >
-        charge_at,
+      <if test="uid != null" >
+        uid,
       </if>
-      <if test="billAt != null" >
-        bill_at,
+      <if test="lateFee != null" >
+        late_fee,
       </if>
-      <if test="dueAt != null" >
-        due_at,
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
       </if>
       <if test="payAt != null" >
         pay_at,
       </if>
-      <if test="updatedAt != null" >
-        updated_at,
+      <if test="dueAt != null" >
+        due_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=BIGINT},
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="billNo != null" >
         #{billNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="newBalance != null" >
-        #{newBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="lateFee != null" >
-        #{lateFee,jdbcType=DECIMAL},
-      </if>
-      <if test="curPeriod != null" >
-        #{curPeriod,jdbcType=INTEGER},
-      </if>
       <if test="allPeriod != null" >
         #{allPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="currentPeriod != null" >
+        #{currentPeriod,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
-      <if test="tradeAt != null" >
-        #{tradeAt,jdbcType=TIMESTAMP},
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
       </if>
-      <if test="chargeAt != null" >
-        #{chargeAt,jdbcType=TIMESTAMP},
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
       </if>
-      <if test="billAt != null" >
-        #{billAt,jdbcType=TIMESTAMP},
+      <if test="lateFee != null" >
+        #{lateFee,jdbcType=DECIMAL},
       </if>
-      <if test="dueAt != null" >
-        #{dueAt,jdbcType=TIMESTAMP},
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="payAt != null" >
         #{payAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedAt != null" >
-        #{updatedAt,jdbcType=TIMESTAMP},
+      <if test="dueAt != null" >
+        #{dueAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -233,47 +217,41 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.uid != null" >
-        uid = #{record.uid,jdbcType=BIGINT},
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
       </if>
       <if test="record.billNo != null" >
         bill_no = #{record.billNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.orderNo != null" >
-        order_no = #{record.orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.newBalance != null" >
-        new_balance = #{record.newBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="record.lateFee != null" >
-        late_fee = #{record.lateFee,jdbcType=DECIMAL},
-      </if>
-      <if test="record.curPeriod != null" >
-        cur_period = #{record.curPeriod,jdbcType=INTEGER},
-      </if>
       <if test="record.allPeriod != null" >
         all_period = #{record.allPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentPeriod != null" >
+        current_period = #{record.currentPeriod,jdbcType=INTEGER},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="record.tradeAt != null" >
-        trade_at = #{record.tradeAt,jdbcType=TIMESTAMP},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="record.chargeAt != null" >
-        charge_at = #{record.chargeAt,jdbcType=TIMESTAMP},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.billAt != null" >
-        bill_at = #{record.billAt,jdbcType=TIMESTAMP},
+      <if test="record.lateFee != null" >
+        late_fee = #{record.lateFee,jdbcType=DECIMAL},
       </if>
-      <if test="record.dueAt != null" >
-        due_at = #{record.dueAt,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.payAt != null" >
         pay_at = #{record.payAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updatedAt != null" >
-        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      <if test="record.dueAt != null" >
+        due_at = #{record.dueAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -283,20 +261,18 @@
   <update id="updateByExample" parameterType="map" >
     update finance_bill
     set id = #{record.id,jdbcType=BIGINT},
-      uid = #{record.uid,jdbcType=BIGINT},
-      bill_no = #{record.billNo,jdbcType=VARCHAR},
       order_no = #{record.orderNo,jdbcType=VARCHAR},
-      new_balance = #{record.newBalance,jdbcType=DECIMAL},
-      late_fee = #{record.lateFee,jdbcType=DECIMAL},
-      cur_period = #{record.curPeriod,jdbcType=INTEGER},
+      bill_no = #{record.billNo,jdbcType=VARCHAR},
       all_period = #{record.allPeriod,jdbcType=INTEGER},
+      current_period = #{record.currentPeriod,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
-      trade_at = #{record.tradeAt,jdbcType=TIMESTAMP},
-      charge_at = #{record.chargeAt,jdbcType=TIMESTAMP},
-      bill_at = #{record.billAt,jdbcType=TIMESTAMP},
-      due_at = #{record.dueAt,jdbcType=TIMESTAMP},
+      price = #{record.price,jdbcType=DECIMAL},
+      uid = #{record.uid,jdbcType=BIGINT},
+      late_fee = #{record.lateFee,jdbcType=DECIMAL},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       pay_at = #{record.payAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+      due_at = #{record.dueAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -304,67 +280,59 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.FinanceBill" >
     update finance_bill
     <set >
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=BIGINT},
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="billNo != null" >
         bill_no = #{billNo,jdbcType=VARCHAR},
       </if>
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="newBalance != null" >
-        new_balance = #{newBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="lateFee != null" >
-        late_fee = #{lateFee,jdbcType=DECIMAL},
-      </if>
-      <if test="curPeriod != null" >
-        cur_period = #{curPeriod,jdbcType=INTEGER},
-      </if>
       <if test="allPeriod != null" >
         all_period = #{allPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="currentPeriod != null" >
+        current_period = #{currentPeriod,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
-      <if test="tradeAt != null" >
-        trade_at = #{tradeAt,jdbcType=TIMESTAMP},
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="chargeAt != null" >
-        charge_at = #{chargeAt,jdbcType=TIMESTAMP},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="billAt != null" >
-        bill_at = #{billAt,jdbcType=TIMESTAMP},
+      <if test="lateFee != null" >
+        late_fee = #{lateFee,jdbcType=DECIMAL},
       </if>
-      <if test="dueAt != null" >
-        due_at = #{dueAt,jdbcType=TIMESTAMP},
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="payAt != null" >
         pay_at = #{payAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedAt != null" >
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      <if test="dueAt != null" >
+        due_at = #{dueAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mfq.bean.FinanceBill" >
     update finance_bill
-    set uid = #{uid,jdbcType=BIGINT},
+    set order_no = #{orderNo,jdbcType=VARCHAR},
       bill_no = #{billNo,jdbcType=VARCHAR},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      new_balance = #{newBalance,jdbcType=DECIMAL},
-      late_fee = #{lateFee,jdbcType=DECIMAL},
-      cur_period = #{curPeriod,jdbcType=INTEGER},
       all_period = #{allPeriod,jdbcType=INTEGER},
+      current_period = #{currentPeriod,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      trade_at = #{tradeAt,jdbcType=TIMESTAMP},
-      charge_at = #{chargeAt,jdbcType=TIMESTAMP},
-      bill_at = #{billAt,jdbcType=TIMESTAMP},
-      due_at = #{dueAt,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL},
+      uid = #{uid,jdbcType=BIGINT},
+      late_fee = #{lateFee,jdbcType=DECIMAL},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       pay_at = #{payAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      due_at = #{dueAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

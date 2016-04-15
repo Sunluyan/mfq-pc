@@ -1,6 +1,5 @@
 package com.mfq.bean;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -166,63 +165,73 @@ public class FinanceBillExample {
             return (Criteria) this;
         }
 
-        public Criteria andUidIsNull() {
-            addCriterion("uid is null");
+        public Criteria andOrderNoIsNull() {
+            addCriterion("order_no is null");
             return (Criteria) this;
         }
 
-        public Criteria andUidIsNotNull() {
-            addCriterion("uid is not null");
+        public Criteria andOrderNoIsNotNull() {
+            addCriterion("order_no is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUidEqualTo(Long value) {
-            addCriterion("uid =", value, "uid");
+        public Criteria andOrderNoEqualTo(String value) {
+            addCriterion("order_no =", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotEqualTo(Long value) {
-            addCriterion("uid <>", value, "uid");
+        public Criteria andOrderNoNotEqualTo(String value) {
+            addCriterion("order_no <>", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThan(Long value) {
-            addCriterion("uid >", value, "uid");
+        public Criteria andOrderNoGreaterThan(String value) {
+            addCriterion("order_no >", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThanOrEqualTo(Long value) {
-            addCriterion("uid >=", value, "uid");
+        public Criteria andOrderNoGreaterThanOrEqualTo(String value) {
+            addCriterion("order_no >=", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThan(Long value) {
-            addCriterion("uid <", value, "uid");
+        public Criteria andOrderNoLessThan(String value) {
+            addCriterion("order_no <", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThanOrEqualTo(Long value) {
-            addCriterion("uid <=", value, "uid");
+        public Criteria andOrderNoLessThanOrEqualTo(String value) {
+            addCriterion("order_no <=", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidIn(List<Long> values) {
-            addCriterion("uid in", values, "uid");
+        public Criteria andOrderNoLike(String value) {
+            addCriterion("order_no like", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotIn(List<Long> values) {
-            addCriterion("uid not in", values, "uid");
+        public Criteria andOrderNoNotLike(String value) {
+            addCriterion("order_no not like", value, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidBetween(Long value1, Long value2) {
-            addCriterion("uid between", value1, value2, "uid");
+        public Criteria andOrderNoIn(List<String> values) {
+            addCriterion("order_no in", values, "orderNo");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotBetween(Long value1, Long value2) {
-            addCriterion("uid not between", value1, value2, "uid");
+        public Criteria andOrderNoNotIn(List<String> values) {
+            addCriterion("order_no not in", values, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoBetween(String value1, String value2) {
+            addCriterion("order_no between", value1, value2, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderNoNotBetween(String value1, String value2) {
+            addCriterion("order_no not between", value1, value2, "orderNo");
             return (Criteria) this;
         }
 
@@ -296,256 +305,6 @@ public class FinanceBillExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderNoIsNull() {
-            addCriterion("order_no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoIsNotNull() {
-            addCriterion("order_no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoEqualTo(String value) {
-            addCriterion("order_no =", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoNotEqualTo(String value) {
-            addCriterion("order_no <>", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoGreaterThan(String value) {
-            addCriterion("order_no >", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoGreaterThanOrEqualTo(String value) {
-            addCriterion("order_no >=", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoLessThan(String value) {
-            addCriterion("order_no <", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoLessThanOrEqualTo(String value) {
-            addCriterion("order_no <=", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoLike(String value) {
-            addCriterion("order_no like", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoNotLike(String value) {
-            addCriterion("order_no not like", value, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoIn(List<String> values) {
-            addCriterion("order_no in", values, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoNotIn(List<String> values) {
-            addCriterion("order_no not in", values, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoBetween(String value1, String value2) {
-            addCriterion("order_no between", value1, value2, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderNoNotBetween(String value1, String value2) {
-            addCriterion("order_no not between", value1, value2, "orderNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceIsNull() {
-            addCriterion("new_balance is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceIsNotNull() {
-            addCriterion("new_balance is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceEqualTo(BigDecimal value) {
-            addCriterion("new_balance =", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceNotEqualTo(BigDecimal value) {
-            addCriterion("new_balance <>", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceGreaterThan(BigDecimal value) {
-            addCriterion("new_balance >", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("new_balance >=", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceLessThan(BigDecimal value) {
-            addCriterion("new_balance <", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("new_balance <=", value, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceIn(List<BigDecimal> values) {
-            addCriterion("new_balance in", values, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceNotIn(List<BigDecimal> values) {
-            addCriterion("new_balance not in", values, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("new_balance between", value1, value2, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andNewBalanceNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("new_balance not between", value1, value2, "newBalance");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeIsNull() {
-            addCriterion("late_fee is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeIsNotNull() {
-            addCriterion("late_fee is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeEqualTo(BigDecimal value) {
-            addCriterion("late_fee =", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeNotEqualTo(BigDecimal value) {
-            addCriterion("late_fee <>", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeGreaterThan(BigDecimal value) {
-            addCriterion("late_fee >", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("late_fee >=", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeLessThan(BigDecimal value) {
-            addCriterion("late_fee <", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("late_fee <=", value, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeIn(List<BigDecimal> values) {
-            addCriterion("late_fee in", values, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeNotIn(List<BigDecimal> values) {
-            addCriterion("late_fee not in", values, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("late_fee between", value1, value2, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andLateFeeNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("late_fee not between", value1, value2, "lateFee");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodIsNull() {
-            addCriterion("cur_period is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodIsNotNull() {
-            addCriterion("cur_period is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodEqualTo(Integer value) {
-            addCriterion("cur_period =", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodNotEqualTo(Integer value) {
-            addCriterion("cur_period <>", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodGreaterThan(Integer value) {
-            addCriterion("cur_period >", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodGreaterThanOrEqualTo(Integer value) {
-            addCriterion("cur_period >=", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodLessThan(Integer value) {
-            addCriterion("cur_period <", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodLessThanOrEqualTo(Integer value) {
-            addCriterion("cur_period <=", value, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodIn(List<Integer> values) {
-            addCriterion("cur_period in", values, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodNotIn(List<Integer> values) {
-            addCriterion("cur_period not in", values, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodBetween(Integer value1, Integer value2) {
-            addCriterion("cur_period between", value1, value2, "curPeriod");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurPeriodNotBetween(Integer value1, Integer value2) {
-            addCriterion("cur_period not between", value1, value2, "curPeriod");
-            return (Criteria) this;
-        }
-
         public Criteria andAllPeriodIsNull() {
             addCriterion("all_period is null");
             return (Criteria) this;
@@ -603,6 +362,66 @@ public class FinanceBillExample {
 
         public Criteria andAllPeriodNotBetween(Integer value1, Integer value2) {
             addCriterion("all_period not between", value1, value2, "allPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodIsNull() {
+            addCriterion("current_period is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodIsNotNull() {
+            addCriterion("current_period is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodEqualTo(Integer value) {
+            addCriterion("current_period =", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodNotEqualTo(Integer value) {
+            addCriterion("current_period <>", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodGreaterThan(Integer value) {
+            addCriterion("current_period >", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodGreaterThanOrEqualTo(Integer value) {
+            addCriterion("current_period >=", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodLessThan(Integer value) {
+            addCriterion("current_period <", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodLessThanOrEqualTo(Integer value) {
+            addCriterion("current_period <=", value, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodIn(List<Integer> values) {
+            addCriterion("current_period in", values, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodNotIn(List<Integer> values) {
+            addCriterion("current_period not in", values, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodBetween(Integer value1, Integer value2) {
+            addCriterion("current_period between", value1, value2, "currentPeriod");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentPeriodNotBetween(Integer value1, Integer value2) {
+            addCriterion("current_period not between", value1, value2, "currentPeriod");
             return (Criteria) this;
         }
 
@@ -666,243 +485,303 @@ public class FinanceBillExample {
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtIsNull() {
-            addCriterion("trade_at is null");
+        public Criteria andPriceIsNull() {
+            addCriterion("price is null");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtIsNotNull() {
-            addCriterion("trade_at is not null");
+        public Criteria andPriceIsNotNull() {
+            addCriterion("price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtEqualTo(Date value) {
-            addCriterion("trade_at =", value, "tradeAt");
+        public Criteria andPriceEqualTo(Long value) {
+            addCriterion("price =", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtNotEqualTo(Date value) {
-            addCriterion("trade_at <>", value, "tradeAt");
+        public Criteria andPriceNotEqualTo(Long value) {
+            addCriterion("price <>", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtGreaterThan(Date value) {
-            addCriterion("trade_at >", value, "tradeAt");
+        public Criteria andPriceGreaterThan(Long value) {
+            addCriterion("price >", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("trade_at >=", value, "tradeAt");
+        public Criteria andPriceGreaterThanOrEqualTo(Long value) {
+            addCriterion("price >=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtLessThan(Date value) {
-            addCriterion("trade_at <", value, "tradeAt");
+        public Criteria andPriceLessThan(Long value) {
+            addCriterion("price <", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtLessThanOrEqualTo(Date value) {
-            addCriterion("trade_at <=", value, "tradeAt");
+        public Criteria andPriceLessThanOrEqualTo(Long value) {
+            addCriterion("price <=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtIn(List<Date> values) {
-            addCriterion("trade_at in", values, "tradeAt");
+        public Criteria andPriceIn(List<Long> values) {
+            addCriterion("price in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtNotIn(List<Date> values) {
-            addCriterion("trade_at not in", values, "tradeAt");
+        public Criteria andPriceNotIn(List<Long> values) {
+            addCriterion("price not in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtBetween(Date value1, Date value2) {
-            addCriterion("trade_at between", value1, value2, "tradeAt");
+        public Criteria andPriceBetween(Long value1, Long value2) {
+            addCriterion("price between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andTradeAtNotBetween(Date value1, Date value2) {
-            addCriterion("trade_at not between", value1, value2, "tradeAt");
+        public Criteria andPriceNotBetween(Long value1, Long value2) {
+            addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtIsNull() {
-            addCriterion("charge_at is null");
+        public Criteria andUidIsNull() {
+            addCriterion("uid is null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtIsNotNull() {
-            addCriterion("charge_at is not null");
+        public Criteria andUidIsNotNull() {
+            addCriterion("uid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtEqualTo(Date value) {
-            addCriterion("charge_at =", value, "chargeAt");
+        public Criteria andUidEqualTo(Long value) {
+            addCriterion("uid =", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtNotEqualTo(Date value) {
-            addCriterion("charge_at <>", value, "chargeAt");
+        public Criteria andUidNotEqualTo(Long value) {
+            addCriterion("uid <>", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtGreaterThan(Date value) {
-            addCriterion("charge_at >", value, "chargeAt");
+        public Criteria andUidGreaterThan(Long value) {
+            addCriterion("uid >", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("charge_at >=", value, "chargeAt");
+        public Criteria andUidGreaterThanOrEqualTo(Long value) {
+            addCriterion("uid >=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtLessThan(Date value) {
-            addCriterion("charge_at <", value, "chargeAt");
+        public Criteria andUidLessThan(Long value) {
+            addCriterion("uid <", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtLessThanOrEqualTo(Date value) {
-            addCriterion("charge_at <=", value, "chargeAt");
+        public Criteria andUidLessThanOrEqualTo(Long value) {
+            addCriterion("uid <=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtIn(List<Date> values) {
-            addCriterion("charge_at in", values, "chargeAt");
+        public Criteria andUidIn(List<Long> values) {
+            addCriterion("uid in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtNotIn(List<Date> values) {
-            addCriterion("charge_at not in", values, "chargeAt");
+        public Criteria andUidNotIn(List<Long> values) {
+            addCriterion("uid not in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtBetween(Date value1, Date value2) {
-            addCriterion("charge_at between", value1, value2, "chargeAt");
+        public Criteria andUidBetween(Long value1, Long value2) {
+            addCriterion("uid between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andChargeAtNotBetween(Date value1, Date value2) {
-            addCriterion("charge_at not between", value1, value2, "chargeAt");
+        public Criteria andUidNotBetween(Long value1, Long value2) {
+            addCriterion("uid not between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtIsNull() {
-            addCriterion("bill_at is null");
+        public Criteria andLateFeeIsNull() {
+            addCriterion("late_fee is null");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtIsNotNull() {
-            addCriterion("bill_at is not null");
+        public Criteria andLateFeeIsNotNull() {
+            addCriterion("late_fee is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtEqualTo(Date value) {
-            addCriterion("bill_at =", value, "billAt");
+        public Criteria andLateFeeEqualTo(Long value) {
+            addCriterion("late_fee =", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtNotEqualTo(Date value) {
-            addCriterion("bill_at <>", value, "billAt");
+        public Criteria andLateFeeNotEqualTo(Long value) {
+            addCriterion("late_fee <>", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtGreaterThan(Date value) {
-            addCriterion("bill_at >", value, "billAt");
+        public Criteria andLateFeeGreaterThan(Long value) {
+            addCriterion("late_fee >", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("bill_at >=", value, "billAt");
+        public Criteria andLateFeeGreaterThanOrEqualTo(Long value) {
+            addCriterion("late_fee >=", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtLessThan(Date value) {
-            addCriterion("bill_at <", value, "billAt");
+        public Criteria andLateFeeLessThan(Long value) {
+            addCriterion("late_fee <", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtLessThanOrEqualTo(Date value) {
-            addCriterion("bill_at <=", value, "billAt");
+        public Criteria andLateFeeLessThanOrEqualTo(Long value) {
+            addCriterion("late_fee <=", value, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtIn(List<Date> values) {
-            addCriterion("bill_at in", values, "billAt");
+        public Criteria andLateFeeIn(List<Long> values) {
+            addCriterion("late_fee in", values, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtNotIn(List<Date> values) {
-            addCriterion("bill_at not in", values, "billAt");
+        public Criteria andLateFeeNotIn(List<Long> values) {
+            addCriterion("late_fee not in", values, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtBetween(Date value1, Date value2) {
-            addCriterion("bill_at between", value1, value2, "billAt");
+        public Criteria andLateFeeBetween(Long value1, Long value2) {
+            addCriterion("late_fee between", value1, value2, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andBillAtNotBetween(Date value1, Date value2) {
-            addCriterion("bill_at not between", value1, value2, "billAt");
+        public Criteria andLateFeeNotBetween(Long value1, Long value2) {
+            addCriterion("late_fee not between", value1, value2, "lateFee");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtIsNull() {
-            addCriterion("due_at is null");
+        public Criteria andCreatedAtIsNull() {
+            addCriterion("created_at is null");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtIsNotNull() {
-            addCriterion("due_at is not null");
+        public Criteria andCreatedAtIsNotNull() {
+            addCriterion("created_at is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtEqualTo(Date value) {
-            addCriterion("due_at =", value, "dueAt");
+        public Criteria andCreatedAtEqualTo(Date value) {
+            addCriterion("created_at =", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtNotEqualTo(Date value) {
-            addCriterion("due_at <>", value, "dueAt");
+        public Criteria andCreatedAtNotEqualTo(Date value) {
+            addCriterion("created_at <>", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtGreaterThan(Date value) {
-            addCriterion("due_at >", value, "dueAt");
+        public Criteria andCreatedAtGreaterThan(Date value) {
+            addCriterion("created_at >", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("due_at >=", value, "dueAt");
+        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("created_at >=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtLessThan(Date value) {
-            addCriterion("due_at <", value, "dueAt");
+        public Criteria andCreatedAtLessThan(Date value) {
+            addCriterion("created_at <", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtLessThanOrEqualTo(Date value) {
-            addCriterion("due_at <=", value, "dueAt");
+        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("created_at <=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtIn(List<Date> values) {
-            addCriterion("due_at in", values, "dueAt");
+        public Criteria andCreatedAtIn(List<Date> values) {
+            addCriterion("created_at in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtNotIn(List<Date> values) {
-            addCriterion("due_at not in", values, "dueAt");
+        public Criteria andCreatedAtNotIn(List<Date> values) {
+            addCriterion("created_at not in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtBetween(Date value1, Date value2) {
-            addCriterion("due_at between", value1, value2, "dueAt");
+        public Criteria andCreatedAtBetween(Date value1, Date value2) {
+            addCriterion("created_at between", value1, value2, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andDueAtNotBetween(Date value1, Date value2) {
-            addCriterion("due_at not between", value1, value2, "dueAt");
+        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("created_at not between", value1, value2, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIsNull() {
+            addCriterion("updated_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIsNotNull() {
+            addCriterion("updated_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtEqualTo(Date value) {
+            addCriterion("updated_at =", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotEqualTo(Date value) {
+            addCriterion("updated_at <>", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtGreaterThan(Date value) {
+            addCriterion("updated_at >", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("updated_at >=", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtLessThan(Date value) {
+            addCriterion("updated_at <", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("updated_at <=", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIn(List<Date> values) {
+            addCriterion("updated_at in", values, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotIn(List<Date> values) {
+            addCriterion("updated_at not in", values, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtBetween(Date value1, Date value2) {
+            addCriterion("updated_at between", value1, value2, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("updated_at not between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
 
@@ -966,63 +845,63 @@ public class FinanceBillExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtIsNull() {
-            addCriterion("updated_at is null");
+        public Criteria andDueAtIsNull() {
+            addCriterion("due_at is null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtIsNotNull() {
-            addCriterion("updated_at is not null");
+        public Criteria andDueAtIsNotNull() {
+            addCriterion("due_at is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtEqualTo(Date value) {
-            addCriterion("updated_at =", value, "updatedAt");
+        public Criteria andDueAtEqualTo(Date value) {
+            addCriterion("due_at =", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtNotEqualTo(Date value) {
-            addCriterion("updated_at <>", value, "updatedAt");
+        public Criteria andDueAtNotEqualTo(Date value) {
+            addCriterion("due_at <>", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtGreaterThan(Date value) {
-            addCriterion("updated_at >", value, "updatedAt");
+        public Criteria andDueAtGreaterThan(Date value) {
+            addCriterion("due_at >", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("updated_at >=", value, "updatedAt");
+        public Criteria andDueAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("due_at >=", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtLessThan(Date value) {
-            addCriterion("updated_at <", value, "updatedAt");
+        public Criteria andDueAtLessThan(Date value) {
+            addCriterion("due_at <", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtLessThanOrEqualTo(Date value) {
-            addCriterion("updated_at <=", value, "updatedAt");
+        public Criteria andDueAtLessThanOrEqualTo(Date value) {
+            addCriterion("due_at <=", value, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtIn(List<Date> values) {
-            addCriterion("updated_at in", values, "updatedAt");
+        public Criteria andDueAtIn(List<Date> values) {
+            addCriterion("due_at in", values, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtNotIn(List<Date> values) {
-            addCriterion("updated_at not in", values, "updatedAt");
+        public Criteria andDueAtNotIn(List<Date> values) {
+            addCriterion("due_at not in", values, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtBetween(Date value1, Date value2) {
-            addCriterion("updated_at between", value1, value2, "updatedAt");
+        public Criteria andDueAtBetween(Date value1, Date value2) {
+            addCriterion("due_at between", value1, value2, "dueAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedAtNotBetween(Date value1, Date value2) {
-            addCriterion("updated_at not between", value1, value2, "updatedAt");
+        public Criteria andDueAtNotBetween(Date value1, Date value2) {
+            addCriterion("due_at not between", value1, value2, "dueAt");
             return (Criteria) this;
         }
     }

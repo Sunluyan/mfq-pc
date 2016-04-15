@@ -1,17 +1,12 @@
 package com.mfq.servlet;
 
-import com.mfq.bean.Users;
-import com.mfq.cache.TicketCacheUtils;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.AppContext;
 import com.mfq.dataservice.context.UserIdHolder;
-import com.mfq.helper.MobileHelper;
 import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.MDC;
 
-import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

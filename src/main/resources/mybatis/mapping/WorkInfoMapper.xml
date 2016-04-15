@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mfq.dao.WorkInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mfq.bean.WorkInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="id_front" property="idFront" jdbcType="VARCHAR" />
+    <result column="id_back" property="idBack" jdbcType="VARCHAR" />
+    <result column="visiting_card" property="visitingCard" jdbcType="VARCHAR" />
+    <result column="id_with_hand" property="idWithHand" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="academic_background" property="academicBackground" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="family_name" property="familyName" jdbcType="VARCHAR" />
+    <result column="family_mobile" property="familyMobile" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, id_front, id_back, visiting_card, id_with_hand, company, academic_background, 
+    email, family_name, family_mobile, created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.WorkInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from work_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from work_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from work_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mfq.bean.WorkInfoExample" >
+    delete from work_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mfq.bean.WorkInfo" >
+    insert into work_info (id, uid, id_front, 
+      id_back, visiting_card, id_with_hand, 
+      company, academic_background, email, 
+      family_name, family_mobile, created_at, 
+      updated_at)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{idFront,jdbcType=VARCHAR}, 
+      #{idBack,jdbcType=VARCHAR}, #{visitingCard,jdbcType=VARCHAR}, #{idWithHand,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{academicBackground,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{familyName,jdbcType=VARCHAR}, #{familyMobile,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mfq.bean.WorkInfo" >
+    insert into work_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="idFront != null" >
+        id_front,
+      </if>
+      <if test="idBack != null" >
+        id_back,
+      </if>
+      <if test="visitingCard != null" >
+        visiting_card,
+      </if>
+      <if test="idWithHand != null" >
+        id_with_hand,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="academicBackground != null" >
+        academic_background,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="familyName != null" >
+        family_name,
+      </if>
+      <if test="familyMobile != null" >
+        family_mobile,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="idFront != null" >
+        #{idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idBack != null" >
+        #{idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="visitingCard != null" >
+        #{visitingCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idWithHand != null" >
+        #{idWithHand,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="academicBackground != null" >
+        #{academicBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyMobile != null" >
+        #{familyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mfq.bean.WorkInfoExample" resultType="java.lang.Integer" >
+    select count(*) from work_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update work_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.idFront != null" >
+        id_front = #{record.idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idBack != null" >
+        id_back = #{record.idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitingCard != null" >
+        visiting_card = #{record.visitingCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idWithHand != null" >
+        id_with_hand = #{record.idWithHand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.academicBackground != null" >
+        academic_background = #{record.academicBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyName != null" >
+        family_name = #{record.familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyMobile != null" >
+        family_mobile = #{record.familyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update work_info
+    set id = #{record.id,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=BIGINT},
+      id_front = #{record.idFront,jdbcType=VARCHAR},
+      id_back = #{record.idBack,jdbcType=VARCHAR},
+      visiting_card = #{record.visitingCard,jdbcType=VARCHAR},
+      id_with_hand = #{record.idWithHand,jdbcType=VARCHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      academic_background = #{record.academicBackground,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      family_name = #{record.familyName,jdbcType=VARCHAR},
+      family_mobile = #{record.familyMobile,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.WorkInfo" >
+    update work_info
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="idFront != null" >
+        id_front = #{idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idBack != null" >
+        id_back = #{idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="visitingCard != null" >
+        visiting_card = #{visitingCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idWithHand != null" >
+        id_with_hand = #{idWithHand,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="academicBackground != null" >
+        academic_background = #{academicBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="familyName != null" >
+        family_name = #{familyName,jdbcType=VARCHAR},
+      </if>
+      <if test="familyMobile != null" >
+        family_mobile = #{familyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.WorkInfo" >
+    update work_info
+    set uid = #{uid,jdbcType=BIGINT},
+      id_front = #{idFront,jdbcType=VARCHAR},
+      id_back = #{idBack,jdbcType=VARCHAR},
+      visiting_card = #{visitingCard,jdbcType=VARCHAR},
+      id_with_hand = #{idWithHand,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      academic_background = #{academicBackground,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      family_name = #{familyName,jdbcType=VARCHAR},
+      family_mobile = #{familyMobile,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mfq.dao.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.mfq.bean.Product" >
+<mapper namespace="com.mfq.dao.SysConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.mfq.bean.SysConfig" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="hos_id" property="hosId" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
-    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
-    <result column="flag" property="flag" jdbcType="INTEGER" />
-    <result column="online" property="online" jdbcType="INTEGER" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="index" property="index" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, hos_id, name, created_at, updated_at, flag, online
+    id, key, value, desc, index
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.ProductExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.SysConfigExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from product
+    from sys_config
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +86,85 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from product
+    from sys_config
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from product
+    delete from sys_config
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mfq.bean.ProductExample" >
-    delete from product
+  <delete id="deleteByExample" parameterType="com.mfq.bean.SysConfigExample" >
+    delete from sys_config
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.mfq.bean.Product" >
-    insert into product (id, hos_id, name, 
-      created_at, updated_at, flag, 
-      online)
-    values (#{id,jdbcType=BIGINT}, #{hosId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, 
-      #{online,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.mfq.bean.SysConfig" >
+    insert into sys_config (id, key, value, 
+      desc, index)
+    values (#{id,jdbcType=BIGINT}, #{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{index,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.mfq.bean.Product" >
-    insert into product
+  <insert id="insertSelective" parameterType="com.mfq.bean.SysConfig" >
+    insert into sys_config
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="hosId != null" >
-        hos_id,
+      <if test="key != null" >
+        key,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="value != null" >
+        value,
       </if>
-      <if test="createdAt != null" >
-        created_at,
+      <if test="desc != null" >
+        desc,
       </if>
-      <if test="updatedAt != null" >
-        updated_at,
-      </if>
-      <if test="flag != null" >
-        flag,
-      </if>
-      <if test="online != null" >
-        online,
+      <if test="index != null" >
+        index,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="hosId != null" >
-        #{hosId,jdbcType=INTEGER},
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
       </if>
-      <if test="createdAt != null" >
-        #{createdAt,jdbcType=TIMESTAMP},
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
       </if>
-      <if test="updatedAt != null" >
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="flag != null" >
-        #{flag,jdbcType=INTEGER},
-      </if>
-      <if test="online != null" >
-        #{online,jdbcType=INTEGER},
+      <if test="index != null" >
+        #{index,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mfq.bean.ProductExample" resultType="java.lang.Integer" >
-    select count(*) from product
+  <select id="countByExample" parameterType="com.mfq.bean.SysConfigExample" resultType="java.lang.Integer" >
+    select count(*) from sys_config
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update product
+    update sys_config
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.hosId != null" >
-        hos_id = #{record.hosId,jdbcType=INTEGER},
+      <if test="record.key != null" >
+        key = #{record.key,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.value != null" >
+        value = #{record.value,jdbcType=VARCHAR},
       </if>
-      <if test="record.createdAt != null" >
-        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      <if test="record.desc != null" >
+        desc = #{record.desc,jdbcType=VARCHAR},
       </if>
-      <if test="record.updatedAt != null" >
-        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.flag != null" >
-        flag = #{record.flag,jdbcType=INTEGER},
-      </if>
-      <if test="record.online != null" >
-        online = #{record.online,jdbcType=INTEGER},
+      <if test="record.index != null" >
+        index = #{record.index,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,50 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update product
+    update sys_config
     set id = #{record.id,jdbcType=BIGINT},
-      hos_id = #{record.hosId,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      flag = #{record.flag,jdbcType=INTEGER},
-      online = #{record.online,jdbcType=INTEGER}
+      key = #{record.key,jdbcType=VARCHAR},
+      value = #{record.value,jdbcType=VARCHAR},
+      desc = #{record.desc,jdbcType=VARCHAR},
+      index = #{record.index,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.Product" >
-    update product
+  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.SysConfig" >
+    update sys_config
     <set >
-      <if test="hosId != null" >
-        hos_id = #{hosId,jdbcType=INTEGER},
+      <if test="key != null" >
+        key = #{key,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
       </if>
-      <if test="createdAt != null" >
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=VARCHAR},
       </if>
-      <if test="updatedAt != null" >
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="flag != null" >
-        flag = #{flag,jdbcType=INTEGER},
-      </if>
-      <if test="online != null" >
-        online = #{online,jdbcType=INTEGER},
+      <if test="index != null" >
+        index = #{index,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.Product" >
-    update product
-    set hos_id = #{hosId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      flag = #{flag,jdbcType=INTEGER},
-      online = #{online,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.SysConfig" >
+    update sys_config
+    set key = #{key,jdbcType=VARCHAR},
+      value = #{value,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      index = #{index,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

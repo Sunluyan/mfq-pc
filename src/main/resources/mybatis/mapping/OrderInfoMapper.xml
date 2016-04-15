@@ -2,25 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mfq.dao.OrderInfoMapper" >
   <resultMap id="BaseResultMap" type="com.mfq.bean.OrderInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="uid" property="uid" jdbcType="BIGINT" />
-    <result column="pid" property="pid" jdbcType="BIGINT" />
-    <result column="pay_type" property="payType" jdbcType="TINYINT" />
-    <result column="period_pay" property="periodPay" jdbcType="DECIMAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="period" property="period" jdbcType="INTEGER" />
-    <result column="online_pay" property="onlinePay" jdbcType="DECIMAL" />
-    <result column="hospital_pay" property="hospitalPay" jdbcType="DECIMAL" />
-    <result column="use_balance" property="useBalance" jdbcType="DECIMAL" />
-    <result column="coupon_num" property="couponNum" jdbcType="VARCHAR" />
-    <result column="security_code" property="securityCode" jdbcType="VARCHAR" />
-    <result column="policy_status" property="policyStatus" jdbcType="TINYINT" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="refund_type" property="refundType" jdbcType="TINYINT" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
-    <result column="service_start_time" property="serviceStartTime" jdbcType="TIMESTAMP" />
+    <result column="pay_at" property="payAt" jdbcType="TIMESTAMP" />
+    <result column="cancel_at" property="cancelAt" jdbcType="TIMESTAMP" />
+    <result column="complete_at" property="completeAt" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -81,9 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_no, price, uid, pid, pay_type, period_pay, period, online_pay, hospital_pay, 
-    use_balance, coupon_num, security_code, policy_status, status, refund_type, created_at, 
-    updated_at, service_start_time
+    id, order_no, uid, name, price, order_type, status, period, img, created_at, updated_at, 
+    pay_at, cancel_at, complete_at
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.OrderInfoExample" >
     select
@@ -99,15 +93,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from order_info
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from order_info
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.mfq.bean.OrderInfoExample" >
     delete from order_info
@@ -116,20 +110,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mfq.bean.OrderInfo" >
-    insert into order_info (id, order_no, price, 
-      uid, pid, pay_type, period_pay, 
-      period, online_pay, hospital_pay, 
-      use_balance, coupon_num, security_code, 
-      policy_status, status, refund_type, 
-      created_at, updated_at, service_start_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{uid,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{payType,jdbcType=TINYINT}, #{periodPay,jdbcType=DECIMAL}, 
-      #{period,jdbcType=INTEGER}, #{onlinePay,jdbcType=DECIMAL}, #{hospitalPay,jdbcType=DECIMAL}, 
-      #{useBalance,jdbcType=DECIMAL}, #{couponNum,jdbcType=VARCHAR}, #{securityCode,jdbcType=VARCHAR}, 
-      #{policyStatus,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{refundType,jdbcType=TINYINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{serviceStartTime,jdbcType=TIMESTAMP}
-      )
+    insert into order_info (id, order_no, uid, 
+      name, price, order_type, 
+      status, period, img, 
+      created_at, updated_at, pay_at, 
+      cancel_at, complete_at)
+    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{orderType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{period,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{payAt,jdbcType=TIMESTAMP}, 
+      #{cancelAt,jdbcType=TIMESTAMP}, #{completeAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.OrderInfo" >
     insert into order_info
@@ -140,47 +130,26 @@
       <if test="orderNo != null" >
         order_no,
       </if>
-      <if test="price != null" >
-        price,
-      </if>
       <if test="uid != null" >
         uid,
       </if>
-      <if test="pid != null" >
-        pid,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="payType != null" >
-        pay_type,
+      <if test="price != null" >
+        price,
       </if>
-      <if test="periodPay != null" >
-        period_pay,
-      </if>
-      <if test="period != null" >
-        period,
-      </if>
-      <if test="onlinePay != null" >
-        online_pay,
-      </if>
-      <if test="hospitalPay != null" >
-        hospital_pay,
-      </if>
-      <if test="useBalance != null" >
-        use_balance,
-      </if>
-      <if test="couponNum != null" >
-        coupon_num,
-      </if>
-      <if test="securityCode != null" >
-        security_code,
-      </if>
-      <if test="policyStatus != null" >
-        policy_status,
+      <if test="orderType != null" >
+        order_type,
       </if>
       <if test="status != null" >
         status,
       </if>
-      <if test="refundType != null" >
-        refund_type,
+      <if test="period != null" >
+        period,
+      </if>
+      <if test="img != null" >
+        img,
       </if>
       <if test="createdAt != null" >
         created_at,
@@ -188,58 +157,43 @@
       <if test="updatedAt != null" >
         updated_at,
       </if>
-      <if test="serviceStartTime != null" >
-        service_start_time,
+      <if test="payAt != null" >
+        pay_at,
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at,
+      </if>
+      <if test="completeAt != null" >
+        complete_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=BIGINT},
       </if>
       <if test="orderNo != null" >
         #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
       <if test="uid != null" >
         #{uid,jdbcType=BIGINT},
       </if>
-      <if test="pid != null" >
-        #{pid,jdbcType=BIGINT},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="payType != null" >
-        #{payType,jdbcType=TINYINT},
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
       </if>
-      <if test="periodPay != null" >
-        #{periodPay,jdbcType=DECIMAL},
+      <if test="orderType != null" >
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="period != null" >
         #{period,jdbcType=INTEGER},
       </if>
-      <if test="onlinePay != null" >
-        #{onlinePay,jdbcType=DECIMAL},
-      </if>
-      <if test="hospitalPay != null" >
-        #{hospitalPay,jdbcType=DECIMAL},
-      </if>
-      <if test="useBalance != null" >
-        #{useBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="couponNum != null" >
-        #{couponNum,jdbcType=VARCHAR},
-      </if>
-      <if test="securityCode != null" >
-        #{securityCode,jdbcType=VARCHAR},
-      </if>
-      <if test="policyStatus != null" >
-        #{policyStatus,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="refundType != null" >
-        #{refundType,jdbcType=TINYINT},
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         #{createdAt,jdbcType=TIMESTAMP},
@@ -247,8 +201,14 @@
       <if test="updatedAt != null" >
         #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="serviceStartTime != null" >
-        #{serviceStartTime,jdbcType=TIMESTAMP},
+      <if test="payAt != null" >
+        #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeAt != null" >
+        #{completeAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -262,52 +222,31 @@
     update order_info
     <set >
       <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.orderNo != null" >
         order_no = #{record.orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=DECIMAL},
-      </if>
       <if test="record.uid != null" >
         uid = #{record.uid,jdbcType=BIGINT},
       </if>
-      <if test="record.pid != null" >
-        pid = #{record.pid,jdbcType=BIGINT},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.payType != null" >
-        pay_type = #{record.payType,jdbcType=TINYINT},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="record.periodPay != null" >
-        period_pay = #{record.periodPay,jdbcType=DECIMAL},
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.period != null" >
         period = #{record.period,jdbcType=INTEGER},
       </if>
-      <if test="record.onlinePay != null" >
-        online_pay = #{record.onlinePay,jdbcType=DECIMAL},
-      </if>
-      <if test="record.hospitalPay != null" >
-        hospital_pay = #{record.hospitalPay,jdbcType=DECIMAL},
-      </if>
-      <if test="record.useBalance != null" >
-        use_balance = #{record.useBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="record.couponNum != null" >
-        coupon_num = #{record.couponNum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.securityCode != null" >
-        security_code = #{record.securityCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.policyStatus != null" >
-        policy_status = #{record.policyStatus,jdbcType=TINYINT},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
-      </if>
-      <if test="record.refundType != null" >
-        refund_type = #{record.refundType,jdbcType=TINYINT},
+      <if test="record.img != null" >
+        img = #{record.img,jdbcType=VARCHAR},
       </if>
       <if test="record.createdAt != null" >
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -315,8 +254,14 @@
       <if test="record.updatedAt != null" >
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.serviceStartTime != null" >
-        service_start_time = #{record.serviceStartTime,jdbcType=TIMESTAMP},
+      <if test="record.payAt != null" >
+        pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cancelAt != null" >
+        cancel_at = #{record.cancelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.completeAt != null" >
+        complete_at = #{record.completeAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -325,25 +270,20 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update order_info
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       order_no = #{record.orderNo,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
       uid = #{record.uid,jdbcType=BIGINT},
-      pid = #{record.pid,jdbcType=BIGINT},
-      pay_type = #{record.payType,jdbcType=TINYINT},
-      period_pay = #{record.periodPay,jdbcType=DECIMAL},
+      name = #{record.name,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      order_type = #{record.orderType,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       period = #{record.period,jdbcType=INTEGER},
-      online_pay = #{record.onlinePay,jdbcType=DECIMAL},
-      hospital_pay = #{record.hospitalPay,jdbcType=DECIMAL},
-      use_balance = #{record.useBalance,jdbcType=DECIMAL},
-      coupon_num = #{record.couponNum,jdbcType=VARCHAR},
-      security_code = #{record.securityCode,jdbcType=VARCHAR},
-      policy_status = #{record.policyStatus,jdbcType=TINYINT},
-      status = #{record.status,jdbcType=TINYINT},
-      refund_type = #{record.refundType,jdbcType=TINYINT},
+      img = #{record.img,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      service_start_time = #{record.serviceStartTime,jdbcType=TIMESTAMP}
+      pay_at = #{record.payAt,jdbcType=TIMESTAMP},
+      cancel_at = #{record.cancelAt,jdbcType=TIMESTAMP},
+      complete_at = #{record.completeAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -354,47 +294,26 @@
       <if test="orderNo != null" >
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
       <if test="uid != null" >
         uid = #{uid,jdbcType=BIGINT},
       </if>
-      <if test="pid != null" >
-        pid = #{pid,jdbcType=BIGINT},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="payType != null" >
-        pay_type = #{payType,jdbcType=TINYINT},
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="periodPay != null" >
-        period_pay = #{periodPay,jdbcType=DECIMAL},
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="period != null" >
         period = #{period,jdbcType=INTEGER},
       </if>
-      <if test="onlinePay != null" >
-        online_pay = #{onlinePay,jdbcType=DECIMAL},
-      </if>
-      <if test="hospitalPay != null" >
-        hospital_pay = #{hospitalPay,jdbcType=DECIMAL},
-      </if>
-      <if test="useBalance != null" >
-        use_balance = #{useBalance,jdbcType=DECIMAL},
-      </if>
-      <if test="couponNum != null" >
-        coupon_num = #{couponNum,jdbcType=VARCHAR},
-      </if>
-      <if test="securityCode != null" >
-        security_code = #{securityCode,jdbcType=VARCHAR},
-      </if>
-      <if test="policyStatus != null" >
-        policy_status = #{policyStatus,jdbcType=TINYINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="refundType != null" >
-        refund_type = #{refundType,jdbcType=TINYINT},
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null" >
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -402,32 +321,33 @@
       <if test="updatedAt != null" >
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="serviceStartTime != null" >
-        service_start_time = #{serviceStartTime,jdbcType=TIMESTAMP},
+      <if test="payAt != null" >
+        pay_at = #{payAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelAt != null" >
+        cancel_at = #{cancelAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeAt != null" >
+        complete_at = #{completeAt,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mfq.bean.OrderInfo" >
     update order_info
     set order_no = #{orderNo,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
       uid = #{uid,jdbcType=BIGINT},
-      pid = #{pid,jdbcType=BIGINT},
-      pay_type = #{payType,jdbcType=TINYINT},
-      period_pay = #{periodPay,jdbcType=DECIMAL},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      order_type = #{orderType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       period = #{period,jdbcType=INTEGER},
-      online_pay = #{onlinePay,jdbcType=DECIMAL},
-      hospital_pay = #{hospitalPay,jdbcType=DECIMAL},
-      use_balance = #{useBalance,jdbcType=DECIMAL},
-      coupon_num = #{couponNum,jdbcType=VARCHAR},
-      security_code = #{securityCode,jdbcType=VARCHAR},
-      policy_status = #{policyStatus,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
-      refund_type = #{refundType,jdbcType=TINYINT},
+      img = #{img,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      service_start_time = #{serviceStartTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+      pay_at = #{payAt,jdbcType=TIMESTAMP},
+      cancel_at = #{cancelAt,jdbcType=TIMESTAMP},
+      complete_at = #{completeAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

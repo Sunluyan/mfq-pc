@@ -1,38 +1,33 @@
 package com.mfq.bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class FinanceBill {
     private Long id;
 
-    private Long uid;
+    private String orderNo;
 
     private String billNo;
 
-    private String orderNo;
-
-    private BigDecimal newBalance;
-
-    private BigDecimal lateFee;
-
-    private Integer curPeriod;
-
     private Integer allPeriod;
+
+    private Integer currentPeriod;
 
     private Integer status;
 
-    private Date tradeAt;
+    private Long price;
 
-    private Date chargeAt;
+    private Long uid;
 
-    private Date billAt;
+    private Long lateFee;
 
-    private Date dueAt;
+    private Date createdAt;
+
+    private Date updatedAt;
 
     private Date payAt;
 
-    private Date updatedAt;
+    private Date dueAt;
 
     public Long getId() {
         return id;
@@ -40,22 +35,6 @@ public class FinanceBill {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUid() {
-        return uid;
-    }
-
-    public void setUid(Long uid) {
-        this.uid = uid;
-    }
-
-    public String getBillNo() {
-        return billNo;
-    }
-
-    public void setBillNo(String billNo) {
-        this.billNo = billNo == null ? null : billNo.trim();
     }
 
     public String getOrderNo() {
@@ -66,28 +45,12 @@ public class FinanceBill {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public BigDecimal getNewBalance() {
-        return newBalance;
+    public String getBillNo() {
+        return billNo;
     }
 
-    public void setNewBalance(BigDecimal newBalance) {
-        this.newBalance = newBalance;
-    }
-
-    public BigDecimal getLateFee() {
-        return lateFee;
-    }
-
-    public void setLateFee(BigDecimal lateFee) {
-        this.lateFee = lateFee;
-    }
-
-    public Integer getCurPeriod() {
-        return curPeriod;
-    }
-
-    public void setCurPeriod(Integer curPeriod) {
-        this.curPeriod = curPeriod;
+    public void setBillNo(String billNo) {
+        this.billNo = billNo == null ? null : billNo.trim();
     }
 
     public Integer getAllPeriod() {
@@ -98,6 +61,14 @@ public class FinanceBill {
         this.allPeriod = allPeriod;
     }
 
+    public Integer getCurrentPeriod() {
+        return currentPeriod;
+    }
+
+    public void setCurrentPeriod(Integer currentPeriod) {
+        this.currentPeriod = currentPeriod;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -106,36 +77,44 @@ public class FinanceBill {
         this.status = status;
     }
 
-    public Date getTradeAt() {
-        return tradeAt;
+    public Long getPrice() {
+        return price;
     }
 
-    public void setTradeAt(Date tradeAt) {
-        this.tradeAt = tradeAt;
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
-    public Date getChargeAt() {
-        return chargeAt;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setChargeAt(Date chargeAt) {
-        this.chargeAt = chargeAt;
+    public void setUid(Long uid) {
+        this.uid = uid;
     }
 
-    public Date getBillAt() {
-        return billAt;
+    public Long getLateFee() {
+        return lateFee;
     }
 
-    public void setBillAt(Date billAt) {
-        this.billAt = billAt;
+    public void setLateFee(Long lateFee) {
+        this.lateFee = lateFee;
     }
 
-    public Date getDueAt() {
-        return dueAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDueAt(Date dueAt) {
-        this.dueAt = dueAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Date getPayAt() {
@@ -146,11 +125,11 @@ public class FinanceBill {
         this.payAt = payAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public Date getDueAt() {
+        return dueAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setDueAt(Date dueAt) {
+        this.dueAt = dueAt;
     }
 }
