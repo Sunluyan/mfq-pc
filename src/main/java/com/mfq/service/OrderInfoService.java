@@ -7,6 +7,7 @@ import com.mfq.constants.OrderStatus;
 import com.mfq.constants.OrderType;
 import com.mfq.dao.OrderInfoMapper;
 import com.mfq.utils.DateUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,13 +34,19 @@ public class OrderInfoService {
 
     @Transactional
     public OrderInfo saveOrderInfo(String proName, BigDecimal price,Integer period,String url,Long uid) throws Exception{
-        OrderInfoExample example = new OrderInfoExample();
-        example.or().andUidEqualTo(uid);
-        List<OrderInfo> list = mapper.selectByExample(example);
-        for (OrderInfo orderInfo : list) {
-            if(orderInfo.getStatus() == OrderStatus.APPLY.getValue()){
-                throw new Exception("已有在申请订单");
-            }
+
+        if(StringUtils.isEmpty(proName)){
+            throw new Exception("产品不能为空");
+        }
+        if(StringUtils.isEmpty(url)){
+            throw new Exception("请上传手术协议书");
+        }
+        if(uid == 0){
+            throw new Exception("非法用户");
+        }
+
+        if(!isBooking(uid)){
+            throw new Exception("已有在申请订单");
         }
 
 
@@ -68,4 +75,25 @@ public class OrderInfoService {
         return sb.toString();
     }
 
+    public boolean isBooking(Long uid) {
+        OrderInfoExample example = new OrderInfoExample();
+        example.or().andUidEqualTo(uid);
+        List<OrderInfo> list = mapper.selectByExample(example);
+        for (OrderInfo orderInfo : list) {
+            if(orderInfo.getStatus() == OrderStatus.APPLY.getValue()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public OrderInfo selectLastByUid(Long uid) {
+        OrderInfoExample example = new OrderInfoExample();
+        example.or().andUidEqualTo(uid);
+        List<OrderInfo> list = mapper.selectByExample(example);
+        if(CollectionUtils.isEmpty(list)){
+            return null;
+        }
+        return list.get(list.size()-1);
+    }
 }

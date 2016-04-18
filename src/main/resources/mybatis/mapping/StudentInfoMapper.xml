@@ -13,7 +13,7 @@
     <result column="school_name" property="schoolName" jdbcType="VARCHAR" />
     <result column="grade" property="grade" jdbcType="VARCHAR" />
     <result column="qq" property="qq" jdbcType="VARCHAR" />
-    <result column="home_address" property="homeAddress" jdbcType="INTEGER" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
     <result column="family_name" property="familyName" jdbcType="VARCHAR" />
     <result column="family_mobile" property="familyMobile" jdbcType="VARCHAR" />
     <result column="wechat_no" property="wechatNo" jdbcType="VARCHAR" />
@@ -123,7 +123,7 @@
     values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{idFront,jdbcType=VARCHAR}, 
       #{idBack,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{idWithHand,jdbcType=VARCHAR}, 
       #{schoolProvice,jdbcType=VARCHAR}, #{schoolCity,jdbcType=VARCHAR}, #{schoolName,jdbcType=VARCHAR}, 
-      #{grade,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{homeAddress,jdbcType=INTEGER}, 
+      #{grade,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, 
       #{familyName,jdbcType=VARCHAR}, #{familyMobile,jdbcType=VARCHAR}, #{wechatNo,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
@@ -217,7 +217,7 @@
         #{qq,jdbcType=VARCHAR},
       </if>
       <if test="homeAddress != null" >
-        #{homeAddress,jdbcType=INTEGER},
+        #{homeAddress,jdbcType=VARCHAR},
       </if>
       <if test="familyName != null" >
         #{familyName,jdbcType=VARCHAR},
@@ -279,7 +279,7 @@
         qq = #{record.qq,jdbcType=VARCHAR},
       </if>
       <if test="record.homeAddress != null" >
-        home_address = #{record.homeAddress,jdbcType=INTEGER},
+        home_address = #{record.homeAddress,jdbcType=VARCHAR},
       </if>
       <if test="record.familyName != null" >
         family_name = #{record.familyName,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
       school_name = #{record.schoolName,jdbcType=VARCHAR},
       grade = #{record.grade,jdbcType=VARCHAR},
       qq = #{record.qq,jdbcType=VARCHAR},
-      home_address = #{record.homeAddress,jdbcType=INTEGER},
+      home_address = #{record.homeAddress,jdbcType=VARCHAR},
       family_name = #{record.familyName,jdbcType=VARCHAR},
       family_mobile = #{record.familyMobile,jdbcType=VARCHAR},
       wechat_no = #{record.wechatNo,jdbcType=VARCHAR},
@@ -358,7 +358,7 @@
         qq = #{qq,jdbcType=VARCHAR},
       </if>
       <if test="homeAddress != null" >
-        home_address = #{homeAddress,jdbcType=INTEGER},
+        home_address = #{homeAddress,jdbcType=VARCHAR},
       </if>
       <if test="familyName != null" >
         family_name = #{familyName,jdbcType=VARCHAR},
@@ -390,7 +390,7 @@
       school_name = #{schoolName,jdbcType=VARCHAR},
       grade = #{grade,jdbcType=VARCHAR},
       qq = #{qq,jdbcType=VARCHAR},
-      home_address = #{homeAddress,jdbcType=INTEGER},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
       family_name = #{familyName,jdbcType=VARCHAR},
       family_mobile = #{familyMobile,jdbcType=VARCHAR},
       wechat_no = #{wechatNo,jdbcType=VARCHAR},

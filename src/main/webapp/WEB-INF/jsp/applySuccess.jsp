@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>申请成功</title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script src="/js/mui.min.js"></script>
+    <link href="/css/mui.min.css" rel="stylesheet"/>
     <script type="text/javascript" charset="UTF-8">
       	mui.init();
     </script>
@@ -51,7 +51,7 @@
 	<div class="mui-content">
 	    <p>申请成功!</p>
 	    <div class="">
-	    	<a href="step.html"><img src="img/申请成功.png"/></a>
+	    	<a href="/confirm"><img src="/img/申请成功.png"/></a>
 	    </div>
 	    <div class="middle">
 	    	<button class="ok">确定</button>
@@ -59,4 +59,10 @@
 	    
 	</div>
 </body>
+<script>
+	var btnOk = document.getElementsByClassName("ok")[0];
+	btnOk.onclick = function () {
+		window.location.href="/confirm"
+	}
+</script>
 </html>

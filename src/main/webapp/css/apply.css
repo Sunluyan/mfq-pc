@@ -1,3 +1,12 @@
+.alert{
+	height: 30px;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 12px;
+	background: #FD5A9C;
+	line-height: 30px;
+}
 .apply{
 	margin: 20px 20px;
 	
@@ -9,6 +18,7 @@
 	margin-bottom: 10px;
 	clear: both;
 	background: #fff;
+	
 }
 .apply div input{
 	border: none;
@@ -17,6 +27,7 @@
 	font-family: "微软雅黑";
 	font-size: 12px;
 	float: left;
+	margin-bottom: 0;
 	
 }
 .apply div label{
@@ -25,6 +36,60 @@
 	float: right;
 	background:url(../img/下拉展开.png) no-repeat center;
 	background-size: 40% 30%;
+}
+#fixed{
+	float: left;
+	background:none;
+	width: 100%;
+	font-family: "微软雅黑";
+	line-height:40px;
+	text-align: left;
+	font-size: 12px;
+	color: #999;
+	text-indent: 16px;
+
+}
+.apply .dropDownInfo{
+	width: 100%;
+	height: auto;
+	background: #fff;
+	display: none;
+	border-top: none;
+	overflow: hidden;
+}
+.apply ul{
+	margin: 0;
+	padding: 0;
+	margin: 10px 20px;
+}
+
+.apply .dropDownInfo ul li{
+	list-style: none;
+	border-bottom: 1px solid #ccc;
+	color: #999;
+	font-family: "微软雅黑";
+	
+}
+.apply .dropDownInfo ul li:nth-last-child(1){
+	border-bottom: none;
+}
+.apply .dropDownWeek{
+	width: 100%;
+	height: auto;
+	background: #fff;
+	display: none;
+	border-top: none;
+	overflow: hidden;
+}
+.apply .dropDownWeek ul li{
+	list-style: none;
+	border-bottom: 1px solid #ccc;
+	color: #999;
+	font-family: "微软雅黑";
+	
+}
+.apply .dropDownWeek ul li:nth-last-child(1){
+	border-bottom: none;
 }
 #camera{
 	background: url(../img/上传照片.png) no-repeat center;

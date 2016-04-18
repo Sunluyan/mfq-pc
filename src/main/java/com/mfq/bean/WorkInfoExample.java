@@ -974,6 +974,76 @@ public class WorkInfoExample {
             addCriterion("updated_at not between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
+
+        public Criteria andBankCardIsNull() {
+            addCriterion("bank_card is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardIsNotNull() {
+            addCriterion("bank_card is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardEqualTo(String value) {
+            addCriterion("bank_card =", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardNotEqualTo(String value) {
+            addCriterion("bank_card <>", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardGreaterThan(String value) {
+            addCriterion("bank_card >", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardGreaterThanOrEqualTo(String value) {
+            addCriterion("bank_card >=", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardLessThan(String value) {
+            addCriterion("bank_card <", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardLessThanOrEqualTo(String value) {
+            addCriterion("bank_card <=", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardLike(String value) {
+            addCriterion("bank_card like", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardNotLike(String value) {
+            addCriterion("bank_card not like", value, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardIn(List<String> values) {
+            addCriterion("bank_card in", values, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardNotIn(List<String> values) {
+            addCriterion("bank_card not in", values, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardBetween(String value1, String value2) {
+            addCriterion("bank_card between", value1, value2, "bankCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andBankCardNotBetween(String value1, String value2) {
+            addCriterion("bank_card not between", value1, value2, "bankCard");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

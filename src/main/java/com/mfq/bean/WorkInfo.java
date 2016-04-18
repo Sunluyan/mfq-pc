@@ -29,6 +29,8 @@ public class WorkInfo {
 
     private Date updatedAt;
 
+    private String bankCard;
+
     public Long getId() {
         return id;
     }
@@ -131,5 +133,13 @@ public class WorkInfo {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getBankCard() {
+        return bankCard;
+    }
+
+    public void setBankCard(String bankCard) {
+        this.bankCard = bankCard == null ? null : bankCard.trim();
     }
 }

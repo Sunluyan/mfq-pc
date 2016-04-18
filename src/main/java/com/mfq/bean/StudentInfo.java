@@ -25,7 +25,7 @@ public class StudentInfo {
 
     private String qq;
 
-    private Integer homeAddress;
+    private String homeAddress;
 
     private String familyName;
 
@@ -125,12 +125,12 @@ public class StudentInfo {
         this.qq = qq == null ? null : qq.trim();
     }
 
-    public Integer getHomeAddress() {
+    public String getHomeAddress() {
         return homeAddress;
     }
 
-    public void setHomeAddress(Integer homeAddress) {
-        this.homeAddress = homeAddress;
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress == null ? null : homeAddress.trim();
     }
 
     public String getFamilyName() {

@@ -865,52 +865,62 @@ public class StudentInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressEqualTo(Integer value) {
+        public Criteria andHomeAddressEqualTo(String value) {
             addCriterion("home_address =", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressNotEqualTo(Integer value) {
+        public Criteria andHomeAddressNotEqualTo(String value) {
             addCriterion("home_address <>", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressGreaterThan(Integer value) {
+        public Criteria andHomeAddressGreaterThan(String value) {
             addCriterion("home_address >", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressGreaterThanOrEqualTo(Integer value) {
+        public Criteria andHomeAddressGreaterThanOrEqualTo(String value) {
             addCriterion("home_address >=", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressLessThan(Integer value) {
+        public Criteria andHomeAddressLessThan(String value) {
             addCriterion("home_address <", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressLessThanOrEqualTo(Integer value) {
+        public Criteria andHomeAddressLessThanOrEqualTo(String value) {
             addCriterion("home_address <=", value, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressIn(List<Integer> values) {
+        public Criteria andHomeAddressLike(String value) {
+            addCriterion("home_address like", value, "homeAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andHomeAddressNotLike(String value) {
+            addCriterion("home_address not like", value, "homeAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andHomeAddressIn(List<String> values) {
             addCriterion("home_address in", values, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressNotIn(List<Integer> values) {
+        public Criteria andHomeAddressNotIn(List<String> values) {
             addCriterion("home_address not in", values, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressBetween(Integer value1, Integer value2) {
+        public Criteria andHomeAddressBetween(String value1, String value2) {
             addCriterion("home_address between", value1, value2, "homeAddress");
             return (Criteria) this;
         }
 
-        public Criteria andHomeAddressNotBetween(Integer value1, Integer value2) {
+        public Criteria andHomeAddressNotBetween(String value1, String value2) {
             addCriterion("home_address not between", value1, value2, "homeAddress");
             return (Criteria) this;
         }

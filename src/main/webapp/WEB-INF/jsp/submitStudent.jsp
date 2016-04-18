@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>提交资料</title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="css/submitStudent.css"/>
+    <script src="/js/mui.min.js"></script>
+    <link href="/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/css/submitStudent.css"/>
     
 </head>
 <body>
+<form enctype="multipart/form-data" action="/submit/student" method="post">
+
 	<div class="mui-content">
 	    <p class="tips">
 		请上传真实有效的信息、任何不实的信息都可能会影响到您的审批结果及信用记录。
@@ -17,19 +19,27 @@
 		<form action="" method="post">
 			<!--拍摄身份证正面-->
 			<div class="needImg">
-				<input type="text" name="idFace" id="idFace" placeholder="拍摄身份证-正面"/><label for="idFace"></label>
+				<input type="text" placeholder="拍摄身份证-正面"/>
+				<input type="file" name="idFace" id="idFace"  style="display:none;"/>
+				<label for="idFace"></label>
 			</div>
 			<!--拍摄身份证反面-->
 			<div class="needImg">
-				<input type="text" name="idReturn" id="idReturn" placeholder="拍摄身份证-反面"/><label for="idReturn"></label>
+				<input type="text" placeholder="拍摄身份证-反面"/><label for="idReturn"></label>
+				<input type="file" name="idReturn" id="idReturn"  style="display:none;"/>
+
 			</div>
 			<!--学生证内页-->
 			<div class="needImg">
-				<input type="text" name="studentCard" id="studentCard" placeholder="拍摄名片或工牌"/><label for="studentCard"></label>
+				<input type="text" placeholder="拍摄名片或工牌"/><label for="studentCard"></label>
+				<input type="file" name="studentCard" id="studentCard"  style="display:none;"/>
+
 			</div>
 			<!--手持身份证自拍-->
 			<div class="needImg">
-				<input type="text" name="studentSelf" id="studentSelf" placeholder="手持身份证自拍"/><label for="studentSelf"></label>
+				<input type="text" placeholder="手持身份证自拍"/><label for="studentSelf"></label>
+				<input type="file" name="studentSelf" id="studentSelf"  style="display:none;"/>
+
 			</div>
 			<p></p>
 			<!--学校省份-->
@@ -82,9 +92,10 @@
 	    </div>
 	
 	</div>
-	
-	
-	<script type="text/javascript" charset="UTF-8">
+</form>
+
+
+<script type="text/javascript" charset="UTF-8">
       	mui.init();
       	var oNext = document.getElementById("next2");
       	var oBack = document.getElementById("back2");

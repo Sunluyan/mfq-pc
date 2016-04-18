@@ -7,12 +7,17 @@
 
 	<typeAliases>
 		<!--<typeAlias alias="City" type="com.mfq.bean.area.City"/>-->
+		<typeAlias alias="SMSConfig" type="com.mfq.bean.sms.SMSConfig"/>
+		<typeAlias alias="SMSLog" type="com.mfq.bean.sms.SMSLog"/>
 
 	</typeAliases>
-	
+
+
 	<typeHandlers>
-
-
+		<typeHandler javaType="com.mfq.bean.sms.SMSSendStatus"
+					 handler="com.mfq.handler.SMSSendStatusEnumHandler"/>
+		<typeHandler javaType="com.mfq.bean.sms.SMSSendType"
+					 handler="com.mfq.handler.SMSSendTypeEnumHandler"/>
 	</typeHandlers>
 
 	<mappers>
@@ -27,6 +32,9 @@
 		<mapper resource="mybatis/mapping/StudentInfoMapper.xml"/>
 		<mapper resource="mybatis/mapping/UsersMapper.xml"/>
 		<mapper resource="mybatis/mapping/WorkInfoMapper.xml"/>
+		<mapper resource="mybatis/mapping/VcodeMapper.xml"/>
+		<mapper resource="mybatis/mapping/sms.xml"/>
+		<mapper resource="mybatis/mapping/sms_config.xml"/>
 	</mappers>
 
 </configuration>

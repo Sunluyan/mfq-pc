@@ -13,9 +13,9 @@ public enum OrderStatus {
 	String desc;
 	
 	OrderStatus(int value, String name, String desc){
-		this.value = value;
-		this.name = name;
-		this.desc = desc;
+        this.value = value;
+        this.name = name;
+        this.desc = desc;
 	}
 
 	public int getValue() {
