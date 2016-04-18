@@ -1,0 +1,49 @@
+body{
+	background: #fff;
+	font-family: "微软雅黑";
+	
+}
+.mui-content{
+	background: #fff;
+}
+/*step*/
+.step{
+
+	height: 40px;
+	background: #fd5a9c;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.step p{
+	float: left;
+	color: #fff;
+	font-family: "微软雅黑";
+	font-size: 10px;
+	height: 32px;
+	line-height:40px;
+	
+}
+.step p:nth-child(1){
+	width: 70px;
+	background: url(../img/bg1.jpg) no-repeat center;
+	background-size: 60% 90%;
+}
+
+/*tips*/
+.tips{
+	clear: both;
+	margin: 0px 14px;
+	margin-top: 13px 18px;
+	overflow: hidden;
+	background: #fff;
+}
+.tips p{
+	font-family: "微软雅黑";
+	color:#c3c3c3;
+	font-size: 9px;
+	margin-top: 0px 23px;
+	line-height: 24px;
+	text-indent: 18px;
+}
+
+

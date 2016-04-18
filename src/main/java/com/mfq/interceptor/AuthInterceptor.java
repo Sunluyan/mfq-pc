@@ -2,11 +2,9 @@ package com.mfq.interceptor;
 
 import com.mfq.annotation.LoginRequired;
 import com.mfq.annotation.WechatRequired;
-import com.mfq.bean.user.User;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.UserIdHolder;
-import com.mfq.service.user.UserService;
 import com.mfq.utils.JsonUtil;
 import com.mfq.utils.RequestUtils;
 import org.slf4j.Logger;
@@ -33,9 +31,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
     private static final Logger logger = LoggerFactory
             .getLogger(AuthInterceptor.class);
 
-    @Resource
-    UserService userService;
-    
+
     public AuthInterceptor() {
     }
     
@@ -47,7 +43,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         // 〇 如果未登录且页面需要登录信息，则返回false
         // 〇 返回true
         String serverName = request.getServerName();
-        logger.info("requestServerName:{}", serverName);
+        logger.debug("requestServerName:{}", serverName);
         String domainSuffix = Constants.COOKIE_DOMAIN;
 //        if (!serverName.endsWith(domainSuffix)) {
 //            // response.setCharacterEncoding("UTF-8");
@@ -73,7 +69,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
     public void postHandle(
 			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
 			throws Exception {
-    	System.out.println("ret ...");
+
 	}
 
 

@@ -17,8 +17,5 @@ public class OrderCloseTask extends DefaultTask {
     @Override
     public void doTask() throws Exception {
     	logger.info("task  start....");
-        OrderCloseService service = (OrderCloseService) new ClassPathXmlApplicationContext("spring/spring")
-                .getBean("OrderCloseService");
-        service.start();
     }
 }

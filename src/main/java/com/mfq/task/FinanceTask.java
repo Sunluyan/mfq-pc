@@ -14,7 +14,7 @@ public class FinanceTask extends DefaultTask {
     public String getTaskName() {
         return "FinanceTask";
     }
-    
+
     @Override
     public void doTask() throws Exception {
         @SuppressWarnings("deprecation")
@@ -23,9 +23,7 @@ public class FinanceTask extends DefaultTask {
             logger.warn("Task {} passed, current time can't do clearTask....", getTaskName());
             return;
         }
-        
-        FinanceBillService financeService = (FinanceBillService) SpringWrapper.getBean("FinanceBillService");
-        financeService.start();
+
     }
 
 }

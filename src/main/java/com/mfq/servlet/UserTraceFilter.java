@@ -1,5 +1,6 @@
 package com.mfq.servlet;
 
+import com.mfq.bean.Users;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.AppContext;
@@ -120,18 +121,6 @@ public class UserTraceFilter implements Filter {
 
     private void logError(Exception e) {
         userTrace.error("Request Error", e);
-    }
-
-    private String kickNXID(HttpServletRequest request,
-            HttpServletResponse response) {
-        String nxid = (String) request.getAttribute(Constants.NXID_ATTRIBUTE);
-        if (nxid == null) {
-            nxid = CookieUtils.readNxid(request);
-            if (nxid != null) {
-                request.setAttribute(Constants.NXID_ATTRIBUTE, nxid);
-            }
-        }
-        return nxid;
     }
 
     @Override

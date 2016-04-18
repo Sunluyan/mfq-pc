@@ -45,8 +45,4 @@ public class UserIdHolder {
         return getLongUid() > 0;
     }
 
-	public static void updateChannelId(long uid, String mobileChannelId, String mobileType) {
-		NotificationService service = (NotificationService)SpringWrapper.getBean("notificationService");
-		service.updateChannelId(uid, mobileChannelId, mobileType);
-	}
 }

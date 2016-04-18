@@ -1,10 +1,14 @@
 package com.mfq.dao;
 
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.Hospital;
 import com.mfq.bean.HospitalExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@MFQDao
+@Component
 public interface HospitalMapper {
     int countByExample(HospitalExample example);
 

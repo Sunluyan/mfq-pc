@@ -2,7 +2,6 @@ package com.mfq.helper;
 
 import com.mfq.constants.Constants;
 import com.mfq.dataservice.context.AppContext;
-import com.mfq.utils.CookieUtils;
 import com.mfq.utils.RequestUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -19,10 +18,6 @@ public class MobileHelper {
             AppContext.setApp(false);
             return false;
         }
-    }
-
-    public static String getMobileMM(HttpServletRequest req) {
-        return RequestUtils.getHeaderString(req, CookieUtils.COOKIE_MM);
     }
 
     public static String getMobileVer(HttpServletRequest req) {

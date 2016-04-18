@@ -1,0 +1,47 @@
+.residue{
+	background: #fff;
+}
+.residue img{
+	width: 100%;
+}
+.my{
+	height: auto;
+	background: #fff;
+	overflow: hidden;
+}
+
+.my div label{
+	float: left;
+	width: 20%;
+	color: #333;
+	font-size: 13px;
+	font-family: "微软雅黑";
+	
+}
+.my div input{
+	float:left;
+	text-align: right;
+	width: 70%;
+	background: none;
+	border: none;
+	margin-bottom: 0;
+}
+.my div{
+	clear: both;
+	height: 40px;
+	margin: 0px 18px;
+	line-height: 40px;
+	background: url(../img/right.png) no-repeat center right;
+	background-size: 4% 50%;
+	
+}
+.my .line{
+	border-bottom: 1px solid #CCCCCC;
+}
+
+
+
+
+
+
+

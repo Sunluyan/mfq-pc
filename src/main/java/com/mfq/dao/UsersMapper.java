@@ -1,10 +1,14 @@
 package com.mfq.dao;
 
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.Users;
 import com.mfq.bean.UsersExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@MFQDao
+@Component
 public interface UsersMapper {
     int countByExample(UsersExample example);
 

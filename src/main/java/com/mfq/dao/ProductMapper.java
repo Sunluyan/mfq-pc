@@ -1,10 +1,14 @@
 package com.mfq.dao;
 
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.Product;
 import com.mfq.bean.ProductExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@MFQDao
+@Component
 public interface ProductMapper {
     int countByExample(ProductExample example);
 

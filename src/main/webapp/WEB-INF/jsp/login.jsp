@@ -93,45 +93,45 @@
                 // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
 
 
-                wx.chooseWXPay({
-                    timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                    nonceStr: '', // 支付签名随机串，不长于 32 位
-                    package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                    signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                    paySign: '', // 支付签名
-                    success: function (res) {
-                        // 支付成功后的回调函数
-                    }
-                });
+//                wx.chooseWXPay({
+//                    timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+//                    nonceStr: '', // 支付签名随机串，不长于 32 位
+//                    package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+//                    signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+//                    paySign: '', // 支付签名
+//                    success: function (res) {
+//                        // 支付成功后的回调函数
+//                    }
+//                });
 
 
-                wx.onMenuShareTimeline({
-                    title: '一顿饭的时间，提升颜值的秘密', // 分享标题
-                    link: 'http://m.5imfq.com/activity/baoming', // 分享链接
-                    imgUrl: 'http://7xlcaq.com2.z0.glb.qiniucdn.com/2016-03-02share.jpg?_=1', // 分享图标
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                        alert("取消就不能参与了哦")
-                    }
-                });
-
-                wx.onMenuShareAppMessage({
-                    title: '一顿饭的时间，提升颜值的秘密', // 分享标题
-                    desc: '', // 分享描述
-                    link: 'http://m.5imfq.com/activity/baoming', // 分享链接
-                    imgUrl: 'http://7xlcaq.com2.z0.glb.qiniucdn.com/2016-03-02share.jpg?_=1', // 分享图标
-                    type: 'link', // 分享类型,music、video或link，不填默认为link
-                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                    success: function () {
-                        // 用户确认分享后执行的回调函数
-                    },
-                    cancel: function () {
-                        // 用户取消分享后执行的回调函数
-                    }
-                });
+//                wx.onMenuShareTimeline({
+//                    title: '一顿饭的时间，提升颜值的秘密', // 分享标题
+//                    link: 'http://m.5imfq.com/activity/baoming', // 分享链接
+//                    imgUrl: 'http://7xlcaq.com2.z0.glb.qiniucdn.com/2016-03-02share.jpg?_=1', // 分享图标
+//                    success: function () {
+//                        // 用户确认分享后执行的回调函数
+//                    },
+//                    cancel: function () {
+//                        // 用户取消分享后执行的回调函数
+//                        alert("取消就不能参与了哦")
+//                    }
+//                });
+//
+//                wx.onMenuShareAppMessage({
+//                    title: '一顿饭的时间，提升颜值的秘密', // 分享标题
+//                    desc: '', // 分享描述
+//                    link: 'http://m.5imfq.com/activity/baoming', // 分享链接
+//                    imgUrl: 'http://7xlcaq.com2.z0.glb.qiniucdn.com/2016-03-02share.jpg?_=1', // 分享图标
+//                    type: 'link', // 分享类型,music、video或link，不填默认为link
+//                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+//                    success: function () {
+//                        // 用户确认分享后执行的回调函数
+//                    },
+//                    cancel: function () {
+//                        // 用户取消分享后执行的回调函数
+//                    }
+//                });
             });
             wx.error(function (res) {
 
@@ -164,103 +164,7 @@
     //
     // -------------------------------------------------- //
 
-    (function (BOM, DOM, $) {
-
-        var URL_Object = BOM.webkitURL || BOM.URL || BOM;
-
-        $.fn.xImage = function (Type_Filter) {
-            var $_This = this.find('*').addBack().filter('input[type="file"]');
-            Type_Filter = Type_Filter || [];
-
-            $_This.parent().css({
-                position: 'relative',
-                cursor: 'pointer'
-            });
-            $_This
-                    .css({
-                        position: 'absolute',
-                        'z-index': 999,
-                        opacity: 0
-                    })
-                    .each(function () {
-                        var $_This = $(this);
-                        var $_PreView = $_This.siblings('img, img.PreView').eq(0);
-                        if (!$_PreView.length)
-                            $_PreView = $('<img />').before($_This);
-
-                        $_PreView.addClass('PreView').css({
-                                    display: 'inline-block',
-                                    'max-height': $(top).height() * ( 1 / 3  ),
-                                    'max-width': $(top).width() * ( 1 / 3  )
-                                })
-                                .on('Ready', function () {
-                                    $_This.css({
-                                        top: $_PreView.position().top,
-                                        left: $_PreView.position().left,
-                                        width: $_PreView.width(),
-                                        height: $_PreView.height()
-                                    });
-                                }).trigger('Ready').on('load', function () {
-                            $_PreView.trigger('Ready');
-                        });
-                    })
-                    .data('clicks', 0).click(function () {
-                        var $_This = $(this);
-                        var Click_Times = $_This.data('clicks');
-
-                        if ($.browser.mobile && ( ++Click_Times > 3  )) {
-                            BOM.alert("您当前的浏览器无法在本页上传文件……");
-                            return false;
-                        }
-                        $_This.data('clicks', Click_Times);
-                    })
-                    .change(function () {
-                        var $_This = $(this).data('clicks', 0);
-
-                        try {
-                            var iFile = arguments  [0].target.files  [0];
-                        } catch (iError) {
-                            BOM.alert([
-                                "您当前 浏览器内核 较为古老，暂不支持【图片上传预览】……",
-                                "建议更换为最新版 搜狗、猎豹、傲游 等双核浏览器~"
-                            ].join("\n\n"));
-
-                            $_This.show().siblings('img.PreView').remove();
-
-                            return true;
-                        }
-
-                        var iType = iFile.type.split('/');
-                        if (iType  [0] != 'image') {
-                            BOM.alert("您所选的文件不是图片……");
-                            return false;
-                        } else if ($.inArray(iType  [1], Type_Filter) > -1) {
-                            BOM.alert([
-                                "此处不能上传", iType  [1].toUpperCase(), "格式的图片！"
-                            ].join(' '));
-                            return false;
-                        }
-
-                        var iReader = new FileReader();
-                        iReader.onload = function () {
-                            $_This.siblings().not('img.PreView, input[type="file"]').hide();
-
-                            var $_PreView = $_This.siblings('img.PreView');
-                            $_PreView  [0].onload = function () {
-                                URL_Object.revokeObjectURL(this.src);
-                            };
-                            $_PreView  [0].src = URL_Object.createObjectURL(iFile);
-                        };
-                        iReader.readAsBinaryString(iFile);
-                    });
-
-            return this;
-        };
-
-    })(self, self.document, self.jQuery);
-
-
-    $('.ImageBox').xImage(['psd', 'webp', 'bpg']);
+    (function(BOM,DOM,$){var URL_Object=BOM.webkitURL||BOM.URL||BOM;$.fn.xImage=function(Type_Filter){var $_This=this.find("*").addBack().filter('input[type="file"]');Type_Filter=Type_Filter||[];$_This.parent().css({position:"relative",cursor:"pointer"});$_This.css({position:"absolute","z-index":999,opacity:0}).each(function(){var $_This=$(this);var $_PreView=$_This.siblings("img, img.PreView").eq(0);if(!$_PreView.length){$_PreView=$("<img />").before($_This)}$_PreView.addClass("PreView").css({display:"inline-block","max-height":$(top).height()*(1/3),"max-width":$(top).width()*(1/3)}).on("Ready",function(){$_This.css({top:$_PreView.position().top,left:$_PreView.position().left,width:$_PreView.width(),height:$_PreView.height()})}).trigger("Ready").on("load",function(){$_PreView.trigger("Ready")})}).data("clicks",0).click(function(){var $_This=$(this);var Click_Times=$_This.data("clicks");if($.browser.mobile&&(++Click_Times>3)){BOM.alert("您当前的浏览器无法在本页上传文件……");return false}$_This.data("clicks",Click_Times)}).change(function(){var $_This=$(this).data("clicks",0);try{var iFile=arguments[0].target.files[0]}catch(iError){BOM.alert(["您当前 浏览器内核 较为古老，暂不支持【图片上传预览】……","建议更换为最新版 搜狗、猎豹、傲游 等双核浏览器~"].join("\n\n"));$_This.show().siblings("img.PreView").remove();return true}var iType=iFile.type.split("/");if(iType[0]!="image"){BOM.alert("您所选的文件不是图片……");return false}else{if($.inArray(iType[1],Type_Filter)>-1){BOM.alert(["此处不能上传",iType[1].toUpperCase(),"格式的图片！"].join(" "));return false}}var iReader=new FileReader();iReader.onload=function(){$_This.siblings().not('img.PreView, input[type="file"]').hide();var $_PreView=$_This.siblings("img.PreView");$_PreView[0].onload=function(){URL_Object.revokeObjectURL(this.src)};$_PreView[0].src=URL_Object.createObjectURL(iFile)};iReader.readAsBinaryString(iFile)});return this}})(self,self.document,self.jQuery);$(".ImageBox").xImage(["psd","webp","bpg"]);
 
 
 </script>

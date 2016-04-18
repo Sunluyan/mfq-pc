@@ -1,0 +1,104 @@
+.mui-content{
+	background: #F4F4F4;
+}
+.step{
+	margin: 0;
+}
+.showStep{
+	width: 320px;
+	height: 100px;
+	background: #f4f4f4;
+	overflow: hidden;
+	text-align: center;
+	
+	margin-left: auto;
+	margin-right: auto;
+	
+	
+}
+.showStep ul{
+	height: 100px;
+	margin: 0;
+	padding: 0;
+	margin: 20px 0px;
+	list-style: none;
+	text-align: center;
+	
+}
+.showStep ul li{
+	float: left;
+	
+}
+.showStep ul li p{
+	font-family: "微软雅黑";
+	color: #fd5a9c;
+	font-size: 10px;
+}
+.showStep ul li img{
+	width: 30px;
+	
+	
+}
+.showStep .line{
+	width: 20px;
+	height: 30px;
+	background: url(../img/line.jpg) no-repeat center;
+	
+}
+.total{
+	
+}
+.total div{
+	height: 38px;
+	clear: both;
+	background: #fff;
+	line-height: 38px;
+	overflow: hidden;
+	
+}
+.total .bottom-line{
+	border-top: 1px solid #ccc;
+
+}
+.total span{
+	float: left;
+	display: block;
+	width: 100px;
+	height: 38px;
+	text-align: center;
+	color: #777;
+	
+}
+.total input{
+	float: right;
+	border: none;
+	text-align: right;
+	width: 200px;
+	height:24px;
+	font-family: "微软雅黑";
+	color: #777;
+	line-height: 24px;
+	margin-top: 6px;
+	
+	
+	
+}
+.middle{
+	width: 210px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.ok{
+	clear: both;
+	width: 210px;
+	height: 33px;
+	background: #fd5a9c;
+	margin: 0px auto;
+	color: #fff;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	border-radius: 20px;
+	border: none;
+	margin: 20px 0px;
+	
+}

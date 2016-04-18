@@ -1,0 +1,69 @@
+.userLogin{
+	margin: 13px 13px;
+}
+.userLogin p{
+	color: #000;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	margin-bottom: 11px;
+}
+.userLogin span{
+	display: block;
+	width: 40px;
+	height: 40px;
+	background: red;
+	float: left;
+
+}
+.userLogin span img{
+	width: 40px;
+	height: 40px;
+}
+
+.userLogin .pwdOne{
+	clear: both;
+	
+	height: 42px;
+	border: 1px solid #ccc;
+	background: #FFF;
+}
+.userLogin .pwdTwo{
+	clear: both;
+	height: 42px;
+	border: 1px solid #ccc;
+	background: #FFF;
+}
+.userLogin input{
+	width: 240px;
+	border: none;
+	float: left;
+	font-size: 12px;
+	font-family: "微软雅黑";
+
+}
+a{
+	clear: both;
+	float: right;
+	color: #007AFF;
+	font-size: 10px;
+	margin-right: 15px;
+}
+.middle{
+	width:210px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.next{
+	clear: both;
+	width: 210px;
+	height: 33px;
+	background: #fd5a9c;
+	margin: 0px auto;
+	color: #fff;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	border-radius: 20px;
+	border: none;
+	margin: 40px 0px;
+	
+}

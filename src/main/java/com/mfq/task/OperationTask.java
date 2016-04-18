@@ -1,6 +1,5 @@
 package com.mfq.task;
 
-import com.mfq.dao.OperationRecordMapper;
 import com.mfq.task.base.DefaultTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,38 +22,10 @@ public class OperationTask extends DefaultTask {
 
     @Override
     public synchronized void doTask() throws Exception {
-        logger.info("operation_task begin.....");
-        OperationRecordMapper recordMapper = new ClassPathXmlApplicationContext("spring/spring.xml").getBean(OperationRecordMapper.class);
-        try {
-            while (UserOperationUtil.proOperation.get(0) != null) {
-                recordMapper.insertSelective(UserOperationUtil.proOperation.get(0));
-                UserOperationUtil.proOperation.remove(0);
-            }
-            while (UserOperationUtil.typeOperation.get(0) != null) {
-                recordMapper.insertSelective(UserOperationUtil.typeOperation.get(0));
-                UserOperationUtil.typeOperation.remove(0);
-            }
-            while (UserOperationUtil.searchOperation.get(0) != null) {
-                recordMapper.insertSelective(UserOperationUtil.searchOperation.get(0));
-                UserOperationUtil.searchOperation.remove(0);
-            }
-        } catch (Exception e) {
-            logger.error("operation_task" + e + "\t" + e.getMessage() + "\t" + e.getCause());
-            return;
-        }
-
-        logger.info("operation_task perfect end.....");
 
     }
 
     public static void main(String[] args) {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
-        OperationRecordMapper mapper = ac.getBean(OperationRecordMapper.class);
-        OperationRecord record = new OperationRecord();
-        record.setKeyword("fuck you all");
-        record.setUid(2798l);
-
-        mapper.insertSelective(record);
 
     }
 

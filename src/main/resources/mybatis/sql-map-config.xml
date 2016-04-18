@@ -16,17 +16,17 @@
 	</typeHandlers>
 
 	<mappers>
-		<mapper resource="mybatis/mapping/BilltopayMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/FinanceBillMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/HospitalMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/JuxinliMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/OpenidUidMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/OrderInfoMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/PayRecordMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/ProductMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/StudentInfoMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/UsersMapper.xml.xml"/>
-		<mapper resource="mybatis/mapping/WorkInfoMapper.xml.xml"/>
+		<mapper resource="mybatis/mapping/BilltopayMapper.xml"/>
+		<mapper resource="mybatis/mapping/FinanceBillMapper.xml"/>
+		<mapper resource="mybatis/mapping/HospitalMapper.xml"/>
+		<mapper resource="mybatis/mapping/JuxinliMapper.xml"/>
+		<mapper resource="mybatis/mapping/OpenidUidMapper.xml"/>
+		<mapper resource="mybatis/mapping/OrderInfoMapper.xml"/>
+		<mapper resource="mybatis/mapping/PayRecordMapper.xml"/>
+		<mapper resource="mybatis/mapping/ProductMapper.xml"/>
+		<mapper resource="mybatis/mapping/StudentInfoMapper.xml"/>
+		<mapper resource="mybatis/mapping/UsersMapper.xml"/>
+		<mapper resource="mybatis/mapping/WorkInfoMapper.xml"/>
 	</mappers>
 
 </configuration>

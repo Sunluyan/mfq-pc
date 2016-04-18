@@ -1,0 +1,112 @@
+.apply{
+	margin: 20px 20px;
+	
+}
+.tips{
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+	margin: 10px 0px;
+	font-family:"微软雅黑" ;
+}
+.apply div{
+	width: 100%;
+	height: 42px;
+	border: 1px solid #CCCCCC;
+	margin-bottom: 10px;
+	clear: both;
+	background: #fff;
+}
+.apply .showChose{
+	height: auto;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid #fff;
+	display: none;
+	
+	
+}
+.apply .showChose ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	margin: 0px 30px;
+}
+.apply .showChose ul li{
+	margin: 12px 0px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+.apply .showChose ul li a{
+	font-family: "微软雅黑";
+	color: #007AFF;
+	font-size: 12px;
+}
+.apply .showChose ul li a:active{
+	color: #333;
+}
+.apply .showChose ul li:nth-child(2){
+	border: none;
+}
+.apply div input{
+	border: none;
+	width: 80%;
+	color: #C3C3C3;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	float: left;
+	
+}
+.apply div label{
+	width: 40px;
+	height: 40px;
+	float: right;
+	background:url(../img/下拉展开.png) no-repeat center;
+	background-size: 40% 30%;
+}
+.middle{
+	width: 210px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+button{
+	clear: both;
+	width: 210px;
+	height: 33px;
+	background: #fd5a9c;
+	margin: 0px auto;
+	color: #fff;
+	font-size: 12px;
+	font-family: "微软雅黑";
+	border-radius: 20px;
+	border: none;
+	margin: 20px 0px;
+}
+#conEcod{
+	width: 40%;
+	
+}
+#getEcod{
+	background: none;
+	background: #fd5a9c;
+	width: 100px;
+	text-align: center;
+	line-height: 40px;
+	color: #fff;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	
+}
+#cheer{
+	height: 40px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+
+
+
+

@@ -1,27 +1,9 @@
 package com.mfq.controller;
 
-import com.mfq.annotation.LoginRequired;
-import com.mfq.constants.ErrorCodes;
-import com.mfq.constants.ProductType;
-import com.mfq.dataservice.context.UserIdHolder;
-import com.mfq.helper.SignHelper;
-import com.mfq.service.wechat.WeChatService;
-import com.mfq.utils.DateUtil;
-import com.mfq.utils.FQUtil;
-import com.mfq.utils.JsonUtil;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
-import java.util.*;
 
 /**
  * 活动
