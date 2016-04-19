@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>信息认证</title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/> 
-    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="css/homeFour.css"/>
+    <script src="/js/mui.min.js"></script>
+    <link href="/css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/homeThree.css"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	
+    </script>
     
 </head>
 <body>
@@ -16,41 +20,46 @@
 	    	<p></p>
 	    	<p>共3步，当前第3步</p>
 	    </div>
-	    
-	    <!--提示-->
-	    <div class="tips">
-	    	<p>电商认证：收集您电商网站的基本信息、送货地址、订单 信息等用于认证服务。</p>
+	    <div class="showStep">
+	    	<ul>
+	    		<li>
+	    			<img src="/img/提交申请1.png"/>
+	    			<p>提交申请</p>
+	    		</li>
+	    		<li class="line">
+	    			
+	    		</li>
+	    		<li>
+	    			<img src="/img/审批通过1.png"/>
+	    			<p>审批通过</p>
+	    		</li>
+	    		<li class="line">
+	    			
+	    		</li>
+	    		<li>
+	    			<img src="/img/等待放款1.png"/>
+	    			<p>等待放款</p>
+	    		</li>
+	    	</ul>
 	    </div>
+	   <p class="replay">认证完成,我们会在30分钟内给您回复</p>
 	    
-	    
-	    <!--用户登录-->
-	    <div class="userLogin">
-	    	<p>请选择您在淘宝的用户名和密码</p>
-	    	<form action="" method="post">
-	    		<div class="pwdOne">
-		    		<span><img src="img/用户.png"/></span>	
-		    		<input type="text" name="userName" id="userName" placeholder="请输入您的淘宝账号或邮箱" />
-	    		</div>
-	    		<div class="pwdTwo">
-	    			<span><img src="img/密码.png"/></span>
-	    			<input type="password" name="userPwd" id="userPwd" placeholder="请输入您淘宝登录密码" />
-	    		</div>	
-	    	</form>
-	    	
-	    </div>
-	    <a href="home.html">跳过淘宝认证信息</a>
 	    <!--next-->
 	    <div class="middle">
-	    	<button class="next" id="next1">下一步</button>
+	    	<button class="ok">确定 </button>
 	    </div>
 	    
 	</div>
-	<script type="text/javascript" charset="utf-8">
-      	mui.init();
-      	var oNext = document.getElementById("next1");
-      	oNext.onclick=function(){
-      		window.location.href="homeThree.html";
-      	}
-    </script>
+	
+	<script>
+		mui.init();
+		var ok = document.getElementsByClassName("ok")[0]
+		ok.onclick = function(){
+			window.location.href = "/confirm";
+		}
+
+	</script>
+	
+	
 </body>
 </html>

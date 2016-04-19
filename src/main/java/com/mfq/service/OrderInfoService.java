@@ -63,7 +63,7 @@ public class OrderInfoService {
         return orderInfo;
     }
 
-    public String makeOrderNo(long pId) {
+    public static String makeOrderNo(long pId) {
         String pHex = Long.toHexString(pId);
         Integer randomInt = new Random().nextInt(9999);
         String randomStr = new DecimalFormat("0000").format(randomInt);

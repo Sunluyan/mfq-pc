@@ -1,10 +1,14 @@
 package com.mfq.dao;
 
+import com.mfq.annotation.MFQDao;
 import com.mfq.bean.WorkInfo;
 import com.mfq.bean.WorkInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
+@MFQDao
 public interface WorkInfoMapper {
     int countByExample(WorkInfoExample example);
 

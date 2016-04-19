@@ -47,16 +47,16 @@
       	var oMy3 = document.getElementById("my3")
       	var oMy4 = document.getElementById("my4")
       	oMy1.onclick=function(){
-      		window.location.href="month.html";
+      		window.location.href="/month";
       	}
       	oMy2.onclick=function(){
-      		window.location.href="allPay.jsp";
+      		window.location.href="/allPay";
       	}
       	oMy3.onclick=function(){
-      		window.location.href="myAll.html";
+      		window.location.href="/my/all";
       	}
       	oMy4.onclick=function(){
-      		window.location.href="record.html";
+      		window.location.href="/record";
       	}
     </script>
 </body>

@@ -1,5 +1,6 @@
 package com.mfq.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class FinanceBill {
@@ -15,7 +16,7 @@ public class FinanceBill {
 
     private Integer status;
 
-    private Long price;
+    private BigDecimal price;
 
     private Long uid;
 
@@ -77,11 +78,11 @@ public class FinanceBill {
         this.status = status;
     }
 
-    public Long getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

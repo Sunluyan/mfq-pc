@@ -5,7 +5,8 @@ public enum AuthStatus {
     INIT(0,"初始化状态"),
     BASE(1,"已填写基本信息"),
     USERTYPEDETAIL(2,"已填写用户身份详细信息"),
-    USERPRIVATE(3,"已填写征信信息");
+    USERSERVERPASSWORD(3,"已填写手机服务密码"),
+    USERTAOBAOORJDPASSWORD(4,"已填写淘宝或京东密码");
 
     
     int id;

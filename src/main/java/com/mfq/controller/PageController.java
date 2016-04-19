@@ -7,6 +7,7 @@ import com.mfq.utils.AliyunFile;
 import com.mfq.utils.FileTypeTest;
 import com.mfq.utils.JsonUtil;
 import com.mfq.utils.RandomUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,22 +134,92 @@ public class PageController {
         return "confirm";
     }
 
-    @RequestMapping(value = {"/home", "/home/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String home(HttpServletRequest request, HttpServletResponse response) {
-
+    @RequestMapping(value = {"/home", "/home/"}, method = {RequestMethod.GET})
+    public String home(HttpServletRequest request, HttpServletResponse response,Model model) {
+        Long uid = 9527l;
+        model.addAttribute("user",userService.selectByUid(uid));
         return "home";
     }
+
+    @RequestMapping(value = {"/home", "/home/"}, method = {RequestMethod.POST})
+    public String uploadHome(HttpServletRequest request, HttpServletResponse response,Model model,
+                             @RequestParam("servePwd")String mobilePassword) {
+        Long uid = 9527l;
+        try {
+            userService.uploadServerPwd(uid,mobilePassword);
+
+        } catch (Exception e) {
+            model.addAttribute("msg",e.getMessage());
+            return "home";
+        }
+        return "redirect:/home/two";
+    }
+
+    @RequestMapping(value = {"/home/two", "/home/two/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String homeTwo(HttpServletRequest request, HttpServletResponse response) {
+
+        return "homeTwo";
+    }
+
+    @RequestMapping(value = {"/home/three", "/home/three/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String homeThree(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Integer type = Integer.parseInt(session.getAttribute("choose").toString());
+        if(type == 1){
+            return "homeThree-taobao";
+        }else if(type == 2){
+            return "homeThree-jd";
+        }else{
+            return "homeThree-taobao";
+        }
+    }
+
+    @RequestMapping(value = {"/home/three/reverse", "/home/three/reverse/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String homeThreeReverse(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Integer type = Integer.parseInt(session.getAttribute("choose").toString());
+        if(type == 2){
+            return "homeThree-taobao";
+        }else if(type == 1){
+            return "homeThree-jd";
+        }else{
+            return "homeThree-taobao";
+        }
+    }
+
+    @RequestMapping(value = {"/home/pwd", "/home/pwd/"}, method = {RequestMethod.POST})
+    public String taobaoOrJdPwd(HttpServletRequest request, HttpServletResponse response,Model model,
+                                @RequestParam(value = "taobao",required = false)String taobao,
+                                @RequestParam(value = "taobaoPwd",required = false)String taobaoPwd,
+                                @RequestParam(value = "jd",required = false)String jd,
+                                @RequestParam(value = "jdPwd",required = false)String jdPwd) {
+
+
+        Long uid = 9527l;
+        try{
+
+
+            if(StringUtils.isNotBlank(taobao) && StringUtils.isNotBlank(taobaoPwd)){
+                userService.uploadTaobao(taobao,taobaoPwd,uid);
+            }else if(StringUtils.isNotBlank(jd) && StringUtils.isNotBlank(jdPwd)){
+                userService.uploadJd(jd,jdPwd,uid);
+            }else{
+                return "redirect:/home/three";
+            }
+        }catch(Exception e){
+            model.addAttribute("msg",e.getMessage());
+            return "redirect:/home/three";
+        }
+        return "homeFour";
+    }
+
+
+
 
     @RequestMapping(value = {"/home/four", "/home/four/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String homeFour(HttpServletRequest request, HttpServletResponse response) {
 
         return "homeFour";
-    }
-
-    @RequestMapping(value = {"/home/three", "/home/three/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String homeThree(HttpServletRequest request, HttpServletResponse response) {
-
-        return "homeThree";
     }
 
     @RequestMapping(value = {"/month", "/month/"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -311,14 +382,6 @@ public class PageController {
                 tmpFile.delete();
             }
 
-            /**
-             * @RequestParam("work") String work,
-             @RequestParam("level") String level,
-             @RequestParam("email") String email,
-             @RequestParam("friend") String friend,
-             @RequestParam("friendPhone") String friendPhone,
-             @RequestParam("card") String card)
-             */
             Long uid = 9527l;
             userService.uploadWork(idFrontUrl,idBackUrl,nameCardUrl,selfUrl,work,level,email,
                     friend,friendPhone,card,uid);
@@ -331,6 +394,16 @@ public class PageController {
 
         return "redirect:/home";
     }
+
+    @RequestMapping(value = {"/chooseWeb", "/chooseWeb/"}, method = {RequestMethod.GET,RequestMethod.POST})
+    public @ResponseBody String chooseWeb(HttpServletRequest request, HttpServletResponse response) {
+
+        Integer type = Integer.parseInt(request.getParameter("type").toString());
+        HttpSession session = request.getSession();
+        session.setAttribute("choose",type);
+        return JsonUtil.successResultJson();
+    }
+
 
 
 }

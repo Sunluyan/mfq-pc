@@ -6,10 +6,7 @@ import com.mfq.constants.AuthStatus;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.controller.VcodeController;
-import com.mfq.dao.OrderInfoMapper;
-import com.mfq.dao.StudentInfoMapper;
-import com.mfq.dao.UsersMapper;
-import com.mfq.dao.WorkInfoMapper;
+import com.mfq.dao.*;
 import com.mfq.helper.MobileHelper;
 import com.mfq.utils.HttpUtil;
 import com.mfq.utils.IDCardUtil;
@@ -44,6 +41,12 @@ public class UserService {
     OrderInfoService orderInfoService;
     @Resource
     WorkInfoMapper workInfoMapper;
+    @Resource
+    JuxinliMapper juxinliMapper;
+
+    public Users selectByUid(Long uid ){
+        return mapper.selectByPrimaryKey(uid);
+    }
 
     @Transactional
     public void uploadBase(String name,String mobile,String vcode,String idCard,Integer userType,Long uid) throws Exception {
@@ -194,5 +197,62 @@ public class UserService {
         }
         updateUserStatus(uid,AuthStatus.USERTYPEDETAIL);
 
+    }
+    @Transactional
+    public void uploadServerPwd(Long uid, String mobilePassword) throws Exception{
+        Users user = selectByUid(uid);
+        Juxinli record = new Juxinli();
+        record.setUid(uid);
+        record.setMobile(user.getMobile());
+        record.setMobilePassword(mobilePassword);
+        record.setUpdatedAt(new Date());
+        JuxinliExample example = new JuxinliExample();
+        example.or().andUidEqualTo(uid);
+        List<Juxinli> list = juxinliMapper.selectByExample(example);
+        if (list != null && list.size() != 0) {
+            juxinliMapper.updateByExampleSelective(record,example);
+        }else{
+            juxinliMapper.insertSelective(record);
+        }
+        updateUserStatus(uid,AuthStatus.USERSERVERPASSWORD);
+    }
+
+    @Transactional
+    public void uploadTaobao(String taobao, String taobaoPwd, Long uid) throws Exception{
+        Users user = selectByUid(uid);
+        Juxinli record = new Juxinli();
+        record.setUid(uid);
+        record.setTaobao(taobao);
+        record.setTaobaoPassword(taobaoPwd);
+        record.setUpdatedAt(new Date());
+        JuxinliExample example = new JuxinliExample();
+        example.or().andUidEqualTo(uid);
+        List<Juxinli> list = juxinliMapper.selectByExample(example);
+        if (list != null && list.size() != 0) {
+            juxinliMapper.updateByExampleSelective(record,example);
+        }else{
+            juxinliMapper.insertSelective(record);
+        }
+        updateUserStatus(uid,AuthStatus.USERTAOBAOORJDPASSWORD);
+    }
+
+    @Transactional
+    public void uploadJd(String jd, String jdPwd, Long uid) throws Exception{
+        Users user = selectByUid(uid);
+        Juxinli record = new Juxinli();
+        record.setUid(uid);
+        record.setJd(jd);
+        record.setJdPassword(jdPwd);
+        record.setUpdatedAt(new Date());
+        JuxinliExample example = new JuxinliExample();
+        example.or().andUidEqualTo(uid);
+        List<Juxinli> list = juxinliMapper.selectByExample(example);
+        if (list != null && list.size() != 0) {
+            juxinliMapper.updateByExampleSelective(record,example);
+        }else{
+            juxinliMapper.insertSelective(record);
+        }
+
+        updateUserStatus(uid,AuthStatus.USERTAOBAOORJDPASSWORD);
     }
 }
