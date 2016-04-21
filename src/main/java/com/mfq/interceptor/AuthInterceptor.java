@@ -43,7 +43,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         // 〇 如果未登录且页面需要登录信息，则返回false
         // 〇 返回true
         String serverName = request.getServerName();
-        logger.debug("requestServerName:{}", serverName);
+//        logger.debug("requestServerName:{}", serverName);
         String domainSuffix = Constants.COOKIE_DOMAIN;
 //        if (!serverName.endsWith(domainSuffix)) {
 //            // response.setCharacterEncoding("UTF-8");

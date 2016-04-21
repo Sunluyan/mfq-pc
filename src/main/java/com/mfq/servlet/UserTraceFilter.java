@@ -61,6 +61,16 @@ public class UserTraceFilter implements Filter {
 //            }
 //
 //        }
+        String logParams = "";
+        if (userTrace.isInfoEnabled() && needLog) {
+            logParams = RequestUtils.formatRequestParameters(req);
+            userTrace.info(
+                    "userId=" + UserIdHolder.getUserId() +
+                    ", ip=" + AppContext.getIp() +
+                    ", request=" + req.getRequestURI() +
+                            ", params=" + logParams +
+            "openId="+"xxxxxxxxxxxxxx");
+        }
 
 
         try {

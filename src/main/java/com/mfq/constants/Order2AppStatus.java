@@ -5,16 +5,16 @@ package com.mfq.constants;
  * @author xingyongshan
  *
  */
-public enum BillStatus {
+public enum Order2AppStatus {
 
-    PAY_OFF(-1, "已还款"),
-    WAIT_PAY(1, "待还款"),
-    OVER_TIME(2, "过期未还款");
-    
+    PAYING(1, "还款中"),
+    PAYOFF(-1, "已还清"),
+    OVER_TIME(2, "已逾期");
+
     int id;
     String desc;
-    
-    BillStatus(int id, String desc){
+
+    Order2AppStatus(int id, String desc){
         this.id = id;
         this.desc = desc;
     }
@@ -35,8 +35,8 @@ public enum BillStatus {
         this.desc = desc;
     }
     
-    public static BillStatus fromId(int id){
-        for(BillStatus status : BillStatus.values()){
+    public static Order2AppStatus fromId(int id){
+        for(Order2AppStatus status : Order2AppStatus.values()){
             if(status.getId() == id){
                 return status;
             }

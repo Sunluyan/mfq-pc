@@ -11,7 +11,7 @@
     
 </head>
 <body>
-<form action="/home/pwd" enctype="multipart/form-data" method="post">
+<form action="/home/three" enctype="multipart/form-data" method="post">
 
 	<div class="mui-content">
 	    <div class="step">

@@ -151,16 +151,16 @@ public class UserService {
         }
         if(user.getStatus() == AuthStatus.BASE.getId()){
             if(user.getUserType() == 1)
-                return "redirect:/submitStudent";
+                return "redirect:/submit/student";
             if(user.getUserType() == 2){
-                return "redirect:/submitWork";
+                return "redirect:/submit/work";
             }
         }
 
         if(user.getStatus() == AuthStatus.USERTYPEDETAIL.getId()){
             return "redirect:/home";
         }
-        return "redirect:/apply";
+        return "redirect:/apply/success";
 
     }
 

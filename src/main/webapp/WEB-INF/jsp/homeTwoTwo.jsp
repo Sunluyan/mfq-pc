@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<form action="/home/two" method="post" enctype="multipart/form-data">
+<form action="/home/two/two" method="post" enctype="multipart/form-data">
 
     <div class="mui-content">
         <div class="step">
@@ -41,12 +41,17 @@
 
             <%--<div class="pwdTwo">--%>
                 <%--<span><img src="/img/密码.png"/></span>--%>
-                <input type="hidden" name="serverPwd" id="serverPwd" value="123456" placeholder="请输入您的服务密码"/>
+                <input type="hidden" name="serverPwd" id="serverPwd" value="${serverPwd}" disabled placeholder="请输入您的服务密码"/>
             <%--</div>--%>
 
+            <div class="pwdTwo">
+                <span><img src="/img/密码.png"/></span>
+                <input type="password" name="dongtaiPwd" id="dongtaiPwd" placeholder="请输入您的动态密码"/>
+            </div>
 
-            <%--<a href="###">不记得服务密码？</a>--%>
-            <%--<a href="###">立即认证></a>--%>
+
+            <a href="###">不记得服务密码？</a>
+            <a href="###">立即认证></a>
         </div>
 
         <!--next-->

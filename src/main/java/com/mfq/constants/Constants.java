@@ -59,8 +59,8 @@ public class Constants {
     public static final long MOBILE_EXPIRE_DURATION = 1000 * 60 * 30; // 30分钟有效
     public static final long Msm_SEND_DURATION = 1000 * 60 * 2; // 重发时间2分钟
     
-    public static final String APPID = "wx9df416d077b29b73";
-	public static final String APPSECRET = "54a8aa54296e229879761249720b1db7";
+    public static final String APPID = "wxdcf80505a7671ba0";//美分期服务号的appid
+	public static final String APPSECRET = "b440fa4b1282b0210ad63e524dcfc068";
 	
 	public static final String WECHAT_TOKEN_KEY = "WECHAT_TOKEN";
 	

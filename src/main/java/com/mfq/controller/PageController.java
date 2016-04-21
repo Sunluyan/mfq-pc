@@ -1,6 +1,12 @@
 package com.mfq.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mfq.bean.OrderInfo;
+import com.mfq.bean.juxinli.stepTwo.Data;
+import com.mfq.bean.juxinli.stepTwo.Datasource;
+import com.mfq.service.JuxinliService;
 import com.mfq.service.OrderInfoService;
 import com.mfq.service.UserService;
 import com.mfq.utils.AliyunFile;
@@ -13,10 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -26,7 +29,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liuzhiguo1 on 16/4/17.
@@ -40,13 +44,13 @@ public class PageController {
     OrderInfoService orderInfoService;
     @Resource
     UserService userService;
+    @Resource
+    JuxinliService juxinliService;
 
     @RequestMapping(value = {"/apply", "/apply/"}, method = {RequestMethod.GET})
     public String apply(HttpServletRequest request, HttpServletResponse response) {
 
         Long uid = 9527l;
-
-
         return userService.toWebByUserAuthStatus(uid);
     }
 
@@ -78,11 +82,6 @@ public class PageController {
         return "base";
     }
 
-    @RequestMapping(value = {"/allPay", "/allPay/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String allPay(HttpServletRequest request, HttpServletResponse response) {
-
-        return "allPay";
-    }
 
     @RequestMapping(value = {"/apply/success", "/apply/success/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String applySuccess(HttpServletRequest request, HttpServletResponse response) {
@@ -109,9 +108,9 @@ public class PageController {
             long uid = 9527;
             userService.uploadBase(name, mobile, vcode, idcard, userType, uid);
             if (userType == 1) {
-                return "redirect:/submitStudent";
+                return "redirect:/submit/student";
             } else if (userType == 2) {
-                return "redirect:/submitWork";
+                return "redirect:/submit/work";
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -135,121 +134,200 @@ public class PageController {
     }
 
     @RequestMapping(value = {"/home", "/home/"}, method = {RequestMethod.GET})
-    public String home(HttpServletRequest request, HttpServletResponse response,Model model) {
-        Long uid = 9527l;
-        model.addAttribute("user",userService.selectByUid(uid));
+    public String home(HttpServletRequest request, HttpServletResponse response, Model model) {
+        try {
+
+            String json = JuxinliService.init();
+            JSONObject object = JSON.parseObject(json);
+
+            JSONArray array = object.getJSONArray("data");
+            List<Datasource> datasources = new ArrayList<>();
+
+            for (int i = 0; i < array.size(); i++) {
+                Datasource datasource = JsonUtil.toBean(array.get(i).toString(), Datasource.class);
+                datasources.add(datasource);
+            }
+
+            HttpSession session = request.getSession();
+            session.setAttribute("datasources", datasources);
+            model.addAttribute("datasources", datasources);
+
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            logger.info(e.getCause().toString());
+            e.printStackTrace();
+        }
         return "home";
     }
 
     @RequestMapping(value = {"/home", "/home/"}, method = {RequestMethod.POST})
-    public String uploadHome(HttpServletRequest request, HttpServletResponse response,Model model,
-                             @RequestParam("servePwd")String mobilePassword) {
+    public String uploadHome(HttpServletRequest request, HttpServletResponse response, Model model,
+                             @RequestParam("choiced") String choiced
+    ) {
+
+        System.out.println(choiced);
+        HttpSession session = request.getSession();
         Long uid = 9527l;
         try {
-            userService.uploadServerPwd(uid,mobilePassword);
+            List<Datasource> list = (List<Datasource>) request.getSession().getAttribute("datasources");
+            List<Datasource> datasources = new ArrayList<>();
+            for (Datasource datasource : list) {
+                if (choiced.contains("jd") && datasource.getWebsite().equals("jingdong")) {
+                    datasources.add(datasource);
+                    continue;
+                }
+                if (choiced.contains("taobao") && datasource.getWebsite().equals("taobao")) {
+                    datasources.add(datasource);
+                    continue;
+                }
+            }
+
+            JSONObject resp = JSON.parseObject(juxinliService.oneStep(uid, datasources));
+            Data data = JsonUtil.toBean(JsonUtil.writeToJson(resp.get("data")), Data.class);
+
+            session.setAttribute("choiced", choiced);
+            session.setAttribute("token", data.getToken());
+            session.setAttribute("twoStepData", data);
 
         } catch (Exception e) {
-            model.addAttribute("msg",e.getMessage());
+            logger.info(e.getMessage());
+            model.addAttribute("msg", e.getMessage());
             return "home";
         }
+
         return "redirect:/home/two";
     }
 
-    @RequestMapping(value = {"/home/two", "/home/two/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String homeTwo(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = {"/home/two", "/home/two/"}, method = {RequestMethod.GET})
+    public String homeTwo(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
 
+        model.addAttribute("user", userService.selectByUid(uid));
         return "homeTwo";
     }
 
-    @RequestMapping(value = {"/home/three", "/home/three/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/home/two", "/home/two/"}, method = {RequestMethod.POST})
+    public String uplaodHomeTwo(HttpServletRequest request, HttpServletResponse response, Model model,
+                                @RequestParam(value = "serverPwd", required = false) String serverPwd
+    ) {
+
+        Long uid = 9527l;
+        try {
+            juxinliService.twoStep(uid, (Data) request.getSession().getAttribute("twoStepData"),
+                    serverPwd, request.getSession());
+            request.getSession().setAttribute("serverPwd", "123456");
+
+        } catch (Exception e) {
+            logger.error(e.getCause().toString());
+            model.addAttribute("msg",e.getMessage());
+            return "redirect:/home/two";
+        }
+
+        return "redirect:/home/two/two";
+    }
+
+    @RequestMapping(value = {"/home/two/two", "/home/two/two/"}, method = {RequestMethod.GET})
+    public String homeTwoTwo(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
+
+        model.addAttribute("user", userService.selectByUid(uid));
+        model.addAttribute("serverPwd", request.getSession().getAttribute("serverPwd"));
+        return "homeTwoTwo";
+    }
+
+    @RequestMapping(value = {"/home/two/two", "/home/two/two/"}, method = {RequestMethod.POST})
+    public String homeTwoTwoPost(HttpServletRequest request, HttpServletResponse response, Model model,
+                                 @RequestParam("dongtaiPwd") String dongtaiPwd) {
+        Long uid = 9527l;
+
+        try {
+            HttpSession session = request.getSession();
+            String serverPwd = (String) request.getSession().getAttribute("serverPwd");
+            juxinliService.threeStep(uid, (Data) request.getSession().getAttribute("twoStepData"),
+                    serverPwd, dongtaiPwd, (String) request.getSession().getAttribute("type"), session);
+
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+
+        return "redirect:/home/three";
+    }
+
+    @RequestMapping(value = {"/home/three", "/home/three/"}, method = {RequestMethod.GET})
     public String homeThree(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Integer type = Integer.parseInt(session.getAttribute("choose").toString());
-        if(type == 1){
-            return "homeThree-taobao";
-        }else if(type == 2){
+        Datasource datasource = (Datasource) session.getAttribute("nextDatasource");
+        if (datasource.getWebsite().equals("jingdong")) {
             return "homeThree-jd";
-        }else{
+        } else if (datasource.getWebsite().equals("taobao")) {
             return "homeThree-taobao";
         }
+        return null;
     }
 
-    @RequestMapping(value = {"/home/three/reverse", "/home/three/reverse/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String homeThreeReverse(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = {"/home/three", "/home/three/"}, method = {RequestMethod.POST})
+    public String homeThreePost(HttpServletRequest request, HttpServletResponse response, Model model,
+                                @RequestParam(value = "taobao", required = false) String taobao,
+                                @RequestParam(value = "taobaoPwd", required = false) String taobaoPwd,
+                                @RequestParam(value = "jd", required = false) String jd,
+                                @RequestParam(value = "jdPwd", required = false) String jdPwd) {
         HttpSession session = request.getSession();
-        Integer type = Integer.parseInt(session.getAttribute("choose").toString());
-        if(type == 2){
-            return "homeThree-taobao";
-        }else if(type == 1){
-            return "homeThree-jd";
-        }else{
-            return "homeThree-taobao";
+        Long uid = 9527l;
+
+        try {
+
+            if (StringUtils.isNotBlank(taobao) && StringUtils.isNotBlank(taobaoPwd)) {
+                juxinliService.fourStep(uid, (Data) request.getSession().getAttribute("twoStepData"),
+                        taobaoPwd, session.getAttribute("captcha").toString(),  taobao, (String) request.getSession().getAttribute("type"),session);
+            } else if (StringUtils.isNotBlank(jd) && StringUtils.isNotBlank(jdPwd)) {
+                juxinliService.fourStep(uid, (Data) request.getSession().getAttribute("twoStepData"),
+                        jdPwd, session.getAttribute("captcha").toString(),  jd, (String) request.getSession().getAttribute("type"),session);
+            } else {
+                return "redirect:/home/three";
+            }
+
+            if((boolean)session.getAttribute("finish") == false){
+                return "redirect:/home/three";
+            }else{
+                return "redirect:/apply/success";
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            model.addAttribute("msg", e.getMessage());
+
+            Datasource datasource = (Datasource) session.getAttribute("nextDatasource");
+            if (datasource.getWebsite().equals("jingdong")) {
+                return "homeThree-jd";
+            } else if (datasource.getWebsite().equals("taobao")) {
+                return "homeThree-taobao";
+            }
         }
+
+        return null;
     }
 
-    @RequestMapping(value = {"/home/pwd", "/home/pwd/"}, method = {RequestMethod.POST})
-    public String taobaoOrJdPwd(HttpServletRequest request, HttpServletResponse response,Model model,
-                                @RequestParam(value = "taobao",required = false)String taobao,
-                                @RequestParam(value = "taobaoPwd",required = false)String taobaoPwd,
-                                @RequestParam(value = "jd",required = false)String jd,
-                                @RequestParam(value = "jdPwd",required = false)String jdPwd) {
+    @RequestMapping(value = {"/home/resetServerPwd", "/home/resetServerPwd/"}, method = {RequestMethod.POST})
+    public String resetServerPwd(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 
         Long uid = 9527l;
-        try{
+        try {
 
 
-            if(StringUtils.isNotBlank(taobao) && StringUtils.isNotBlank(taobaoPwd)){
-                userService.uploadTaobao(taobao,taobaoPwd,uid);
-            }else if(StringUtils.isNotBlank(jd) && StringUtils.isNotBlank(jdPwd)){
-                userService.uploadJd(jd,jdPwd,uid);
-            }else{
-                return "redirect:/home/three";
-            }
-        }catch(Exception e){
-            model.addAttribute("msg",e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("msg", e.getMessage());
             return "redirect:/home/three";
         }
         return "homeFour";
     }
 
-
-
-
     @RequestMapping(value = {"/home/four", "/home/four/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String homeFour(HttpServletRequest request, HttpServletResponse response) {
 
         return "homeFour";
-    }
-
-    @RequestMapping(value = {"/month", "/month/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String month(HttpServletRequest request, HttpServletResponse response) {
-
-        return "month";
-    }
-
-    @RequestMapping(value = {"/my", "/my/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String my(HttpServletRequest request, HttpServletResponse response) {
-
-        return "my";
-    }
-
-    @RequestMapping(value = {"/my/all", "/my/all/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String myAll(HttpServletRequest request, HttpServletResponse response) {
-
-        return "myAll";
-    }
-
-    @RequestMapping(value = {"/record", "/record/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String record(HttpServletRequest request, HttpServletResponse response) {
-
-        return "record";
-    }
-
-    @RequestMapping(value = {"/step", "/step/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String step(HttpServletRequest request, HttpServletResponse response) {
-
-        return "step";
     }
 
     @RequestMapping(value = {"/submit/student", "/submit/student/"}, method = {RequestMethod.GET})
@@ -276,7 +354,7 @@ public class PageController {
     ) {
         try {
 
-            if(idFront.isEmpty() || idBack.isEmpty() || studentId.isEmpty() || cardIdWithHand.isEmpty()){
+            if (idFront.isEmpty() || idBack.isEmpty() || studentId.isEmpty() || cardIdWithHand.isEmpty()) {
                 throw new Exception("照片数量有误");
             }
             String idFrontUrl = "";
@@ -313,8 +391,8 @@ public class PageController {
             }
 
             Long uid = 9527l;
-            userService.uploadStudent(idFrontUrl,idBackUrl,studentIdUrl,cardIdWithHandUrl,schoolPro,schoolCity,schoolName,
-                    grade,qq,address,parents,parentsPhone,wechat,uid);
+            userService.uploadStudent(idFrontUrl, idBackUrl, studentIdUrl, cardIdWithHandUrl, schoolPro, schoolCity, schoolName,
+                    grade, qq, address, parents, parentsPhone, wechat, uid);
 
 
         } catch (Exception e) {
@@ -333,7 +411,7 @@ public class PageController {
 
 
     @RequestMapping(value = {"/submit/work", "/submit/work/"}, method = {RequestMethod.POST})
-    public String uploadWork(HttpServletRequest request, HttpServletResponse response,Model model,
+    public String uploadWork(HttpServletRequest request, HttpServletResponse response, Model model,
                              @RequestParam("face") MultipartFile idFront,
                              @RequestParam("return") MultipartFile idBack,
                              @RequestParam("nameCard") MultipartFile nameCard,
@@ -346,7 +424,7 @@ public class PageController {
                              @RequestParam("card") String card) {
         try {
 
-            if(idFront.isEmpty() || idBack.isEmpty() || nameCard.isEmpty() || self.isEmpty()){
+            if (idFront.isEmpty() || idBack.isEmpty() || nameCard.isEmpty() || self.isEmpty()) {
                 throw new Exception("照片数量有误");
             }
             String idFrontUrl = "";
@@ -383,8 +461,8 @@ public class PageController {
             }
 
             Long uid = 9527l;
-            userService.uploadWork(idFrontUrl,idBackUrl,nameCardUrl,selfUrl,work,level,email,
-                    friend,friendPhone,card,uid);
+            userService.uploadWork(idFrontUrl, idBackUrl, nameCardUrl, selfUrl, work, level, email,
+                    friend, friendPhone, card, uid);
 
 
         } catch (Exception e) {
@@ -395,15 +473,66 @@ public class PageController {
         return "redirect:/home";
     }
 
-    @RequestMapping(value = {"/chooseWeb", "/chooseWeb/"}, method = {RequestMethod.GET,RequestMethod.POST})
-    public @ResponseBody String chooseWeb(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = {"/chooseWeb", "/chooseWeb/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public
+    @ResponseBody
+    String chooseWeb(HttpServletRequest request, HttpServletResponse response) {
 
         Integer type = Integer.parseInt(request.getParameter("type").toString());
         HttpSession session = request.getSession();
-        session.setAttribute("choose",type);
+        session.setAttribute("choose", type);
         return JsonUtil.successResultJson();
     }
 
+
+    @RequestMapping(value = {"/my", "/my/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String my(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
+        orderInfoService.myPage(uid, model);
+        return "my";
+    }
+
+    @RequestMapping(value = {"/allPay", "/allPay/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String allPay(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
+        orderInfoService.allPayPage(uid, model);
+        return "allPay";
+    }
+
+    @RequestMapping(value = {"/month", "/month/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String month(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
+        orderInfoService.monthPage(uid, model);
+        return "month";
+    }
+
+    @RequestMapping(value = {"/my/all", "/my/all/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String myAll(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Long uid = 9527l;
+        orderInfoService.myAllPage(uid, model);
+        return "myAll";
+    }
+
+    @RequestMapping(value = {"/my/all/{orderNo}", "/my/all/{orderNo}/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String allByOrder(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String orderNo) {
+        Long uid = 9527l;
+        if (StringUtils.isNotEmpty(orderNo)) {
+            orderInfoService.myAllBills(uid, orderNo, model);
+        }
+        return "allbyorder";
+    }
+
+    @RequestMapping(value = {"/record", "/record/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String record(HttpServletRequest request, HttpServletResponse response) {
+
+        return "record";
+    }
+
+    @RequestMapping(value = {"/step", "/step/"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String step(HttpServletRequest request, HttpServletResponse response) {
+
+        return "step";
+    }
 
 
 }

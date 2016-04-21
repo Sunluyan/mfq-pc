@@ -44,7 +44,7 @@ public class ManagerService {
      * 2.生成账单
      */
     @Transactional
-    public void ratify(Long uid, String orderNo) throws RuntimeException {
+    public void ratify(Long uid, String orderNo) throws Exception {
 
             OrderInfoExample example = new OrderInfoExample();
             example.or().andOrderNoEqualTo(orderNo);
@@ -77,7 +77,6 @@ public class ManagerService {
                 financeBill.setPrice(currentPrice);
                 if (i == order.getPeriod() - 1) {
                     financeBill.setPrice(allPrice.subtract(countPrice));
-                    throw new RuntimeException("测试");
                 }
                 countPrice = countPrice.add(currentPrice);
 
@@ -89,7 +88,7 @@ public class ManagerService {
     public static void main(String[] args) throws Exception {
         ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
         ManagerService service = ac.getBean(ManagerService.class);
-        service.ratify(9527l, "mn2016041819251888512537");
+        service.ratify(9527l, "mn2016041819251888512638");
     }
 
 

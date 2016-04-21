@@ -60,21 +60,21 @@
 	  		<form action="" method="post">
 	  			<div>
 	  				<span>订单总额</span>
-	  			<input type="text" name="totalNumber" id="totalNumber" value="¥ ${order.price}" />
+	  			<input type="text" name="totalNumber" id="totalNumber" value="¥ ${order.price}" disabled/>
 	  			</div>
 	  			
 	  			<div class="bottom-line">
 	  				<span>项目名称</span>
-	  			<input type="text" name="projectName" id="projectName" value="${order.name}" />
+	  			<input type="text" name="projectName" id="projectName" value="${order.name}" disabled/>
 	  			</div>
 	  			<p></p>
 	  			<div>
 	  				<span>还款期数</span>
-	  			<input type="text" name="repay" id="repay" value="${order.period}期" />
+	  			<input type="text" name="repay" id="repay" value="${order.period}期" disabled/>
 	  			</div>
 	  			<div class="bottom-line">
 	  				<span>月还款额</span>
-	  			<input type="text" name="repayMonth" id="repayMonth" value="¥<fmt:formatNumber value="${order.price/order.period}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber>" />
+	  			<input type="text" name="repayMonth" id="repayMonth" disabled value="¥<fmt:formatNumber value="${order.price/order.period}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber>" />
 
 				</div>
 	  			
