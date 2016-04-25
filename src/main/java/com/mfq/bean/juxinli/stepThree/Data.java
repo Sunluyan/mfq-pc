@@ -29,7 +29,7 @@ public class Data {
     }
 
     public boolean isFinish() {
-        return finish;
+        return this.finish;
     }
 
     public Datasource getNext_datasource() {
@@ -74,10 +74,6 @@ public class Data {
 
     public void setFinish(boolean finish) {
         this.finish = finish;
-    }
-
-    public boolean getFinish() {
-        return this.finish;
     }
 
 }

@@ -3,7 +3,7 @@ package com.mfq.bean;
 public class OpenidUid {
     private String openid;
 
-    private Integer uid;
+    private Long uid;
 
     public String getOpenid() {
         return openid;
@@ -13,11 +13,11 @@ public class OpenidUid {
         this.openid = openid == null ? null : openid.trim();
     }
 
-    public Integer getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 }

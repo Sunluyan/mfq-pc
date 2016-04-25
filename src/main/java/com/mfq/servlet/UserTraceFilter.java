@@ -1,13 +1,16 @@
 package com.mfq.servlet;
 
 import com.mfq.bean.Users;
+import com.mfq.bean.wechat.OpenId;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.AppContext;
 import com.mfq.dataservice.context.UserIdHolder;
+import com.mfq.service.UserService;
 import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +25,7 @@ public class UserTraceFilter implements Filter {
     /**
      * 拦截需要做
      * 1,是否有session记录,有的话像UserHolder加入userId(为了@LoginRequired注释)
+     *
      * @param request
      * @param response
      * @param chain
@@ -30,48 +34,41 @@ public class UserTraceFilter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+                         FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-     
+
 
         AppContext.setIp(getIp(req));
         boolean needLog = isNeedLog(req);
         AppContext.setUserTrace(needLog);
 
         HttpSession session = req.getSession();
-        Users user = session.getAttribute("user")!=null?(Users)session.getAttribute("user"):null;
-        if(user != null ){
-            if(user.getUid()!=0){
+        Users user = session.getAttribute("user") != null ? (Users) session.getAttribute("user") : null;
+        if (user != null) {
+            if (user.getUid() != 0) {
                 UserIdHolder.setUserId(user.getUid());
-            }else{
-                session.setAttribute("user",null);
+            } else {
+                session.setAttribute("user", null);
                 RequestUtils.writeResponse(req, resp,
                         JsonUtil.toJson(ErrorCodes.CORE_NEED_LOGIN, "登陆账号出错", null));
                 return;
             }
         }
-//        if(needLog){ // 如果是需要微信环境下请求的资源,也就是 css,js等 除外
-//            String openId = getOpenId(req);
-//            if(openId == null){
-//                RequestUtils.writeResponse(req, resp,
-//                        JsonUtil.toJson(ErrorCodes.WECHAT_REQUIRED, "请在微信环境下打开网页", null));
-//                return;
-//            }
-//
-//        }
+
+
+
+
         String logParams = "";
         if (userTrace.isInfoEnabled() && needLog) {
             logParams = RequestUtils.formatRequestParameters(req);
             userTrace.info(
                     "userId=" + UserIdHolder.getUserId() +
-                    ", ip=" + AppContext.getIp() +
-                    ", request=" + req.getRequestURI() +
-                            ", params=" + logParams +
-            "openId="+"xxxxxxxxxxxxxx");
+                            ", ip=" + AppContext.getIp() +
+                            ", request=" + req.getRequestURI() +
+                            ", params=" + logParams);
         }
-
 
         try {
             chain.doFilter(request, response);
@@ -89,8 +86,6 @@ public class UserTraceFilter implements Filter {
         }
 
     }
-
-
 
 
     private String getIp(HttpServletRequest req) {

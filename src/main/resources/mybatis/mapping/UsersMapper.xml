@@ -117,6 +117,10 @@
       #{status,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.Users" >
+    <selectKey resultType="long" order="AFTER" keyProperty="uid">
+      SELECT LAST_INSERT_ID() AS uid
+    </selectKey>
+
     insert into users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uid != null" >

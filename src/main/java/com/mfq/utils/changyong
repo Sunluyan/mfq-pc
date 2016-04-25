@@ -7,10 +7,10 @@
 
 
 0、ssh进入服务器
-ssh root@123.57.224.100
+ssh root@112.126.81.40
 MFQ-dev-20!6
 
-scp /Users/liuzhiguo1/git/mfq-pc/target/mfq-app.war root@123.57.224.100:/usr/mfq-dev/tomcat/webapps/ROOT/
+scp /Users/liuzhiguo1/git/mfq-pc/target/mfq-app.war root@112.126.81.40:/usr/mfq-dev/tomcat/webapps/ROOT/
 MFQ-dev-20!6
 
 cd /usr/mfq-dev/tomcat/webapps/ROOT/

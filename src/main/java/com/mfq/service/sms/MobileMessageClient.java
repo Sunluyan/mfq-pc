@@ -285,7 +285,7 @@ public class MobileMessageClient {
                         provider = new UcpaasMessageProvider();
                     }  else if (config.getName().equalsIgnoreCase("alidayu")) {
                         provider = new AlidayuMessageProvider();
-                    } else { // 不认识或者故意的  // TODO: 16/2/4   默认麦讯通
+                    } else { // 不认识或者故意的
                         provider = new MaiXunMessageProvider();
                         errorWarning(
                                 "wrong mobile message server name!:"

@@ -123,7 +123,6 @@ public class RedisCacheManipulater extends BaseCache implements IRedis, RedisCac
 
     @Override
     public long decr(final String key, final long delta, long initValue, long timeout, int exp) {
-        // FIXME: 需要处理initValue以及过期时间
         return execute(key, new RedisCallback<Long>() {
             @Override
             public Long doWithJedis(ShardedJedis jedis) {
@@ -274,7 +273,7 @@ public class RedisCacheManipulater extends BaseCache implements IRedis, RedisCac
 
             @Override
             public Long doWithJedis(ShardedJedis jedis) {
-                return jedis.incrBy(key, delta);// FIXME: 处理initValue
+                return jedis.incrBy(key, delta);
             }
         });
     }

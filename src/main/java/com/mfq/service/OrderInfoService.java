@@ -127,6 +127,12 @@ public class OrderInfoService {
         FinanceBillExample example = new FinanceBillExample();
         example.or().andUidEqualTo(uid).andStatusNotEqualTo(BillStatus.PAY_OFF.getId());
         List<FinanceBill> list = financeBillMapper.selectByExample(example);
+        if(CollectionUtils.isEmpty(list)){
+            model.addAttribute("monthPay", 0);
+            model.addAttribute("allPay", 0);
+            model.addAttribute("msg","您还没有订单");
+            return;
+        }
         BigDecimal monthPay = BigDecimal.valueOf(0);
         BigDecimal allPay = BigDecimal.valueOf(0);
         for (FinanceBill financeBill : list) {

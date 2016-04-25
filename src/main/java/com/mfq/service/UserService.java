@@ -2,6 +2,7 @@ package com.mfq.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.mfq.bean.*;
+import com.mfq.bean.wechat.OpenId;
 import com.mfq.constants.AuthStatus;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
@@ -15,10 +16,13 @@ import com.mfq.utils.VerifyUtils;
 import org.omg.CORBA.UserException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +47,8 @@ public class UserService {
     WorkInfoMapper workInfoMapper;
     @Resource
     JuxinliMapper juxinliMapper;
+    @Resource
+    OpenidUidMapper openidUidMapper;
 
     public Users selectByUid(Long uid ){
         return mapper.selectByPrimaryKey(uid);
@@ -132,41 +138,42 @@ public class UserService {
         updateUserStatus(uid,AuthStatus.USERTYPEDETAIL);
     }
 
-    public void updateUserStatus(long uid , AuthStatus status){
+    @Transactional
+    public void updateUserStatus(long uid , AuthStatus status) throws Exception{
         Users user = new Users();
         user.setStatus(status.getId());
         user.setUid(uid);
-        mapper.updateByPrimaryKeySelective(user);
+        long count = mapper.updateByPrimaryKeySelective(user);
+        if(count!=1){
+            throw new RuntimeException("更新用户状态出错");
+        }
     }
 
-    public String toWebByUserAuthStatus(Long uid){
-        Users user = mapper.selectByPrimaryKey(uid);
-        OrderInfo order= orderInfoService.selectLastByUid(uid);
+    /**
+     * 根据用户状态和订单 决定用户去哪个网页
+     * @param uid
+     * @return
+     */
 
-        if(order == null){
-            return "apply";
-        }
-        if(user.getStatus() == AuthStatus.INIT.getId()){
-            return "redirect:/base";
-        }
-        if(user.getStatus() == AuthStatus.BASE.getId()){
-            if(user.getUserType() == 1)
-                return "redirect:/submit/student";
-            if(user.getUserType() == 2){
-                return "redirect:/submit/work";
-            }
-        }
 
-        if(user.getStatus() == AuthStatus.USERTYPEDETAIL.getId()){
-            return "redirect:/home";
-        }
-        return "redirect:/apply/success";
-
-    }
-
+    /**
+     * 上传上班族用户信息
+     * @param idFrontUrl
+     * @param idBackUrl
+     * @param nameCardUrl
+     * @param selfUrl
+     * @param work
+     * @param level
+     * @param email
+     * @param friend
+     * @param friendPhone
+     * @param card
+     * @param uid
+     */
+    @Transactional
     public void uploadWork(String idFrontUrl, String idBackUrl, String nameCardUrl, String selfUrl, String work,
                            String level, String email, String friend, String friendPhone,
-                           String card, Long uid) {
+                           String card, Long uid) throws Exception{
 
         WorkInfo info = new WorkInfo();
 
@@ -190,10 +197,14 @@ public class UserService {
         info.setFamilyMobile(friendPhone);
         info.setUpdatedAt(new Date());
 
+        long count = 0;
         if(list != null && list.size() != 0){
-            workInfoMapper.updateByPrimaryKeySelective(info);
+            count = workInfoMapper.updateByPrimaryKeySelective(info);
         }else{
-            workInfoMapper.insertSelective(info);
+            count = workInfoMapper.insertSelective(info);
+        }
+        if(count != 1){
+            throw new RuntimeException("上传用户资料出错");
         }
         updateUserStatus(uid,AuthStatus.USERTYPEDETAIL);
 
@@ -254,5 +265,46 @@ public class UserService {
         }
 
         updateUserStatus(uid,AuthStatus.USERTAOBAOORJDPASSWORD);
+    }
+
+    public static void main(String[] args) throws Exception {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
+        UserService service = ac.getBean(UserService.class);
+        OpenId openId = new OpenId();
+        openId.setOpenid("aaaaaaaaaaaaaaaaaaaaa");
+        service.selectOrInsertByOpenid(openId,null);
+    }
+
+    /**
+     * 查询或新建用户,并放入 session 中 (暂时)
+     * @param openId
+     * @param session
+     * @throws Exception
+     */
+    @Transactional
+    public void selectOrInsertByOpenid(OpenId openId,HttpSession session) throws Exception{
+        OpenidUid openidUid = openidUidMapper.selectByPrimaryKey(openId.getOpenid());
+        if(openidUid == null){
+            //创建新用户
+            Users user = new Users();
+            user.setUpdatedAt(new Date());
+            long count = mapper.insertSelective(user);
+            if(count <= 0 ){
+                throw new RuntimeException("插入用户错误,请重试");
+            }
+            openidUid = new OpenidUid();
+            openidUid.setOpenid(openId.getOpenid());
+            openidUid.setUid(user.getUid());
+            count = openidUidMapper.insert(openidUid);
+            if(count <= 0 ){
+                throw new RuntimeException("插入错误,请重试");
+            }
+            session.setAttribute("openid",openidUid.getOpenid());
+            session.setAttribute("uid",user.getUid());
+
+        }else{
+            session.setAttribute("openid",openidUid.getOpenid());
+            session.setAttribute("uid",openidUid.getUid());
+        }
     }
 }

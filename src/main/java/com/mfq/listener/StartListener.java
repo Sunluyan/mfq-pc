@@ -14,6 +14,7 @@ public class StartListener implements ServletContextListener {
 
     private static Logger logger = LoggerFactory.getLogger(StartListener.class);
 
+
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
@@ -36,7 +37,9 @@ public class StartListener implements ServletContextListener {
                 throw new RuntimeException("task didn't registerd!");
             }
         }
-        
+
+
+
 
 //    		System.out.println("INSURE_URL="+WkbConstants.INSURE_URL+", APP_KEY="+WkbConstants.APP_KEY+",INSURE_PRODUCT="+WkbConstants.INSURE_PRODUCT);
         //启动监听

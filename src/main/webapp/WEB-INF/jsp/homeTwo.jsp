@@ -8,6 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>信息认证</title>
     <script src="/js/mui.min.js"></script>
+    <script src="/js/jquery-2.2.3.min.js"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/home.css"/>
@@ -15,11 +16,21 @@
 </head>
 <body>
 <form action="/home/two" method="post" enctype="multipart/form-data">
+    <c:if test="${msg != null}">
+        <p class="alert" >
+                ${msg}
+        </p>
+    </c:if>
+    <c:if test="${msg == null}">
+        <p class="alert" style="display:none;">
+                ${msg}
+        </p>
+    </c:if>
 
     <div class="mui-content">
         <div class="step">
             <p></p>
-            <p>共3步，当前第1步</p>
+            <p>共3步，当前第2步</p>
         </div>
 
         <!--提示-->
@@ -39,14 +50,12 @@
                            value="${user.mobile}" disabled/>
                 </div>
 
-            <%--<div class="pwdTwo">--%>
-                <%--<span><img src="/img/密码.png"/></span>--%>
-                <input type="hidden" name="serverPwd" id="serverPwd" value="123456" placeholder="请输入您的服务密码"/>
-            <%--</div>--%>
+            <div class="pwdTwo">
+                <span><img src="/img/密码.png"/></span>
+                <input type="password" name="serverPwd" id="serverPwd"  placeholder="请输入您的服务密码"/>
+            </div>
 
-
-            <%--<a href="###">不记得服务密码？</a>--%>
-            <%--<a href="###">立即认证></a>--%>
+            <a href="###">不记得服务密码？</a>
         </div>
 
         <!--next-->
@@ -56,7 +65,15 @@
 </form>
 
 <script type="text/javascript" charset="utf-8">
+    $("#btn").click(function(){
+        if($("#serverPwd").val() == "" || $("#serverPwd").val() == null ||isNaN(Number.parseInt($("#serverPwd").val()))){
+            $(".alert").html("服务密码忘记填了").show();
+            return false;
+        }
+
+    })
     mui.init();
+
 </script>
 </body>
 </html>

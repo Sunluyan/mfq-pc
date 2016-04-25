@@ -19,7 +19,7 @@
     <div class="mui-content">
         <div class="step">
             <p></p>
-            <p>共3步，当前第1步</p>
+            <p>共3步，当前第2步</p>
         </div>
 
         <!--提示-->
@@ -31,7 +31,7 @@
 
         <!--服务密码-->
         <div class="servicePwd">
-            <p>请输入服务密码</p>
+            <p>请输入动态密码</p>
 
                 <div class="pwdOne">
                     <span><img src="/img/手机.png"/></span>
@@ -49,9 +49,6 @@
                 <input type="password" name="dongtaiPwd" id="dongtaiPwd" placeholder="请输入您的动态密码"/>
             </div>
 
-
-            <a href="###">不记得服务密码？</a>
-            <a href="###">立即认证></a>
         </div>
 
         <!--next-->

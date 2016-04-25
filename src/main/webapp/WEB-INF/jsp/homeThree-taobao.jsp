@@ -18,7 +18,7 @@
     <div class="mui-content">
         <div class="step">
             <p></p>
-            <p>共3步，当前第2步</p>
+            <p>共3步，当前第3步</p>
         </div>
 
         <!--提示-->

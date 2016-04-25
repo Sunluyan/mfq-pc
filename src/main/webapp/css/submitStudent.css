@@ -1,3 +1,13 @@
+.alert{
+	height: 30px;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 12px;
+	background: #FD5A9C;
+	line-height: 30px;
+}
+
 .tips{
 	text-align: center;
 	font-size: 12px;

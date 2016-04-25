@@ -5,6 +5,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/sms/provider/UcpaasMessageProvider.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/WeChatService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/Users.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/WechatEventWithBLOBs.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/sms/MailAndSmsService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dataservice/cache/impl/RedisCacheMBean.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/StudentInfo.java
@@ -102,6 +103,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/task/OperationTask.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/sms/provider/NullMessageProvider.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/cache/MsgTmplContext.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/WxMessageService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/ProductExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/UserService.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/BilltopayExample.java
@@ -148,6 +150,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/juxinli/stepTwo/Data.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/wechat/message/BaseMessage.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/RefundStatus.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/WechatEventMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/exception/AccountExpiredException.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/interceptor/AuthInterceptor.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/helper/MobileHelper.java
@@ -159,6 +162,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/PayType.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/juxinli/stepTwo/Create_time.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/OrderType.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/WechatMessageType.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/service/sms/provider/MessageProvider.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/Base64.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/cache/WeChatJsApiTicketCacheUtils.java
@@ -167,10 +171,12 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/Billtopay.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/VcodeMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/OpenidUidMapper.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/WechatEvent.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dataservice/context/AppContext.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/JuxinliExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/wechat/message/News.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/task/base/ExecuteTaskService.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/WechatEventExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/exception/AuthenticationException.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/FinanceBillMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/SecurityCodeUtil.java
@@ -181,6 +187,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/RequestUtils.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/task/WeChatTask.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/BilltopayMapper.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/controller/wechat/WxMessageController.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/sms/SMSConfig.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/RunnerUtils.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/XBase64Utils.java
@@ -189,6 +196,7 @@
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/dao/SMSMapper.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/servlet/CaptchaImgServlet.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/utils/DnsUtil.java
+/Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/wechat/OpenId.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/bean/SysConfigExample.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/constants/RefundType.java
 /Users/liuzhiguo1/git/mfq-pc/src/main/java/com/mfq/exception/UsernameNotFoundException.java

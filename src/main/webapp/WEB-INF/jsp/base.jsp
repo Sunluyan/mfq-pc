@@ -17,6 +17,16 @@
 <form enctype="multipart/form-data" action="/base" method="post">
 
     <div class="mui-content">
+        <c:if test="${msg != null}">
+            <p class="alert" >
+                    ${msg}
+            </p>
+        </c:if>
+        <c:if test="${msg == null}">
+            <p class="alert" style="display:none;">
+                    ${msg}
+            </p>
+        </c:if>
         <div class="apply">
             <p class="tips">请确认您在使用本人的微信号操作,否则会导致后续流程无法操作</p>
             <div class="">
@@ -25,12 +35,12 @@
             </div>
             <div class="">
                 <!--手机号码-->
-                <input type="text" name="nowNumber" id="nowNumber" placeholder="手机号码"/>
+                <input type="number" name="nowNumber" id="nowNumber" placeholder="手机号码"/>
             </div>
 
             <div class="">
                 <!--验证码-->
-                <input type="text" name="conEcod" id="conEcod" placeholder="验证码"/><label for="conEcod" id="getEcod">获取验证码</label>
+                <input type="number" name="conEcod" id="conEcod" placeholder="验证码"/><label for="conEcod" id="getEcod">获取验证码</label>
             </div>
             <div class="">
                 <!--身份证号码-->
@@ -56,6 +66,31 @@
 
 
 <script type="text/javascript" charset="UTF-8">
+
+    $(".next").click(function(){
+
+        if($("#name").val() == "" || $("#name").val() == null){
+            $(".alert").html("姓名不能为空")
+            return false;
+        }
+        else if($("#nowNumber").val() == "" || $("#nowNumber").val() == null || $("#nowNumber").val().length != 11 || isNaN(Number.parseInt($("#nowNumber").val())) ){
+            $(".alert").html("手机号格式错误")
+            return false;
+        }
+        else if($("#conEcod").val() == "" || $("#conEcod").val() == null || $("#conEcod").val().length != 4 || isNaN(Number.parseInt($("#conEcod").val())) ){
+            $(".alert").html("验证码格式错误")
+            return false;
+        }
+        else if($("#idCard").val() == "" || $("#idCard").val() == null || $("#idCard").val().length < 15){
+            $(".alert").html("身份证不能为空")
+            return false;
+        }
+        else if($("#userType").val() == 0){
+            $(".alert").html("请选择您的身份")
+            return false;
+        }
+
+    })
     mui.init();
     var showChose = document.getElementById("showChose");
     //      	var clickShow = document.getElementById("clickShow");

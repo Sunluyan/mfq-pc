@@ -30,7 +30,7 @@ public class Constants {
     // 网站相关，通用－发短信／邮件等
     public static String SITE_NAME = "美分期";
     public static String SITE_DOMAIN = Config.getItem("site_domain");
-    public static String COOKIE_DOMAIN = ".5imfq.com";
+    public static String COOKIE_DOMAIN = ".iyeeda.com";
     
     //当前登录用户在attribute中的属性名称
     public static String CURRENT_USER_ATTRIBUTE = "user";
@@ -61,7 +61,8 @@ public class Constants {
     
     public static final String APPID = "wxdcf80505a7671ba0";//美分期服务号的appid
 	public static final String APPSECRET = "b440fa4b1282b0210ad63e524dcfc068";
-	
+	public static final String WECHAT_USER_NAME = "gh_89644d25f3bf";
+
 	public static final String WECHAT_TOKEN_KEY = "WECHAT_TOKEN";
 	
 	public static final int ACCESS_TOKEN_IN = 7200; //微信access token维持时间

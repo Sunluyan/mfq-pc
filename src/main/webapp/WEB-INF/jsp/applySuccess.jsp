@@ -51,7 +51,7 @@
 	<div class="mui-content">
 	    <p>申请成功!</p>
 	    <div class="">
-	    	<a href="/confirm"><img src="/img/申请成功.png"/></a>
+	    	<a href="/step"><img src="/img/申请成功.png"/></a>
 	    </div>
 	    <div class="middle">
 	    	<button class="ok">确定</button>

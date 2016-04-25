@@ -13,7 +13,18 @@
 </head>
 <body>
 	<div class="mui-content">
-	    <div class="residue"><!--剩余(residue)-->
+        <c:if test="${msg != null}">
+            <p class="alert" >
+                    ${msg}
+            </p>
+        </c:if>
+        <c:if test="${msg == null}">
+            <p class="alert" style="display:none;">
+                    ${msg}
+            </p>
+        </c:if>
+
+		<div class="residue"><!--剩余(residue)-->
 	    	<img src="/img/shengyu.png"/>
 	    </div>
 	    

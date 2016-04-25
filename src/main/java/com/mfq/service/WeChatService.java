@@ -19,6 +19,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.http.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -86,7 +88,7 @@ public class WeChatService {
 		SysConfigExample example = new SysConfigExample();
 		example.or().andKeyEqualTo(Constants.WECHAT_TOKEN_KEY);
 		List<SysConfig> config = sysConfigMapper.selectByExample(example);
-		AccessToken token = new AccessToken();
+		AccessToken token;
 		if(config.size() != 0 && config.get(0).getValue() != null){
 			token = JsonUtil.toBean(config.get(0).getValue(), AccessToken.class);
 			if ((System.currentTimeMillis()- token.getCreateAt())/1000 < TOKEN_IN) {// 有效
@@ -315,6 +317,52 @@ public class WeChatService {
 			log.info("get js ticket is error {}", e);
 		}
 		return null;
+	}
+
+
+	/**
+	 * 定义微信菜单
+	 *
+	 * {
+		 "button": [
+		 {
+		 "name": "我的分期",
+		 "type": "view",
+		 "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fmy&response_type=code&scope=snsapi_base&state=123123#wechat_redirect"
+		 },
+		 {
+		 "name": "我的订单",
+		 "type": "view",
+		 "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fconfirm&response_type=code&scope=snsapi_base&state=123123#wechat_redirect"
+		 },
+
+		 {
+		 "name":"咨询客服",
+		 "type":"view",
+		 "url":"http://www.sobot.com/chat/h5/index.html?sysNum=c3c7fc4f6f84467ab9a32452e9284ecb&source=1"
+		 }
+		 ]
+		 }
+	 * @throws Exception
+     */
+	public void initMenu() throws Exception {
+		String body = "{\"button\":[{\"name\":\"我的分期\",\"type\":\"view\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fmy&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"name\":\"我的订单\",\"type\":\"view\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fconfirm&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"name\":\"咨询客服\",\"type\":\"view\",\"url\":\"http://www.sobot.com/chat/h5/index.html?sysNum=c3c7fc4f6f84467ab9a32452e9284ecb&source=1\"}]}";
+
+		String resp = HttpUtil.postJson("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+getAccessToken().getToken(),body,false);
+		log.info(resp);
+	}
+
+	public String getQRTicket() throws IOException {
+		String body = "{\"action_name\":\"QR_LIMIT_SCENE\",\"action_info\":{\"scene\":{\"scene_id\":1}}}";
+		String resp = HttpUtil.postJson("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token="+getAccessToken().getToken(),body,false);
+		log.info(resp);
+		return resp;
+	}
+
+	public static void main(String[] args) throws Exception {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
+		WeChatService service = ac.getBean(WeChatService.class);
+		service.initMenu();
 	}
 
 }

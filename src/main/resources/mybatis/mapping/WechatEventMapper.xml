@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mfq.dao.WechatEventMapper" >
+  <resultMap id="BaseResultMap" type="com.mfq.bean.WechatEvent" >
+    <id column="event_id" property="eventId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="image_media_id" property="imageMediaId" jdbcType="VARCHAR" />
+    <result column="media_media_id" property="mediaMediaId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mfq.bean.WechatEventWithBLOBs" extends="BaseResultMap" >
+    <result column="text_content" property="textContent" jdbcType="LONGVARCHAR" />
+    <result column="articles_title" property="articlesTitle" jdbcType="LONGVARCHAR" />
+    <result column="articles_desc" property="articlesDesc" jdbcType="LONGVARCHAR" />
+    <result column="articles_pic_url" property="articlesPicUrl" jdbcType="LONGVARCHAR" />
+    <result column="articles_url" property="articlesUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    event_id, type, image_media_id, media_media_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    text_content, articles_title, articles_desc, articles_pic_url, articles_url
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.mfq.bean.WechatEventExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wechat_event
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.WechatEventExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wechat_event
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wechat_event
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wechat_event
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mfq.bean.WechatEventExample" >
+    delete from wechat_event
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mfq.bean.WechatEventWithBLOBs" >
+    insert into wechat_event (event_id, type, image_media_id, 
+      media_media_id, text_content, articles_title, 
+      articles_desc, articles_pic_url, articles_url
+      )
+    values (#{eventId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{imageMediaId,jdbcType=VARCHAR}, 
+      #{mediaMediaId,jdbcType=VARCHAR}, #{textContent,jdbcType=LONGVARCHAR}, #{articlesTitle,jdbcType=LONGVARCHAR}, 
+      #{articlesDesc,jdbcType=LONGVARCHAR}, #{articlesPicUrl,jdbcType=LONGVARCHAR}, #{articlesUrl,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mfq.bean.WechatEventWithBLOBs" >
+    insert into wechat_event
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        event_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="imageMediaId != null" >
+        image_media_id,
+      </if>
+      <if test="mediaMediaId != null" >
+        media_media_id,
+      </if>
+      <if test="textContent != null" >
+        text_content,
+      </if>
+      <if test="articlesTitle != null" >
+        articles_title,
+      </if>
+      <if test="articlesDesc != null" >
+        articles_desc,
+      </if>
+      <if test="articlesPicUrl != null" >
+        articles_pic_url,
+      </if>
+      <if test="articlesUrl != null" >
+        articles_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="imageMediaId != null" >
+        #{imageMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaMediaId != null" >
+        #{mediaMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="textContent != null" >
+        #{textContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesTitle != null" >
+        #{articlesTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesDesc != null" >
+        #{articlesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesPicUrl != null" >
+        #{articlesPicUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesUrl != null" >
+        #{articlesUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mfq.bean.WechatEventExample" resultType="java.lang.Integer" >
+    select count(*) from wechat_event
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wechat_event
+    <set >
+      <if test="record.eventId != null" >
+        event_id = #{record.eventId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageMediaId != null" >
+        image_media_id = #{record.imageMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mediaMediaId != null" >
+        media_media_id = #{record.mediaMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textContent != null" >
+        text_content = #{record.textContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.articlesTitle != null" >
+        articles_title = #{record.articlesTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.articlesDesc != null" >
+        articles_desc = #{record.articlesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.articlesPicUrl != null" >
+        articles_pic_url = #{record.articlesPicUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.articlesUrl != null" >
+        articles_url = #{record.articlesUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update wechat_event
+    set event_id = #{record.eventId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      image_media_id = #{record.imageMediaId,jdbcType=VARCHAR},
+      media_media_id = #{record.mediaMediaId,jdbcType=VARCHAR},
+      text_content = #{record.textContent,jdbcType=LONGVARCHAR},
+      articles_title = #{record.articlesTitle,jdbcType=LONGVARCHAR},
+      articles_desc = #{record.articlesDesc,jdbcType=LONGVARCHAR},
+      articles_pic_url = #{record.articlesPicUrl,jdbcType=LONGVARCHAR},
+      articles_url = #{record.articlesUrl,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wechat_event
+    set event_id = #{record.eventId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      image_media_id = #{record.imageMediaId,jdbcType=VARCHAR},
+      media_media_id = #{record.mediaMediaId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mfq.bean.WechatEventWithBLOBs" >
+    update wechat_event
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="imageMediaId != null" >
+        image_media_id = #{imageMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="mediaMediaId != null" >
+        media_media_id = #{mediaMediaId,jdbcType=VARCHAR},
+      </if>
+      <if test="textContent != null" >
+        text_content = #{textContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesTitle != null" >
+        articles_title = #{articlesTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesDesc != null" >
+        articles_desc = #{articlesDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesPicUrl != null" >
+        articles_pic_url = #{articlesPicUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articlesUrl != null" >
+        articles_url = #{articlesUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mfq.bean.WechatEventWithBLOBs" >
+    update wechat_event
+    set type = #{type,jdbcType=INTEGER},
+      image_media_id = #{imageMediaId,jdbcType=VARCHAR},
+      media_media_id = #{mediaMediaId,jdbcType=VARCHAR},
+      text_content = #{textContent,jdbcType=LONGVARCHAR},
+      articles_title = #{articlesTitle,jdbcType=LONGVARCHAR},
+      articles_desc = #{articlesDesc,jdbcType=LONGVARCHAR},
+      articles_pic_url = #{articlesPicUrl,jdbcType=LONGVARCHAR},
+      articles_url = #{articlesUrl,jdbcType=LONGVARCHAR}
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mfq.bean.WechatEvent" >
+    update wechat_event
+    set type = #{type,jdbcType=INTEGER},
+      image_media_id = #{imageMediaId,jdbcType=VARCHAR},
+      media_media_id = #{mediaMediaId,jdbcType=VARCHAR}
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+</mapper>

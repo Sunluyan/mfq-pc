@@ -35,6 +35,8 @@
 		<mapper resource="mybatis/mapping/VcodeMapper.xml"/>
 		<mapper resource="mybatis/mapping/sms.xml"/>
 		<mapper resource="mybatis/mapping/sms_config.xml"/>
+		<mapper resource="mybatis/mapping/SysConfigMapper.xml"/>
+		<mapper resource="mybatis/mapping/WechatEventMapper.xml"/>
 	</mappers>
 
 </configuration>

@@ -52,7 +52,7 @@
 	</div>
 	
 	<script>
-		mui.init();
+
 		var ok = document.getElementsByClassName("ok")[0]
 		ok.onclick = function(){
 			window.location.href = "/confirm";

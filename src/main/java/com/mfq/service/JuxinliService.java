@@ -89,16 +89,13 @@ public class JuxinliService {
         String body = JsonUtil.writeToJson(map);
         String resp = HttpUtil.postJson("https://www.juxinli.com/orgApi/rest/v2/applications/meilifenqi",
                 body,false);
-        System.out.println(resp);
+        logger.info(resp);
         Root root = JsonUtil.toBean(resp,Root.class);
         if(root.getSuccess() == false){
             throw new Exception("出错了,请重试或联系工程师");
         }
 
         Data data = JsonUtil.toBean(JsonUtil.writeToJson(root.getData()),Data.class);
-//        Datasource datasource = JsonUtil.toBean(JsonUtil.writeToJson(data.getDatasource()),Datasource.class);
-//        System.out.println(datasource.toString());
-
 
         return JsonUtil.successResultJson(data);
     }
@@ -119,7 +116,7 @@ public class JuxinliService {
         String body = JsonUtil.writeToJson(map);
         String resp = HttpUtil.postJson("https://www.juxinli.com/orgApi/rest/v2/messages/collect/req",
                 body,false);
-        System.out.println(resp);
+        logger.info(resp);
         com.mfq.bean.juxinli.stepThree.Root root =JsonUtil.toBean(resp, com.mfq.bean.juxinli.stepThree.Root.class);
         com.mfq.bean.juxinli.stepThree.Data data = root.getData();
 
@@ -165,7 +162,7 @@ public class JuxinliService {
         String body = JsonUtil.writeToJson(map);
         String resp = HttpUtil.postJson("https://www.juxinli.com/orgApi/rest/v2/messages/collect/req",
                 body,false);
-        System.out.println(resp);
+        logger.info(resp);
         com.mfq.bean.juxinli.stepThree.Root root =JsonUtil.toBean(resp, com.mfq.bean.juxinli.stepThree.Root.class);
         com.mfq.bean.juxinli.stepThree.Data data = root.getData();
 
@@ -200,7 +197,7 @@ public class JuxinliService {
         String body = JsonUtil.writeToJson(map);
         String resp = HttpUtil.postJson("https://www.juxinli.com/orgApi/rest/v2/messages/collect/req",
                 body,false);
-        System.out.println(resp);
+        logger.info(resp);
         com.mfq.bean.juxinli.stepThree.Root root =JsonUtil.toBean(resp, com.mfq.bean.juxinli.stepThree.Root.class);
         com.mfq.bean.juxinli.stepThree.Data data = root.getData();
 
@@ -208,7 +205,7 @@ public class JuxinliService {
         if(data.getType().equals("ERROR")){
             throw new Exception(data.getContent());
         }
-        session.setAttribute("finish",data.getFinish());
+        session.setAttribute("finish",data.isFinish());
         session.setAttribute("nextDatasource",data.getNext_datasource());
         if(data.getProcess_code() == 30000){
             throw new Exception(data.getContent());
@@ -235,7 +232,7 @@ public class JuxinliService {
         String body = JsonUtil.writeToJson(map);
         String resp = HttpUtil.postJson("https://www.juxinli.com/orgApi/rest/v2/messages/collect/req",
                 body,false);
-        System.out.println(resp);
+        logger.info(resp);
         com.mfq.bean.juxinli.stepThree.Root root =JsonUtil.toBean(resp, com.mfq.bean.juxinli.stepThree.Root.class);
         com.mfq.bean.juxinli.stepThree.Data data = root.getData();
 
@@ -243,7 +240,7 @@ public class JuxinliService {
         if(data.getType().equals("ERROR")){
             throw new Exception(data.getContent());
         }
-        session.setAttribute("finish",data.getFinish());
+        session.setAttribute("finish",data.isFinish());
         session.setAttribute("nextDatasource",data.getNext_datasource());
         if(data.getProcess_code() == 30000){
             throw new Exception(data.getContent());

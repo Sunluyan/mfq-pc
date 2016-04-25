@@ -39,6 +39,7 @@ com/mfq/servlet/RobotsServlet.class
 com/mfq/bean/WorkInfoExample$Criterion.class
 com/mfq/service/sms/provider/AlidayuMessageProvider.class
 com/mfq/bean/OpenidUidExample$GeneratedCriteria.class
+com/mfq/bean/WechatEventExample$Criterion.class
 com/mfq/utils/RunnerUtils$2.class
 com/mfq/listener/StartListener$1.class
 com/mfq/task/OperationTask.class
@@ -96,6 +97,7 @@ com/mfq/bean/UsersExample.class
 com/mfq/dao/WeChatMsgMapper.class
 com/mfq/handler/SMSSendTypeEnumHandler.class
 com/mfq/utils/RunnerUtils$1.class
+com/mfq/bean/WechatEventExample$GeneratedCriteria.class
 com/mfq/bean/HospitalExample$Criteria.class
 com/mfq/utils/ListSortUtil.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$5.class
@@ -130,11 +132,13 @@ com/mfq/task/NotificationTask.class
 com/mfq/bean/juxinli/stepThree/Data.class
 com/mfq/constants/Constants.class
 com/mfq/annotation/MFQDao.class
+com/mfq/bean/wechat/OpenId.class
 com/mfq/service/sms/SMSInnerService$2.class
 com/mfq/utils/IDCardUtil.class
 com/mfq/cache/RedisCache.class
 com/mfq/constants/AuthStatus.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$59.class
+com/mfq/dao/WechatEventMapper.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$29.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$12.class
 com/mfq/constants/QiniuBucketEnum.class
@@ -165,10 +169,12 @@ com/mfq/utils/UserTraceLogger.class
 com/mfq/annotation/CheckRiskHtml.class
 com/mfq/bean/OrderInfoExample$Criteria.class
 com/mfq/bean/HospitalExample$Criterion.class
+com/mfq/constants/WechatMessageType.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$11.class
 com/mfq/service/sms/SMSInnerService$1.class
 com/mfq/utils/JsonUtil.class
 com/mfq/utils/CommonUtil.class
+com/mfq/controller/wechat/WxMessageController.class
 com/mfq/constants/Grade.class
 com/mfq/bean/BilltopayExample$GeneratedCriteria.class
 com/mfq/bean/FinanceBill.class
@@ -197,6 +203,7 @@ com/mfq/bean/VcodeExample$Criterion.class
 com/mfq/utils/DateUtil.class
 com/mfq/bean/WorkInfoExample.class
 com/mfq/bean/wechat/message/ImageMessage.class
+com/mfq/bean/WechatEventExample.class
 com/mfq/bean/wechat/message/Image.class
 com/mfq/bean/sms/SMSSendStatus.class
 com/mfq/service/WeChatService.class
@@ -240,6 +247,7 @@ com/mfq/dao/JuxinliMapper.class
 com/mfq/constants/ProductType.class
 com/mfq/bean/WorkInfoExample$Criteria.class
 com/mfq/dao/StudentInfoMapper.class
+com/mfq/bean/WechatEvent.class
 com/mfq/bean/OpenidUid.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$38.class
 com/mfq/bean/WorkInfo.class
@@ -250,7 +258,9 @@ com/mfq/bean/wechat/message/MusicMessage.class
 com/mfq/listener/StartListener.class
 com/mfq/dataservice/cache/impl/transcoders/CachedData.class
 com/mfq/filemanipulate/image/service/QiniuManipulater.class
+com/mfq/bean/WechatEventWithBLOBs.class
 com/mfq/bean/juxinli/stepTwo/Root.class
+com/mfq/bean/WechatEventExample$Criteria.class
 com/mfq/service/sms/provider/UcpaasMessageProvider.class
 com/mfq/bean/wechat/message/NewsMessage.class
 com/mfq/utils/XBase64Utils$InputStream.class
@@ -320,6 +330,7 @@ com/mfq/dataservice/cache/ICache.class
 com/mfq/service/sms/provider/MaiXunMessageProvider.class
 com/mfq/bean/VcodeExample$GeneratedCriteria.class
 com/mfq/task/WeChatTask.class
+com/mfq/service/WxMessageService.class
 com/mfq/dao/OpenidUidMapper.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$18.class
 com/mfq/dataservice/cache/impl/RedisCacheManipulater$51.class

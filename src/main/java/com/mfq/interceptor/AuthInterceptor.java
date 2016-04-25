@@ -2,11 +2,15 @@ package com.mfq.interceptor;
 
 import com.mfq.annotation.LoginRequired;
 import com.mfq.annotation.WechatRequired;
+import com.mfq.bean.wechat.OpenId;
 import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.UserIdHolder;
+import com.mfq.service.UserService;
+import com.mfq.utils.HttpUtil;
 import com.mfq.utils.JsonUtil;
 import com.mfq.utils.RequestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -31,6 +35,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
     private static final Logger logger = LoggerFactory
             .getLogger(AuthInterceptor.class);
 
+    @Resource
+    UserService userService;
 
     public AuthInterceptor() {
     }
@@ -43,15 +49,46 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         // 〇 如果未登录且页面需要登录信息，则返回false
         // 〇 返回true
         String serverName = request.getServerName();
-//        logger.debug("requestServerName:{}", serverName);
-        String domainSuffix = Constants.COOKIE_DOMAIN;
+        logger.info("requestServerName:{}", serverName);
+//        String domainSuffix = Constants.COOKIE_DOMAIN;
 //        if (!serverName.endsWith(domainSuffix)) {
-//            // response.setCharacterEncoding("UTF-8");
+//            response.setCharacterEncoding("UTF-8");
 //            response.setContentType("text/plain; charset=UTF-8");
 //            response.getWriter().append("域名错误(必须*" + domainSuffix + ")");
 //            return false;
 //        }
 
+        HttpSession session = request.getSession();
+
+        String code = request.getParameter("code");
+        if(session.getAttribute("openid") == null && StringUtils.isEmpty(code)){
+//             response.sendRedirect("/wechat/notwechat");// TODO
+
+            session.setAttribute("openid","ot7eHxIp5Ch33prnfcYlvqOuFTCE");
+            session.setAttribute("uid",9529);
+
+        }
+
+        if (session.getAttribute("openid") == null) {
+            String re = HttpUtil.post("https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code"
+                            .replace("APPID", Constants.APPID)
+                            .replace("SECRET", Constants.APPSECRET)
+                            .replace("CODE", code),
+                    "", false);
+            logger.info(code + "\t" + re);
+
+            if (re.contains("openid")) {
+                OpenId openId = JsonUtil.toBean(re, OpenId.class);
+                try {
+                    userService.selectOrInsertByOpenid(openId,session);
+                } catch (Exception e) {
+                    logger.error(e.getCause().toString());
+                    e.printStackTrace();
+                }
+
+                session.setAttribute("openid", openId.getOpenid());
+            }
+        }
 //        if (!checkWechat(request, response, handler)) {
 //            return false;
 //        }

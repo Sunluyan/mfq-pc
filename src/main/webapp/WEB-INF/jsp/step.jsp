@@ -56,13 +56,14 @@
     </style>
 </head>
 <body>
+
 	<div class="mui-content">
 	    <p>您的借款将在当天审核完成!</p>
 	    <div class="">
-	    	<a href="###"><img src="img/step.png"/></a>
+	    	<a href="###"><img src="/img/step.png"/></a>
 	    </div>
-	    
 	</div>
+
 	<div class="middle">
 		<button class="ok">确定</button>
 	</div>
