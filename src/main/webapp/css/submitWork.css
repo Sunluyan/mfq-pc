@@ -1,41 +1,41 @@
 .alert{
-	height: 30px;
+	height: 0.3rem;
 	text-align: center;
 	font-family: "微软雅黑";
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	background: #FD5A9C;
-	line-height: 30px;
+	line-height: 0.3rem;
 }
 .tips{
 	text-align: center;
-	font-size: 12px;
+	font-size: 0.12rem;
 	color: #999;
-	margin: 10px 45px;
+	margin: 0.1rem 0.45rem;
 	font-family:"微软雅黑" ;
 }
 .needImg{
 	width: 100%;
 	border-bottom: 1px solid #ccc;
-	height: 40px;
+	height: 0.4rem;
 	background: #fff;
 }
 .needImg input{
 	border: none;
 	margin: 0;
 	padding: 0;
-	height: 40px;
+	height: 0.4rem;
 	background: none;
 	float:left;
 	width: 70%;
-	margin-left: 30px;
+	margin-left: 0.3rem;
 	font-family: "微软雅黑";
-	font-size: 12px;
+	font-size: 0.12rem;
 	
 }
 .needImg label{
-	width: 40px;
-	height: 40px;
+	width: 0.4rem;
+	height:0.4rem;
 	float: right;
 	background: url(../img/上传照片.png) no-repeat center;
 	background-size: 60% 50%;
@@ -43,54 +43,54 @@
 .other{
 	width: 100%;
 	border-bottom: 1px solid #ccc;
-	height: 40px;
+	height: 0.4rem;
 	background: #fff;
 }
 .other input{
 	border: none;
 	margin: 0;
 	padding: 0;
-	height: 40px;
+	height: 0.4rem;
 	background: none;
 	float:left;
 	width: 70%;
-	margin-left: 30px;
+	margin-left: 0.3rem;
 	font-family: "微软雅黑";
-	font-size: 12px;
+	font-size: 0.12rem;
 	
 }
 
 .agree{
-	margin: 20px 20px;
+	margin: 0.2rem;
 }
 .agree input{
 	float: left;
 }
 .agree p{
-	font-size: 10px;
+	font-size: 0.1rem;
 	font-family: "微软雅黑";
-	height: 10px;
-	line-height: 10px;
+	height: 0.1rem;
+	line-height: 0.1rem;
 }
 .agree p a{
-	font-size: 10px;
+	font-size:0.1rem;
 	font-family: "微软雅黑";
 }
 .middle{
-	width: 210px;
+	width: 2.1rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 button{
 	clear: both;
-	width: 210px;
-	height: 33px;
+	width: 2.1rem;
+	height: 0.33rem;
 	background: #fd5a9c;
 	
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	font-family: "微软雅黑";
-	border-radius: 20px;
+	border-radius: 0.2rem;
 	border: none;
-	margin: 10px 0px;
+	margin: 0.1rem 0rem;
 }

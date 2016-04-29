@@ -1,12 +1,18 @@
 package com.mfq.service;
 
+import com.mfq.bean.OrderInfoExample;
+import com.mfq.bean.Users;
 import com.mfq.bean.WechatEvent;
 import com.mfq.bean.WechatEventWithBLOBs;
 import com.mfq.bean.wechat.message.News;
 import com.mfq.bean.wechat.message.NewsMessage;
 import com.mfq.bean.wechat.message.TextMessage;
+import com.mfq.constants.AuthStatus;
 import com.mfq.constants.Constants;
 import com.mfq.constants.WechatMessageType;
+import com.mfq.dao.OpenidUidMapper;
+import com.mfq.dao.OrderInfoMapper;
+import com.mfq.dao.UsersMapper;
 import com.mfq.dao.WechatEventMapper;
 import com.mfq.utils.XMLConverUtil;
 import org.slf4j.Logger;
@@ -32,35 +38,77 @@ public class WxMessageService {
 
     @Resource
     WechatEventMapper mapper;
+    @Resource
+    OpenidUidMapper openidUidMapper;
+    @Resource
+    OrderInfoMapper orderInfoMapper;
+    @Resource
+    UsersMapper usersMapper;
+    @Resource
+    UserService userService;
     /**
      * 处理微信文本类信息
      * @return
      */
     public String textHandle(Map<String,Object> text){
 
-//        TextMessage textMessage = new TextMessage();
-//        textMessage.setCreateTime(System.currentTimeMillis());
-//        textMessage.setMsgType("text");
-//        textMessage.setToUserName(text.get("FromUserName").toString());
-//        textMessage.setFromUserName(Constants.WECHAT_USER_NAME);
-//
-//        if(text.get("Content").toString().equals("。。")){
-//            textMessage.setContent("不许说。。");
-//        }else{
-//            textMessage.setContent("不许说话");
-//        }
-//
-//        String xml = XMLConverUtil.writeObj2Xml(textMessage);
-//        xml = xml.replaceAll("com.mfq.bean.wechat.message.TextMessage","xml");
-//        logger.info("xml result = "+xml);
+        TextMessage textMessage = new TextMessage();
+        textMessage.setCreateTime(System.currentTimeMillis());
+        textMessage.setMsgType("text");
+        textMessage.setToUserName(text.get("FromUserName").toString());
+        textMessage.setFromUserName(Constants.WECHAT_USER_NAME);
 
-        return "";
+        String content = text.get("Content").toString();
+        if(content.equals("。。")){
+            textMessage.setContent("不许说。。");
+        }
+        String openId = text.get("FromUserName").toString();
+        long uid = openidUidMapper.selectByPrimaryKey(openId).getUid();
+
+        if(content.equals("清除订单")){
+            OrderInfoExample example = new OrderInfoExample();
+            example.or().andUidEqualTo(uid);
+            orderInfoMapper.deleteByExample(example);
+            textMessage.setContent("清除成功");
+        }
+        else if(content.equals("清除所有资料")){
+            userService.changeUserStatusForWechat(uid,AuthStatus.INIT);
+            textMessage.setContent("清除成功");
+        }
+        else if(content.equals("清除基本资料")){
+            userService.changeUserStatusForWechat(uid,AuthStatus.INIT);
+            textMessage.setContent("清除成功");
+        }
+        else if(content.equals("清除身份资料")){
+            userService.changeUserStatusForWechat(uid,AuthStatus.BASE);
+            textMessage.setContent("清除成功");
+
+        }
+        else if(content.equals("清除征信资料")){
+            userService.changeUserStatusForWechat(uid,AuthStatus.USERTYPEDETAIL);
+            textMessage.setContent("清除成功");
+        }
+
+        else{
+            return "";
+        }
+
+
+
+        String xml = XMLConverUtil.writeObj2Xml(textMessage);
+        xml = xml.replaceAll("com.mfq.bean.wechat.message.TextMessage","xml");
+        logger.info("xml result = "+xml);
+
+        return xml;
     }
 
 
 
     public String eventHandle(Map<String,Object> text){
 
+        if(text.get("Event").equals("VIEW")){
+            return "";
+        }
         Integer eventId = null;
         if(text.get("EventKey").toString().contains("_")){
             eventId = Integer.parseInt(text.get("EventKey").toString().split("_")[1]);
@@ -89,6 +137,12 @@ public class WxMessageService {
     }
 
 
+    /**
+     * 发送图文消息
+     * @param event
+     * @param text
+     * @return
+     */
     public String sendArticlesByEvent(WechatEventWithBLOBs event ,Map<String,Object> text){
 
         NewsMessage newsMessage = new NewsMessage();

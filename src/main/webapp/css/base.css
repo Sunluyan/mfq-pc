@@ -1,27 +1,28 @@
 .alert{
-	height: 30px;
+	height: 0.3rem;
 	text-align: center;
 	font-family: "微软雅黑";
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	background: #FD5A9C;
-	line-height: 30px;
+	line-height: 0.3rem;
 }
 .apply{
-	margin: 20px 20px;
+	margin: 0.2rem;
+	
 }
 .tips{
 	text-align: center;
-	font-size: 12px;
+	font-size: 0.12rem;
 	color: #999;
-	margin: 10px 0px;
+	margin: 0.10rem 0px;
 	font-family:"微软雅黑" ;
 }
 .apply div{
 	width: 100%;
-	height: 42px;
+	height: 0.42rem;
 	border: 1px solid #CCCCCC;
-	margin-bottom: 10px;
+	margin-bottom: 0.1rem;
 	clear: both;
 	background: #fff;
 }
@@ -40,17 +41,17 @@
 	padding: 0;
 	list-style: none;
 	text-align: center;
-	margin: 0px 30px;
+	margin: 0rem 0.3rem;
 }
 .apply .showChose ul li{
-	margin: 12px 0px;
+	margin: 0.12rem 0rem;
 	border-bottom: 1px solid #ccc;
-	padding-bottom: 10px;
+	padding-bottom: 0.1rem;
 }
 .apply .showChose ul li a{
 	font-family: "微软雅黑";
 	color: #007AFF;
-	font-size: 12px;
+	font-size: 0.12rem;
 }
 .apply .showChose ul li a:active{
 	color: #333;
@@ -63,35 +64,35 @@
 	width: 80%;
 	color: #C3C3C3;
 	font-family: "微软雅黑";
-	font-size: 12px;
+	font-size: 0.12rem;
 	float: left;
 	
 }
 .apply div label{
-	width: 40px;
-	height: 40px;
+	width: 0.4rem;
+	height: 0.4rem;
 	float: right;
 	background:url(../img/下拉展开.png) no-repeat center;
 	background-size: 40% 30%;
 }
 .middle{
-	width: 210px;
+	width: 2.1rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 button{
 	clear: both;
-	width: 210px;
-	height: 33px;
+	width: 2.1rem;
+	height: 0.33rem;
 	background: #fd5a9c;
 	margin: 0px auto;
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	font-family: "微软雅黑";
-	border-radius: 20px;
+	border-radius: 0.2rem;
 	border: none;
-	margin: 20px 0px;
+	margin: 0.2rem 0px;
 }
 #conEcod{
 	width: 40%;
@@ -100,16 +101,16 @@ button{
 #getEcod{
 	background: none;
 	background: #fd5a9c;
-	width: 100px;
+	width: 1rem;
 	text-align: center;
-	line-height: 40px;
+	line-height: 0.4rem;
 	color: #fff;
 	font-family: "微软雅黑";
-	font-size: 14px;
+	font-size: 0.14rem;
 	
 }
 #cheer{
-	height: 40px;
+	height: 0.4rem;
 	margin-top: 0;
 	margin-bottom: 0;
 }

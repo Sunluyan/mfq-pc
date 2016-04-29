@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_type" property="orderType" jdbcType="INTEGER" />
     <result column="pay_no" property="payNo" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="uid" property="uid" jdbcType="BIGINT" />
     <result column="tpp" property="tpp" jdbcType="VARCHAR" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_type, pay_no, amount, uid, tpp, status, created_at, updated_at, pay_at
+    id, order_type, pay_no, order_no, amount, uid, tpp, status, created_at, updated_at, 
+    pay_at
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.PayRecordExample" >
     select
@@ -106,13 +108,13 @@
   </delete>
   <insert id="insert" parameterType="com.mfq.bean.PayRecord" >
     insert into pay_record (id, order_type, pay_no, 
-      amount, uid, tpp, status, 
-      created_at, updated_at, pay_at
-      )
+      order_no, amount, uid, 
+      tpp, status, created_at, 
+      updated_at, pay_at)
     values (#{id,jdbcType=BIGINT}, #{orderType,jdbcType=INTEGER}, #{payNo,jdbcType=VARCHAR}, 
-      #{amount,jdbcType=DECIMAL}, #{uid,jdbcType=BIGINT}, #{tpp,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{payAt,jdbcType=TIMESTAMP}
-      )
+      #{orderNo,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{uid,jdbcType=BIGINT}, 
+      #{tpp,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{payAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.PayRecord" >
     insert into pay_record
@@ -125,6 +127,9 @@
       </if>
       <if test="payNo != null" >
         pay_no,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
       </if>
       <if test="amount != null" >
         amount,
@@ -157,6 +162,9 @@
       </if>
       <if test="payNo != null" >
         #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null" >
         #{amount,jdbcType=DECIMAL},
@@ -199,6 +207,9 @@
       <if test="record.payNo != null" >
         pay_no = #{record.payNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.amount != null" >
         amount = #{record.amount,jdbcType=DECIMAL},
       </if>
@@ -230,6 +241,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       order_type = #{record.orderType,jdbcType=INTEGER},
       pay_no = #{record.payNo,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
       amount = #{record.amount,jdbcType=DECIMAL},
       uid = #{record.uid,jdbcType=BIGINT},
       tpp = #{record.tpp,jdbcType=VARCHAR},
@@ -249,6 +261,9 @@
       </if>
       <if test="payNo != null" >
         pay_no = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="amount != null" >
         amount = #{amount,jdbcType=DECIMAL},
@@ -278,6 +293,7 @@
     update pay_record
     set order_type = #{orderType,jdbcType=INTEGER},
       pay_no = #{payNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=DECIMAL},
       uid = #{uid,jdbcType=BIGINT},
       tpp = #{tpp,jdbcType=VARCHAR},

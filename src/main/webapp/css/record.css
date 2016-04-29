@@ -1,6 +1,15 @@
+.alert{
+	height: 0.3rem;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 0.12rem;
+	background: #FD5A9C;
+	line-height: 0.3rem;
+}
 .alreadyPay {
 	width: 100%;
-	height: 50px;
+	height: 0.5rem;
 	background: #fff;
 	border-bottom: 1px solid #ccc;
 	overflow: hidden;
@@ -10,16 +19,16 @@
 	float: left;
 	font-family: "微软雅黑";
 	color: #999;
-	font-size: 10px;
+	font-size: 0.1rem;
 	text-align: center;
-	margin-top: 14px;
+	margin-top:0.14rem;
 }
 
 .alreadyPay .money {
 	width: 50%;
 	text-align: left;
-	font-size: 14px;
-	padding-left: 16px;
+	font-size: 0.14rem;
+	padding-left: 0.16rem;
 }
 
 .alreadyPay .dateRecord {
@@ -33,12 +42,12 @@
 
 .alreadyPay .help {
 	float: left;
-	width: 12px;
-	height: 12px;
+	width: 0.12rem;
+	height: 0.12rem;
 	background: url(../img/help.png) no-repeat center;
-	border-radius: 12px;
+	border-radius: 0.12rem;
 	background-size: 100% 100%;
-	margin-top: 18px;
+	margin-top: 0.18rem;
 }
 
 .alreadyPay:active {

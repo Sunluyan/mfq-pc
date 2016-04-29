@@ -9,6 +9,7 @@
     <title>信息认证</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/home.css"/>
@@ -55,7 +56,7 @@
                 <input type="password" name="serverPwd" id="serverPwd"  placeholder="请输入您的服务密码"/>
             </div>
 
-            <a href="###">不记得服务密码？</a>
+            <%--<a href="###">不记得服务密码？</a>--%>
         </div>
 
         <!--next-->

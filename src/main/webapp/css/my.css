@@ -1,11 +1,11 @@
 .alert{
-	height: 30px;
+	height: 0.3rem;
 	text-align: center;
 	font-family: "微软雅黑";
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	background: #FD5A9C;
-	line-height: 30px;
+	line-height: 0.3rem;
 }
 .residue{
 	background: #fff;
@@ -23,7 +23,7 @@
 	float: left;
 	width: 20%;
 	color: #333;
-	font-size: 13px;
+	font-size: 0.13rem;
 	font-family: "微软雅黑";
 	
 }
@@ -34,12 +34,13 @@
 	background: none;
 	border: none;
 	margin-bottom: 0;
+	margin-top: 0.04rem;
 }
 .my div{
 	clear: both;
-	height: 40px;
-	margin: 0px 18px;
-	line-height: 40px;
+	height: 0.4rem;
+	margin: 0rem 0.18rem;
+	line-height: 0.4rem;
 	background: url(../img/right.png) no-repeat center right;
 	background-size: 4% 50%;
 	

@@ -9,6 +9,7 @@
     <title>提交资料</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/submitWork.css"/>
 
@@ -31,25 +32,25 @@
     <form action="/submit/work" method="post" enctype="multipart/form-data">
         <!--拍摄身份证正面-->
         <div class="needImg">
-            <input type="text" placeholder="拍摄身份证-正面"/><label for="face"></label>
+            <input type="text" placeholder="拍摄身份证-正面"disabled/><label for="face"></label>
             <input type="file" name="face" id="face" style="display: none;" onchange="choicePic(this)"/>
 
         </div>
         <!--拍摄身份证反面-->
         <div class="needImg">
-            <input type="text" placeholder="拍摄身份证-反面"/><label for="return"></label>
+            <input type="text" placeholder="拍摄身份证-反面"disabled/><label for="return"></label>
             <input type="file" name="return" id="return" style="display: none;" onchange="choicePic(this)"/>
 
         </div>
         <!--名片或者工作牌-->
         <div class="needImg">
-            <input type="text" placeholder="拍摄名片或工牌"/><label for="nameCard"></label>
+            <input type="text" placeholder="拍摄名片或工牌"disabled/><label for="nameCard"></label>
             <input type="file" name="nameCard" id="nameCard" style="display: none;" onchange="choicePic(this)"/>
 
         </div>
         <!--手持身份证自拍-->
         <div class="needImg">
-            <input type="text" placeholder="手持身份证自拍"/><label for="self"></label>
+            <input type="text" placeholder="手持身份证自拍" disabled/><label for="self"></label>
             <input type="file" name="self" id="self" style="display: none;" onchange="choicePic(this)"/>
 
         </div>
@@ -57,6 +58,18 @@
         <!--工作单位-->
         <div class="other">
             <input type="text" name="work" id="work" placeholder="工作单位"/>
+        </div>
+          <!--工作地址-->
+        <div class="other">
+            <input type="text" name="workAddress" id="workAddress" placeholder="工作地址"/>
+        </div>
+          <!--现居住地址-->
+        <div class="other">
+            <input type="text" name="liveAddress" id="liveAddress" placeholder="现居住地址"/>
+        </div>
+          <!--当前月收入-->
+        <div class="other">
+            <input type="text" name="monthAccess" id="monthAccess" placeholder="当前月收入"/>
         </div>
         <!--学历-->
         <div class="other">
@@ -76,7 +89,7 @@
         </div>
         <!--信用卡-->
         <div class="other">
-            <input type="text" name="card" id="card" placeholder="信用卡(选填)"/>
+            <input type="text" name="card" id="card" class="card" placeholder="信用卡(选填)"/>
         </div>
     </form>
 
@@ -84,7 +97,7 @@
         <div id="">
             <input type="checkbox" name="agreeItem" id="agreeItem" value="123"/>
         </div>
-        <p>&nbsp;&nbsp;同意<a href="###">《美分期个人借款协议》</a></p>
+        <p>&nbsp;&nbsp;同意<a href="/jiekuanxieyi">《美分期个人借款协议》</a></p>
     </div>
     <div class="middle">
         <button class="next" id="next3">提交申请</button>
@@ -102,8 +115,10 @@
         for (var i = 0; i < length; i++) {
             var thisInput = $input.get(i);
             if ($(thisInput).val() == "" || $(thisInput).val() == null || typeof($(thisInput).val()) == 'undefined') {
-                $(".alert").html("都得填上哦").show();
-                return false;
+                if (thisInput.className.indexOf("card") == -1) {
+                    $(".alert").html("都得填上哦").show();
+                    return false;
+                }
             }
         }
         if (!$("#agreeItem").get(0).checked) {

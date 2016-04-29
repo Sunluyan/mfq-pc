@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -286,14 +287,32 @@ public class WeChatController {
         return new ModelAndView("/wechat/QRCode", model);
     }
 
-    
+
+//    @RequestMapping(value = {"/js/token/","/js/token"}, method = { RequestMethod.GET, RequestMethod.POST })
+//    @ResponseBody
+//    public String JsApiToken(HttpServletRequest request) {
+//        String ret = "";
+//        try {
+//            String url = StringUtils.stripToEmpty(request.getParameter("url"));
+//            ret = weChatService.generateJsApiToken(url);
+//            logger.info("ret:{}",ret);
+//        } catch (Exception e) {
+//            logger.info("gen js api token {}", e);
+//        }
+//
+//        return ret;
+//    }
     @RequestMapping(value = {"/js/token/","/js/token"}, method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public String JsApiToken(HttpServletRequest request) {
         String ret = "";
         try {
-        	String url = StringUtils.stripToEmpty(request.getParameter("url"));
-            ret = weChatService.generateJsApiToken(url);
+            String url = StringUtils.stripToEmpty(request.getParameter("url"));
+            Map<String,Object> map = new HashMap<>();
+            map.put("url",url);
+            logger.info("url : "+url);
+            String body = JsonUtil.writeToJson(map);
+            ret = HttpUtil.get("http://m.5imfq.com/wechat/js/token?url="+url,false);
             logger.info("ret:{}",ret);
         } catch (Exception e) {
             logger.info("gen js api token {}", e);
@@ -308,5 +327,18 @@ public class WeChatController {
         return "/error/error";
     }
 
-    
+
+    @RequestMapping(value = "/pay/mobile_pay/{tpp}.do", method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public String mobileGoPay(@PathVariable String tpp, HttpServletRequest request, HttpServletResponse response){
+        Map<String,Object> map = JsonUtil.readMapFromReq(request);
+        map.put("order_no",request.getParameter("order_no"));
+        map.put("uid",request.getParameter("uid"));
+        map.put("amount",request.getParameter("amount"));
+        String body = JsonUtil.writeToJson(map);
+        String resp = HttpUtil.postJson("http://106.75.6.128/pay/mobile_pay/"+tpp+".do",body,false);
+
+        return resp;
+    }
+
 }

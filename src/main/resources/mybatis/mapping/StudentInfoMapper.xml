@@ -19,6 +19,9 @@
     <result column="wechat_no" property="wechatNo" jdbcType="VARCHAR" />
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="xuexinwang" property="xuexinwang" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -81,7 +84,7 @@
   <sql id="Base_Column_List" >
     id, uid, id_front, id_back, student_id, id_with_hand, school_provice, school_city, 
     school_name, grade, qq, home_address, family_name, family_mobile, wechat_no, created_at, 
-    updated_at
+    updated_at, xuexinwang, salary, level
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.StudentInfoExample" >
     select
@@ -119,13 +122,15 @@
       school_provice, school_city, school_name, 
       grade, qq, home_address, 
       family_name, family_mobile, wechat_no, 
-      created_at, updated_at)
+      created_at, updated_at, xuexinwang, 
+      salary, level)
     values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{idFront,jdbcType=VARCHAR}, 
       #{idBack,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{idWithHand,jdbcType=VARCHAR}, 
       #{schoolProvice,jdbcType=VARCHAR}, #{schoolCity,jdbcType=VARCHAR}, #{schoolName,jdbcType=VARCHAR}, 
       #{grade,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, 
       #{familyName,jdbcType=VARCHAR}, #{familyMobile,jdbcType=VARCHAR}, #{wechatNo,jdbcType=VARCHAR}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{xuexinwang,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.StudentInfo" >
     insert into student_info
@@ -181,6 +186,15 @@
       <if test="updatedAt != null" >
         updated_at,
       </if>
+      <if test="xuexinwang != null" >
+        xuexinwang,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -233,6 +247,15 @@
       </if>
       <if test="updatedAt != null" >
         #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xuexinwang != null" >
+        #{xuexinwang,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -296,6 +319,15 @@
       <if test="record.updatedAt != null" >
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.xuexinwang != null" >
+        xuexinwang = #{record.xuexinwang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -319,7 +351,10 @@
       family_mobile = #{record.familyMobile,jdbcType=VARCHAR},
       wechat_no = #{record.wechatNo,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      xuexinwang = #{record.xuexinwang,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -375,6 +410,15 @@
       <if test="updatedAt != null" >
         updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
+      <if test="xuexinwang != null" >
+        xuexinwang = #{xuexinwang,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -395,7 +439,10 @@
       family_mobile = #{familyMobile,jdbcType=VARCHAR},
       wechat_no = #{wechatNo,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      xuexinwang = #{xuexinwang,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

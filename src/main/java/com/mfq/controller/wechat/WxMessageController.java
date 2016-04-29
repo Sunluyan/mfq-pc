@@ -8,6 +8,8 @@ import com.mfq.utils.XMLConverUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,15 +38,21 @@ public class WxMessageController{
 
     @RequestMapping(value = "/wechat/receive",method = {RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody String receiveMessage(HttpServletRequest request , HttpServletResponse response) throws IOException {
+
         String xml = JsonUtil.readRequestString(request);
         Map<String, Object> soap = XMLConverUtil.convertSoapToMap(xml);
-
         if(soap.get("MsgType").toString().equals("text")){
             return service.textHandle(soap);
         }else if(soap.get("MsgType").toString().equals("event")){
             return service.eventHandle(soap);
         }
         return "";
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
+        String resp  = HttpUtil.post("http://we.5imfq.com/confirm","code=0118eVvI1zsnhc02ghtI1LoSvI18eVv4",false);
+        System.out.println(resp);
     }
 
 

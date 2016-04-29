@@ -31,6 +31,12 @@ public class WorkInfo {
 
     private String bankCard;
 
+    private String address;
+
+    private String workAddress;
+
+    private String salary;
+
     public Long getId() {
         return id;
     }
@@ -141,5 +147,29 @@ public class WorkInfo {
 
     public void setBankCard(String bankCard) {
         this.bankCard = bankCard == null ? null : bankCard.trim();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public String getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress == null ? null : workAddress.trim();
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary == null ? null : salary.trim();
     }
 }

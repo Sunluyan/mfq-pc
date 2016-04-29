@@ -7,6 +7,7 @@ import com.mfq.constants.Constants;
 import com.mfq.constants.ErrorCodes;
 import com.mfq.dataservice.context.UserIdHolder;
 import com.mfq.service.UserService;
+import com.mfq.utils.Config;
 import com.mfq.utils.HttpUtil;
 import com.mfq.utils.JsonUtil;
 import com.mfq.utils.RequestUtils;
@@ -25,13 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Spring 认证拦截器 
+ * Spring 认证拦截器
  * Created by xingyongshan on 15/8/4.
  */
 @Component
 public class AuthInterceptor extends HandlerInterceptorAdapter
         implements Ordered {
-    
+
     private static final Logger logger = LoggerFactory
             .getLogger(AuthInterceptor.class);
 
@@ -40,16 +41,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
 
     public AuthInterceptor() {
     }
-    
+
     @Override
     public boolean preHandle(HttpServletRequest request,
-            HttpServletResponse response, Object handler) throws Exception {
+                             HttpServletResponse response, Object handler) throws Exception {
         // 〇 非.5imfq.com域名 直接无视，系统错误。
         // 〇 如果是白名单地址（某些controller无需登录），直接通过，返回true
         // 〇 如果未登录且页面需要登录信息，则返回false
         // 〇 返回true
         String serverName = request.getServerName();
-        logger.info("requestServerName:{}", serverName);
+        logger.debug("requestServerName:{}", serverName);
 //        String domainSuffix = Constants.COOKIE_DOMAIN;
 //        if (!serverName.endsWith(domainSuffix)) {
 //            response.setCharacterEncoding("UTF-8");
@@ -61,26 +62,28 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
         HttpSession session = request.getSession();
 
         String code = request.getParameter("code");
-        if(session.getAttribute("openid") == null && StringUtils.isEmpty(code)){
+        logger.debug("code : " + code);
+        if (session.getAttribute("openid") == null && StringUtils.isEmpty(code)) {
+            logger.debug("not have a openid");
 //             response.sendRedirect("/wechat/notwechat");// TODO
-
-            session.setAttribute("openid","ot7eHxIp5Ch33prnfcYlvqOuFTCE");
-            session.setAttribute("uid",9529);
-
+            if (Config.isDev()) {
+                session.setAttribute("openid", "ot7eHxIp5Ch33prnfcYlvqOuFTCE");
+                session.setAttribute("uid", 9529);
+            }
         }
-
-        if (session.getAttribute("openid") == null) {
-            String re = HttpUtil.post("https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code"
+        logger.debug("openid"+session.getAttribute("openid"));
+        if (session.getAttribute("openid") == null && !StringUtils.isEmpty(code)) {
+            String re = HttpUtil.postJson("https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code"
                             .replace("APPID", Constants.APPID)
                             .replace("SECRET", Constants.APPSECRET)
                             .replace("CODE", code),
                     "", false);
-            logger.info(code + "\t" + re);
+            logger.debug(code + "\t" + re);
 
             if (re.contains("openid")) {
                 OpenId openId = JsonUtil.toBean(re, OpenId.class);
                 try {
-                    userService.selectOrInsertByOpenid(openId,session);
+                    userService.selectOrInsertByOpenid(openId, session);
                 } catch (Exception e) {
                     logger.error(e.getCause().toString());
                     e.printStackTrace();
@@ -89,28 +92,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
                 session.setAttribute("openid", openId.getOpenid());
             }
         }
-//        if (!checkWechat(request, response, handler)) {
-//            return false;
-//        }
-//        if (!checkLoginRequired(request, response, handler)) {
-//            return false;
-//        }
-
 
 
         return true;
     }
-    
-    
+
+
     @Override
     public void postHandle(
-			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
-			throws Exception {
+            HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
 
-	}
-
-
-
+    }
 
 
     /**
@@ -138,7 +131,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
             // 需要登录 但 未登录!!!!!
 //            RequestUtils.writeResponse(request, response,
 //                    JsonUtil.toJson(ErrorCodes.CORE_NEED_LOGIN, "需要登录", null));
-            request.getRequestDispatcher("/login").forward(request,response);
+            request.getRequestDispatcher("/login").forward(request, response);
             return false;
         }
 
@@ -155,7 +148,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
      * @throws Exception
      */
     private boolean checkWechat(HttpServletRequest request,
-                                       HttpServletResponse response, Object handler) throws Exception {
+                                HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof org.springframework.web.servlet.resource.ResourceHttpRequestHandler) {
             return true;
         }
@@ -166,7 +159,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
             WechatRequired = handlerMethod.getBeanType()
                     .getAnnotation(WechatRequired.class);
         }
-        if (WechatRequired != null && getOpenId(request)==null) {
+        if (WechatRequired != null && getOpenId(request) == null) {
             // 需要微信环境但没有 openid .
             RequestUtils.writeResponse(request, response,
                     JsonUtil.toJson(ErrorCodes.WECHAT_REQUIRED, "请在微信浏览器内打开", null));
@@ -178,29 +171,25 @@ public class AuthInterceptor extends HandlerInterceptorAdapter
     /**
      * 获取每次连接是否有 openid ,如果没有的话,返回null.
      * 目前这里需要修改.
+     *
      * @param request
      * @return
      */
-    private String getOpenId(HttpServletRequest request){
-        String openId = request.getAttribute("openid") != null ? request.getAttribute("openid").toString():null;
+    private String getOpenId(HttpServletRequest request) {
+        String openId = request.getAttribute("openid") != null ? request.getAttribute("openid").toString() : null;
         HttpSession session = request.getSession();
-        if(openId != null){
-            session.setAttribute("openid",openId);
+        if (openId != null) {
+            session.setAttribute("openid", openId);
             return openId;
         }
-        openId = request.getParameter("openid") != null ? request.getParameter("openid").toString():null;
-        if(openId != null){
-            session.setAttribute("openid",openId);
+        openId = request.getParameter("openid") != null ? request.getParameter("openid").toString() : null;
+        if (openId != null) {
+            session.setAttribute("openid", openId);
             return openId;
         }
         return null;
     }
 
-    
-    
-    
-    
-    
 
     @Override
     public int getOrder() {

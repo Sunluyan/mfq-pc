@@ -9,6 +9,7 @@
     <title>我的订单</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/myAll.css"/>
     <script src="/js/swiper.js" type="text/javascript" charset="utf-8"></script>

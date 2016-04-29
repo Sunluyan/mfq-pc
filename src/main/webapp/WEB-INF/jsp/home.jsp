@@ -9,6 +9,7 @@
     <title>信息认证</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/homeTwo.css"/>
@@ -47,7 +48,7 @@
                     <img src="/img/电商淘宝-选中.png" id="checkInTb">
                 </div>
             </c:if>
-
+                
 
         </c:forEach>
         <input type="hidden" name="choiced" class="choiced" value=""/>

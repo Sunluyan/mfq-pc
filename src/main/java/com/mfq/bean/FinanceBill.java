@@ -20,7 +20,7 @@ public class FinanceBill {
 
     private Long uid;
 
-    private Long lateFee;
+    private BigDecimal lateFee;
 
     private Date createdAt;
 
@@ -94,11 +94,11 @@ public class FinanceBill {
         this.uid = uid;
     }
 
-    public Long getLateFee() {
+    public BigDecimal getLateFee() {
         return lateFee;
     }
 
-    public void setLateFee(Long lateFee) {
+    public void setLateFee(BigDecimal lateFee) {
         this.lateFee = lateFee;
     }
 

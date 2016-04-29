@@ -1,43 +1,52 @@
+.alert{
+	height: 0.3rem;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 0.12rem;
+	background: #FD5A9C;
+	line-height: 0.3rem;
+}
 .userLogin{
-	margin: 13px 13px;
+	margin: 0.13rem 0.13rem;
 }
 .userLogin p{
 	color: #000;
-	font-size: 12px;
+	font-size: 0.12rem;
 	font-family: "微软雅黑";
-	margin-bottom: 11px;
+	margin-bottom: 0.11rem;
 }
 .userLogin span{
 	display: block;
-	width: 40px;
-	height: 40px;
+	width: 0.4rem;
+	height: 0.4rem;
 	background: red;
 	float: left;
 
 }
 .userLogin span img{
-	width: 40px;
-	height: 40px;
+	width: 0.4rem;
+	height:0.4rem;
 }
 
 .userLogin .pwdOne{
 	clear: both;
 	
-	height: 42px;
+	height: 0.42rem;
 	border: 1px solid #ccc;
 	background: #FFF;
 }
 .userLogin .pwdTwo{
 	clear: both;
-	height: 42px;
+	height: 0.42rem;
 	border: 1px solid #ccc;
 	background: #FFF;
 }
 .userLogin input{
-	width: 240px;
+	width: 2.4rem;
 	border: none;
 	float: left;
-	font-size: 12px;
+	font-size:0.12rem;
 	font-family: "微软雅黑";
 
 }
@@ -45,25 +54,25 @@ a{
 	clear: both;
 	float: right;
 	color: #007AFF;
-	font-size: 10px;
-	margin-right: 15px;
+	font-size: 0.1rem;
+	margin-right: 0.15rem;
 }
 .middle{
-	width:210px;
+	width:2.1rem;
 	margin-left: auto;
 	margin-right: auto;
 }
 .next{
 	clear: both;
-	width: 210px;
-	height: 33px;
+	width:2.1rem;
+	height: 0.33rem;
 	background: #fd5a9c;
 	margin: 0px auto;
 	color: #fff;
-	font-size: 12px;
+	font-size: 0.12rem;
 	font-family: "微软雅黑";
-	border-radius: 20px;
+	border-radius: 0.12rem;
 	border: none;
-	margin: 40px 0px;
+	margin: 0.4rem 0px;
 	
 }

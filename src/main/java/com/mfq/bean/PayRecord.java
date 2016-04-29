@@ -1,5 +1,6 @@
 package com.mfq.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class PayRecord {
@@ -9,7 +10,9 @@ public class PayRecord {
 
     private String payNo;
 
-    private Long amount;
+    private String orderNo;
+
+    private BigDecimal amount;
 
     private Long uid;
 
@@ -47,11 +50,19 @@ public class PayRecord {
         this.payNo = payNo == null ? null : payNo.trim();
     }
 
-    public Long getAmount() {
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
+    }
+
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

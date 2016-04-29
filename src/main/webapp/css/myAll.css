@@ -1,9 +1,18 @@
+.alert{
+	height: 0.3rem;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 0.12rem;
+	background: #FD5A9C;
+	line-height: 0.3rem;
+}
 .mui-content{
 	font-family: "微软雅黑";
 }
 
 .tabs {
-	height: 40px;
+	height: 0.4rem;
 	border-bottom: 1px solid #000;
 }
 
@@ -14,8 +23,8 @@
 	color: #999;
 	text-align: center;
 	background: #eee;
-	line-height: 40px;
-	font-size: 16px;
+	line-height: 0.4rem;
+	font-size: 0.16rem;
 	text-decoration: none;
 	border-bottom: 1px solid #ccc;
 }
@@ -28,7 +37,7 @@
 
 .swiper-container {
 
-	border-radius: 0 0 5px 5px;
+	border-radius: 0 0 0.05rem 0.05rem;
 	width: 100%;
 	border-top: 0;
 }
@@ -41,11 +50,11 @@
 }
 
 .content-slide {
-	margin: 10px 0px;
+	margin: 0.10rem 0rem;
 }
 
 .content-slide p {
-	margin:10px 10px;
+	margin:0.10rem;
 	
 	
 }
@@ -111,14 +120,14 @@
 }
 .showInfo{
 	
-	height: 60px;
+	height: 0.6rem;
 	border-bottom: 1px solid #ccc;
 
 
 }
 .showDate{
 	color: #CCCCCC;
-	font-size:10px;
+	font-size:0.1rem;
 }
 .showDate span{
 	color: #FD5A9C;

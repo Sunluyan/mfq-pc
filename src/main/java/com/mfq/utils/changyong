@@ -2,13 +2,14 @@
 
 
 
-
+ucloud
 ssh root@123.59.141.18
 YLcWemA8pvmPwTdM
 
 scp /Users/liuzhiguo1/git/mfq-pc/target/mfq-app.war root@123.59.141.18:/usr/mfq-dev/tomcat/webapps/ROOT/
 
 0、ssh进入服务器
+aliyun
 ssh root@112.126.81.40
 MFQ-dev-20!6
 

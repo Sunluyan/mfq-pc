@@ -9,11 +9,13 @@ import com.mfq.bean.juxinli.stepTwo.Data;
 import com.mfq.bean.juxinli.stepTwo.Datasource;
 import com.mfq.constants.AuthStatus;
 import com.mfq.constants.Constants;
+import com.mfq.constants.OrderStatus;
 import com.mfq.service.JuxinliService;
 import com.mfq.service.OrderInfoService;
 import com.mfq.service.UserService;
 import com.mfq.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.protocol.HTTP;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,9 +50,13 @@ public class PageController {
     JuxinliService juxinliService;
 
     @RequestMapping(value = {"/apply", "/apply/"}, method = {RequestMethod.GET})
-    public String apply(HttpServletRequest request, HttpServletResponse response) {
-
+    public String apply(HttpServletRequest request, HttpServletResponse response,Model model) {
         Long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
+        OrderInfo orderInfo = orderInfoService.selectLastByUid(uid);
+        if(orderInfo != null && orderInfo.getStatus() == OrderStatus.APPLY.getValue()){
+            model.addAttribute("msg","您有一个申请中的订单,点击去完善资料.");
+            model.addAttribute("link","/base");
+        }
         return "apply";
     }
 
@@ -59,27 +65,16 @@ public class PageController {
                             Model model,
                             @RequestParam("applyName") String proName,
                             @RequestParam("money") BigDecimal price,
-                            @RequestParam("moneyMonth") Integer period,
-                            @RequestParam("upLoad") MultipartFile img) {
+                            @RequestParam("moneyMonth") Integer period) {
         try {
-            String url = "";
-            if (!img.isEmpty()) {
-                File tmpFile = new File(System.currentTimeMillis() + RandomUtil.getRandom(5));
-                img.transferTo(tmpFile);
-                AliyunFile.uploadFile("wxp", tmpFile, tmpFile.getName() + "." + FileTypeTest.getFileByFile(tmpFile));
-                url = "http://y.iyeeda.com/" + tmpFile.getName() + "." + FileTypeTest.getFileByFile(tmpFile);
-                tmpFile.delete();
-            }
             Long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
-            orderInfoService.saveOrderInfo(proName, price, period, url, uid);
-
+            orderInfoService.saveOrderInfo(proName, price, period, uid);
 
         } catch (Exception e) {
             model.addAttribute("msg", e.getMessage());
             return "apply";
         }
-
-        return "base";
+        return "redirect:/base";
     }
 
 
@@ -91,8 +86,8 @@ public class PageController {
 
     @RequestMapping(value = {"/base", "/base/"}, method = {RequestMethod.GET})
     public String base(HttpServletRequest request, HttpServletResponse response) {
-
-        return toWebByUserAuthStatus((long) Integer.parseInt(request.getSession().getAttribute("uid").toString()));
+        logger.info("base uid :"+request.getSession().getAttribute("uid"));
+        return toWebByUserAuthStatus(Long.parseLong(request.getSession().getAttribute("uid").toString()));
     }
 
     @RequestMapping(value = {"/base", "/base/"}, method = {RequestMethod.POST})
@@ -101,12 +96,14 @@ public class PageController {
                              @RequestParam("nowNumber") String mobile,
                              @RequestParam("conEcod") String vcode,
                              @RequestParam("idCard") String idcard,
-                             @RequestParam("userType") Integer userType) {
+                             @RequestParam("userType") Integer userType,
+                             @RequestParam(value = "zhiye",required = false)String zhiye,
+                             @RequestParam(value = "zhiwei",required = false)String zhiwei) {
 
 
         try {
             long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
-            userService.uploadBase(name, mobile, vcode, idcard, userType, uid);
+            userService.uploadBase(name, mobile, vcode, idcard, userType, uid , zhiye,zhiwei);
             if (userType == 1) {
                 return "redirect:/submit/student";
             } else if (userType == 2) {
@@ -127,14 +124,25 @@ public class PageController {
         Long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
 
         OrderInfo orderInfo = orderInfoService.selectLastByUid(uid);
+        model.addAttribute("status",0);
         if (orderInfo == null) {
             model.addAttribute("msg","您还没有下订单,点击前往补充个人资料");
+            model.addAttribute("no","sdf");
             model.addAttribute("link","/base");
         } else {
+            Users user = userService.selectByUid(uid);
+            if(user.getStatus() == AuthStatus.USERTYPEDETAIL.getId()){
+                model.addAttribute("status",1);
+            }
+            if(user.getStatus() == AuthStatus.USERTAOBAOORJDPASSWORD.getId()){
+                model.addAttribute("status",3);
+            }
+
             model.addAttribute("order", orderInfo);
         }
         return "confirm";
     }
+
     public String toWebByUserAuthStatus(Long uid){
         Users user = userService.selectByUid(uid);
 
@@ -244,9 +252,10 @@ public class PageController {
             request.getSession().setAttribute("serverPwd", serverPwd);
 
         } catch (Exception e) {
-            logger.error(e.getCause().toString());
+            logger.error(e.getMessage());
+            model.addAttribute("user", userService.selectByUid(uid));
             model.addAttribute("msg",e.getMessage());
-            return "redirect:/home/two";
+            return "homeTwo";
         }
 
         return "redirect:/home/two/two";
@@ -372,6 +381,7 @@ public class PageController {
                                 @RequestParam("idReturn") MultipartFile idBack,
                                 @RequestParam("studentCard") MultipartFile studentId,
                                 @RequestParam("studentSelf") MultipartFile cardIdWithHand,
+                                @RequestParam("xuexinwang") MultipartFile xuexinwang,
                                 @RequestParam("schoolPro") String schoolPro,
                                 @RequestParam("schoolCity") String schoolCity,
                                 @RequestParam("schoolName") String schoolName,
@@ -380,7 +390,9 @@ public class PageController {
                                 @RequestParam("address") String address,
                                 @RequestParam("parents") String parents,
                                 @RequestParam("parentsPhone") String parentsPhone,
-                                @RequestParam("webChat") String wechat
+                                @RequestParam(value = "wechat",required = false,defaultValue = "") String wechat,
+                                @RequestParam("level") String level,
+                                @RequestParam("salary") String salary
     ) {
         try {
 
@@ -419,10 +431,18 @@ public class PageController {
                 cardIdWithHandUrl = "http://y.iyeeda.com/" + tmpFile.getName() + "." + FileTypeTest.getFileByFile(tmpFile);
                 tmpFile.delete();
             }
+            String xuexinwangUrl = "";
+            if (!xuexinwang.isEmpty()) {
+                File tmpFile = new File(System.currentTimeMillis() + RandomUtil.getRandom(5));
+                xuexinwang.transferTo(tmpFile);
+                AliyunFile.uploadFile("wxp", tmpFile, tmpFile.getName() + "." + FileTypeTest.getFileByFile(tmpFile));
+                xuexinwangUrl = "http://y.iyeeda.com/" + tmpFile.getName() + "." + FileTypeTest.getFileByFile(tmpFile);
+                tmpFile.delete();
+            }
 
             Long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
-            userService.uploadStudent(idFrontUrl, idBackUrl, studentIdUrl, cardIdWithHandUrl, schoolPro, schoolCity, schoolName,
-                    grade, qq, address, parents, parentsPhone, wechat, uid);
+            userService.uploadStudent(idFrontUrl, idBackUrl, studentIdUrl, cardIdWithHandUrl,schoolPro, schoolCity, schoolName,
+                    grade, qq, address, parents, parentsPhone, wechat, uid, xuexinwangUrl,level,salary);
 
 
         } catch (Exception e) {
@@ -447,11 +467,14 @@ public class PageController {
                              @RequestParam("nameCard") MultipartFile nameCard,
                              @RequestParam("self") MultipartFile self,
                              @RequestParam("work") String work,
+                             @RequestParam("workAddress") String workAddress,
+                             @RequestParam("liveAddress") String liveAddress,
+                             @RequestParam("monthAccess") String monthAccess,
                              @RequestParam("level") String level,
                              @RequestParam("email") String email,
                              @RequestParam("friend") String friend,
                              @RequestParam("friendPhone") String friendPhone,
-                             @RequestParam("card") String card) {
+                             @RequestParam(value = "card",required = false,defaultValue = "") String card ){
         try {
 
             if (idFront.isEmpty() || idBack.isEmpty() || nameCard.isEmpty() || self.isEmpty()) {
@@ -492,7 +515,7 @@ public class PageController {
 
             Long uid = Long.parseLong(request.getSession().getAttribute("uid").toString());
             userService.uploadWork(idFrontUrl, idBackUrl, nameCardUrl, selfUrl, work, level, email,
-                    friend, friendPhone, card, uid);
+                    friend, friendPhone, card, uid,workAddress,liveAddress,monthAccess);
 
 
         } catch (Exception e) {
@@ -562,6 +585,23 @@ public class PageController {
     public String step(HttpServletRequest request, HttpServletResponse response) {
 
         return "step";
+    }
+
+
+    /**
+     * 借款协议
+     */
+    @RequestMapping("/jiekuanxieyi")
+    public String jiekuanxieyi(HttpServletRequest request,Model model){
+        model.addAttribute("username",userService.selectByUid(Long.parseLong(request.getSession().getAttribute("uid").toString())));
+        return "jiekuanxieyi";
+    }
+    /**
+     * 声明
+     */
+    @RequestMapping("/shengming")
+    public String shengming(){
+        return "shengming";
     }
 
 

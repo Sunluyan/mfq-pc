@@ -8,6 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>信息认证</title>
     <script src="/js/mui.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/homeFour.css"/>

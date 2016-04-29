@@ -37,6 +37,12 @@ public class StudentInfo {
 
     private Date updatedAt;
 
+    private String xuexinwang;
+
+    private String salary;
+
+    private String level;
+
     public Long getId() {
         return id;
     }
@@ -171,5 +177,29 @@ public class StudentInfo {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getXuexinwang() {
+        return xuexinwang;
+    }
+
+    public void setXuexinwang(String xuexinwang) {
+        this.xuexinwang = xuexinwang == null ? null : xuexinwang.trim();
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary == null ? null : salary.trim();
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 }

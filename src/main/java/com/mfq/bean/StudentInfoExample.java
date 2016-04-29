@@ -1254,6 +1254,216 @@ public class StudentInfoExample {
             addCriterion("updated_at not between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
+
+        public Criteria andXuexinwangIsNull() {
+            addCriterion("xuexinwang is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangIsNotNull() {
+            addCriterion("xuexinwang is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangEqualTo(String value) {
+            addCriterion("xuexinwang =", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangNotEqualTo(String value) {
+            addCriterion("xuexinwang <>", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangGreaterThan(String value) {
+            addCriterion("xuexinwang >", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangGreaterThanOrEqualTo(String value) {
+            addCriterion("xuexinwang >=", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangLessThan(String value) {
+            addCriterion("xuexinwang <", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangLessThanOrEqualTo(String value) {
+            addCriterion("xuexinwang <=", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangLike(String value) {
+            addCriterion("xuexinwang like", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangNotLike(String value) {
+            addCriterion("xuexinwang not like", value, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangIn(List<String> values) {
+            addCriterion("xuexinwang in", values, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangNotIn(List<String> values) {
+            addCriterion("xuexinwang not in", values, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangBetween(String value1, String value2) {
+            addCriterion("xuexinwang between", value1, value2, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andXuexinwangNotBetween(String value1, String value2) {
+            addCriterion("xuexinwang not between", value1, value2, "xuexinwang");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryIsNull() {
+            addCriterion("salary is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryIsNotNull() {
+            addCriterion("salary is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryEqualTo(String value) {
+            addCriterion("salary =", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryNotEqualTo(String value) {
+            addCriterion("salary <>", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryGreaterThan(String value) {
+            addCriterion("salary >", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryGreaterThanOrEqualTo(String value) {
+            addCriterion("salary >=", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryLessThan(String value) {
+            addCriterion("salary <", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryLessThanOrEqualTo(String value) {
+            addCriterion("salary <=", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryLike(String value) {
+            addCriterion("salary like", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryNotLike(String value) {
+            addCriterion("salary not like", value, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryIn(List<String> values) {
+            addCriterion("salary in", values, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryNotIn(List<String> values) {
+            addCriterion("salary not in", values, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryBetween(String value1, String value2) {
+            addCriterion("salary between", value1, value2, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andSalaryNotBetween(String value1, String value2) {
+            addCriterion("salary not between", value1, value2, "salary");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelEqualTo(String value) {
+            addCriterion("level =", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotEqualTo(String value) {
+            addCriterion("level <>", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThan(String value) {
+            addCriterion("level >", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("level >=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThan(String value) {
+            addCriterion("level <", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThanOrEqualTo(String value) {
+            addCriterion("level <=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLike(String value) {
+            addCriterion("level like", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotLike(String value) {
+            addCriterion("level not like", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIn(List<String> values) {
+            addCriterion("level in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotIn(List<String> values) {
+            addCriterion("level not in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelBetween(String value1, String value2) {
+            addCriterion("level between", value1, value2, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotBetween(String value1, String value2) {
+            addCriterion("level not between", value1, value2, "level");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

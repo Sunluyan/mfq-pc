@@ -43,15 +43,12 @@ public class OrderInfoService {
     FinanceBillMapper financeBillMapper;
 
     @Transactional
-    public OrderInfo saveOrderInfo(String proName, BigDecimal price, Integer period, String url, Long uid) throws Exception {
+    public OrderInfo saveOrderInfo(String proName, BigDecimal price, Integer period, Long uid) throws Exception {
 
         if (StringUtils.isEmpty(proName)) {
             throw new Exception("产品不能为空");
         }
 
-        if (StringUtils.isEmpty(url)) {
-            throw new Exception("请上传手术协议书");
-        }
         if (uid == 0) {
             throw new Exception("非法用户");
         }
@@ -60,13 +57,16 @@ public class OrderInfoService {
             throw new Exception("已有在申请订单");
         }
 
+        if(period == 0){
+            throw new Exception("期数只能为3 6 12 24 ");
+        }
+
 
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setName(proName);
         orderInfo.setPrice(price.longValue());
         orderInfo.setPeriod(period);
         orderInfo.setUid(uid);
-        orderInfo.setImg(url);
         orderInfo.setOrderNo(makeOrderNo(uid));
         orderInfo.setOrderType(OrderType.ONLINE.getId());
         orderInfo.setStatus(OrderStatus.APPLY.getValue());
@@ -279,7 +279,6 @@ public class OrderInfoService {
     public static void main(String[] args) throws Exception {
         ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
         OrderInfoService service = ac.getBean(OrderInfoService.class);
-        service.allPayPage(9527l, null);
     }
 
     public void myAllBills(Long uid , String orderNo, Model model) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>我的分期</title>
     <script src="/js/mui.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/my.css"/>
     <script type="text/javascript" charset="UTF-8">
@@ -25,7 +26,7 @@
         </c:if>
 
 		<div class="residue"><!--剩余(residue)-->
-	    	<img src="/img/shengyu.png"/>
+	    	<img src="/img/h5 我的分期.png"/>
 	    </div>
 	    
 	    <div class="my">

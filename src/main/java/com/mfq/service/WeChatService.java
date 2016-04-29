@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -346,8 +347,7 @@ public class WeChatService {
 	 * @throws Exception
      */
 	public void initMenu() throws Exception {
-		String body = "{\"button\":[{\"name\":\"我的分期\",\"type\":\"view\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fmy&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"name\":\"我的订单\",\"type\":\"view\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fconfirm&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"name\":\"咨询客服\",\"type\":\"view\",\"url\":\"http://www.sobot.com/chat/h5/index.html?sysNum=c3c7fc4f6f84467ab9a32452e9284ecb&source=1\"}]}";
-
+		String body = "{\"button\":[{\"name\":\"我的分期\",\"sub_button\":[{\"type\":\"view\",\"name\":\"我的分期\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fmy&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"type\":\"view\",\"name\":\"申请分期\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fapply&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"type\":\"view\",\"name\":\"完整资料\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fbase&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"}]},{\"name\":\"我的订单\",\"type\":\"view\",\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdcf80505a7671ba0&redirect_uri=http%3A%2F%2Ftest.iyeeda.com%2Fconfirm&response_type=code&scope=snsapi_base&state=123123#wechat_redirect\"},{\"name\":\"咨询客服\",\"type\":\"view\",\"url\":\"http://www.sobot.com/chat/h5/index.html?sysNum=c3c7fc4f6f84467ab9a32452e9284ecb&source=1\"}]}";
 		String resp = HttpUtil.postJson("https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+getAccessToken().getToken(),body,false);
 		log.info(resp);
 	}
@@ -359,10 +359,29 @@ public class WeChatService {
 		return resp;
 	}
 
+	public static void testGetJsTicket(){
+		Map<String,Object> map = new HashMap<>();
+		map.put("order_no","wbl2016042714040128912539,wbl2016042714040175472539,wbl2016042714040110302539");
+		map.put("uid",9529);
+		map.put("amount",416.67*3);
+		map.put("sign",SignHelper.makeSign(map));
+		String body = JsonUtil.writeToJson(map);
+		String resp = HttpUtil.postJson("http://106.75.6.128/pay/mobile_pay/wechat.do",body,false);
+		System.out.println(resp);
+	}
+
+	public static void testGetConfig(){
+		Map<String,Object> map = new HashMap<>();
+		map.put("url","http://test.iyeeda.com/my/all/wmn2016042615190326312539");
+		String body = JsonUtil.writeToJson(map);
+		String ret = HttpUtil.postJson("http://m.5imfq.com/wechat/js/token",body,false);
+	}
+
 	public static void main(String[] args) throws Exception {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("spring/spring.xml");
 		WeChatService service = ac.getBean(WeChatService.class);
 		service.initMenu();
+//		testGetConfig();
 	}
 
 }

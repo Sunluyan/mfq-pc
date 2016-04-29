@@ -17,14 +17,14 @@ public class Constants {
     public static Set<String> APP_TYPE = Sets.newHashSet("Android", "iOS");
     
     // 在线生单－购物部分订单号前缀
-    public static String ONLINE_ORDER_PREFIX = "mn";
+    public static String ONLINE_ORDER_PREFIX = "wmn";
     // 在线充值－仅充值订单前缀
     public static String RECHARGE_ORDER_PREFIX = "cz";
     // 在线还款－仅还款订单前缀
-    public static String REFUND_ORDER_PREFIX = "bl";
-    // 随意单前缀
-    public static String FREEDOM_ORDER_PREFIX = "fk";
-    
+    public static String REFUND_ORDER_PREFIX = "wbl";
+
+    public static String PAY_ORDER_PREFIX = "wpa";
+
     public static String SEC_KEY = "Xo+81y.0AA61j89],f|yu6";
     
     // 网站相关，通用－发短信／邮件等

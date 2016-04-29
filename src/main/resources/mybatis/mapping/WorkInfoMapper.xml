@@ -16,6 +16,9 @@
     <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
     <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
     <result column="bank_card" property="bankCard" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="work_address" property="workAddress" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,7 +80,8 @@
   </sql>
   <sql id="Base_Column_List" >
     id, uid, id_front, id_back, visiting_card, id_with_hand, company, academic_background, 
-    email, family_name, family_mobile, created_at, updated_at, bank_card
+    email, family_name, family_mobile, created_at, updated_at, bank_card, address, work_address, 
+    salary
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mfq.bean.WorkInfoExample" >
     select
@@ -114,12 +118,14 @@
       id_back, visiting_card, id_with_hand, 
       company, academic_background, email, 
       family_name, family_mobile, created_at, 
-      updated_at, bank_card)
+      updated_at, bank_card, address, 
+      work_address, salary)
     values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{idFront,jdbcType=VARCHAR}, 
       #{idBack,jdbcType=VARCHAR}, #{visitingCard,jdbcType=VARCHAR}, #{idWithHand,jdbcType=VARCHAR}, 
       #{company,jdbcType=VARCHAR}, #{academicBackground,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{familyName,jdbcType=VARCHAR}, #{familyMobile,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{bankCard,jdbcType=VARCHAR})
+      #{updatedAt,jdbcType=TIMESTAMP}, #{bankCard,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{workAddress,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mfq.bean.WorkInfo" >
     insert into work_info
@@ -166,6 +172,15 @@
       <if test="bankCard != null" >
         bank_card,
       </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="workAddress != null" >
+        work_address,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -209,6 +224,15 @@
       </if>
       <if test="bankCard != null" >
         #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -263,6 +287,15 @@
       <if test="record.bankCard != null" >
         bank_card = #{record.bankCard,jdbcType=VARCHAR},
       </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAddress != null" >
+        work_address = #{record.workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -283,7 +316,10 @@
       family_mobile = #{record.familyMobile,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      bank_card = #{record.bankCard,jdbcType=VARCHAR}
+      bank_card = #{record.bankCard,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      work_address = #{record.workAddress,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -330,6 +366,15 @@
       <if test="bankCard != null" >
         bank_card = #{bankCard,jdbcType=VARCHAR},
       </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        work_address = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -347,7 +392,10 @@
       family_mobile = #{familyMobile,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      bank_card = #{bankCard,jdbcType=VARCHAR}
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      work_address = #{workAddress,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

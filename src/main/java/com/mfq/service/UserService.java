@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public void uploadBase(String name,String mobile,String vcode,String idCard,Integer userType,Long uid) throws Exception {
+    public void uploadBase(String name, String mobile, String vcode, String idCard, Integer userType, Long uid, String zhiye, String zhiwei) throws Exception {
         //验证开始
 
         if(vcodeService.validate(mobile,vcode).getCode() != ErrorCodes.SUCCESS){
@@ -91,6 +91,8 @@ public class UserService {
         user.setCardId(idCard);
         user.setUpdatedAt(new Date());
         user.setStatus(AuthStatus.BASE.getId());
+        user.setOccupation(zhiye);
+        user.setWorkPosition(zhiwei);
         mapper.updateByPrimaryKeySelective(user);
     }
 
@@ -104,7 +106,7 @@ public class UserService {
     @Transactional
     public void uploadStudent(String idFrontUrl, String idBackUrl, String studentIdUrl, String cardIdWithHandUrl, String schoolPro,
                               String schoolCity, String schoolName, String grade, String qq, String address, String parents,
-                              String parentsPhone, String wechat,Long uid) throws Exception{
+                              String parentsPhone, String wechat,Long uid,String xuexinwangUrl,String level,String salary) throws Exception{
         StudentInfo info = new StudentInfo();
 
         StudentInfoExample example = new StudentInfoExample();
@@ -119,6 +121,7 @@ public class UserService {
         info.setIdBack(idBackUrl);
         info.setStudentId(studentIdUrl);
         info.setIdWithHand(cardIdWithHandUrl);
+        info.setXuexinwang(xuexinwangUrl);
         info.setSchoolProvice(schoolPro);
         info.setSchoolCity(schoolCity);
         info.setSchoolName(schoolName);
@@ -128,6 +131,8 @@ public class UserService {
         info.setFamilyName(parents);
         info.setFamilyMobile(parentsPhone);
         info.setWechatNo(wechat);
+        info.setLevel(level);
+        info.setSalary(salary);
         info.setUpdatedAt(new Date());
 
         if(list != null && list.size() != 0){
@@ -169,11 +174,14 @@ public class UserService {
      * @param friendPhone
      * @param card
      * @param uid
+     * @param workAddress
+     * @param liveAddress
+     * @param monthAccess
      */
     @Transactional
     public void uploadWork(String idFrontUrl, String idBackUrl, String nameCardUrl, String selfUrl, String work,
                            String level, String email, String friend, String friendPhone,
-                           String card, Long uid) throws Exception{
+                           String card, Long uid, String workAddress, String liveAddress, String monthAccess) throws Exception{
 
         WorkInfo info = new WorkInfo();
 
@@ -195,6 +203,9 @@ public class UserService {
         info.setBankCard(card);
         info.setFamilyName(friend);
         info.setFamilyMobile(friendPhone);
+        info.setAddress(liveAddress);
+        info.setWorkAddress(workAddress);
+        info.setSalary(monthAccess);
         info.setUpdatedAt(new Date());
 
         long count = 0;
@@ -288,6 +299,7 @@ public class UserService {
             //创建新用户
             Users user = new Users();
             user.setUpdatedAt(new Date());
+            user.setStatus(AuthStatus.INIT.getId());
             long count = mapper.insertSelective(user);
             if(count <= 0 ){
                 throw new RuntimeException("插入用户错误,请重试");
@@ -306,5 +318,12 @@ public class UserService {
             session.setAttribute("openid",openidUid.getOpenid());
             session.setAttribute("uid",openidUid.getUid());
         }
+    }
+
+    public void changeUserStatusForWechat(long uid , AuthStatus authStatus){
+        Users user = new Users();
+        user.setUid(uid);
+        user.setStatus(authStatus.getId());
+        mapper.updateByPrimaryKeySelective(user);
     }
 }

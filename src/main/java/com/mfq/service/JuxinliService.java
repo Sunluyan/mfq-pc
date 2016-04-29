@@ -48,6 +48,7 @@ public class JuxinliService {
      */
     public static String init() throws IOException {
         if(staticDatasources != null){
+            logger.info(staticDatasources.toString());
             return JsonUtil.successResultJson(staticDatasources);
         }
         String resp = HttpUtil.get("https://www.juxinli.com/orgApi/rest/v2/orgs/meilifenqi/datasources",true);
@@ -59,6 +60,8 @@ public class JuxinliService {
             Datasource datasource = JsonUtil.toBean(array.get(i).toString(),Datasource.class);
             datasources.add(datasource);
         }
+        logger.info(datasources.toString());
+
         if(staticDatasources == null){
             staticDatasources = datasources;
         }
@@ -124,7 +127,7 @@ public class JuxinliService {
             throw new Exception(data.getContent());
         }
         if(data.getProcess_code() == 10003) {
-            throw new Exception(data.getContent());
+            throw new Exception("服务密码错误,请查实后再输入,输入错误5次24小时内无法输入.");
         }
         if(data != null && data.getReq_msg_tpl() != null){
             session.setAttribute("type",data.getReq_msg_tpl().getType());

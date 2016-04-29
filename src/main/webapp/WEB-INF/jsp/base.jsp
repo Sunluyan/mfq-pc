@@ -9,6 +9,7 @@
     <title>基础信息</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/base.css"/>
 
@@ -46,14 +47,22 @@
                 <!--身份证号码-->
                 <input type="text" name="idCard" id="idCard" placeholder="身份证号码"/>
             </div>
-            <div class="" style="margin: 0;padding: 0;">
+            <div class="">
                 <!--选择行业-->
                 <select id="userType" name="userType">
                     <option value="0">选择身份</option>
                     <option value="1">学生党</option>
                     <option value="2">上班族</option>
                 </select>
+            </div>
 
+            <div class="zhi" style="display: none;">
+                <!--职业-->
+                <input type="text" name="zhiye" id="zhiye" placeholder="职业"/>
+            </div>
+            <div class="zhi" style="display: none;">
+                <!--职位-->
+                <input type="text" name="zhiwei" id="zhiwei" placeholder="职位"/>
             </div>
         </div>
         <div class="middle">
@@ -89,7 +98,13 @@
             $(".alert").html("请选择您的身份")
             return false;
         }
-
+    })
+    $("#userType").change(function(){
+        if($(this).val() == 2){
+            $(".zhi").show();
+        }else{
+            $(".zhi").hide();
+        }
     })
     mui.init();
     var showChose = document.getElementById("showChose");

@@ -1,73 +1,82 @@
+
 body {
 	background: #fff;
 }
-
+.alert{
+	height: 0.3rem;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #fff;
+	font-size: 0.12rem;
+	background: #FD5A9C;
+	line-height: 0.3rem;
+}
 .mui-content {
 	background: #fff;
 }
 
 .monthInfo {
-	height: 60px;
+	height: 0.6rem;
 	border-bottom: 1px solid #ccc;
 	font-family: "微软雅黑";
 }
 
 .monthInfo p {
-	margin: 10px;
+	margin: 0.1rem;
 }
 
 .monthInfo .order {
 	float: left;
-	width: 20px;
-	height: 20px;
+	width: 0.2rem;
+	height: 0.2rem;
 	background: none;
 	text-align: center;
-	line-height: 18px;
+	line-height: 0.18rem;
 	border: 1px solid #ccc;
-	border-radius: 20px;
+	border-radius: 0.2rem;
 	margin-bottom: 0;
 }
 
 .monthInfo .order img {
-	width: 20px;
+	width: 0.2rem;
 }
 
 .monthInfo .price {
-	margin: 10px 0px 0px 0px;
+	margin: 0.1rem 0rem 0rem 0rem;
 	float: left;
 	color: #999;
-	font-size: 10px;
+	font-size: 0.1rem;
 }
 
 .monthInfo .days {
 	float: right;
 	color: #999;
-	font-size: 10px;
+	font-size: 0.1rem;
 	margin-bottom: 0;
 }
 
 .monthInfo .help {
 	float: right;
-	width: 12px;
-	height: 12px;
+	width:0.12rem;
+	height: 0.12rem;
 	background: url(../img/help.png) no-repeat center;
-	border-radius: 12px;
+	border-radius: 0.12rem;
 	background-size: 100% 100%;
-	margin: 14px 10px 0px 0px;
+	margin: 0.14rem 0.14rem 0rem 0rem;
 }
 
 .monthInfo .date {
 	clear: both;
 	float: left;
-	margin: 0px 0px 0px 30px;
-	font-size: 10px;
+	margin: 0rem 0rem 0rem 0.3rem;
+	font-size: 0.1rem;
 	color: #ccc;
 }
 
 .monthInfo .proName {
-	margin: 0px 0px;
+	margin: 0rem 0rem;
 	float: left;
-	font-size: 10px;
+	font-size: 0.1rem;
 	color: #ccc;
 }
 
@@ -78,25 +87,25 @@ body {
 .already {
 	float: left;
 	width: 70%;
-	height: 50px;
+	height: 0.5rem;
 	background: #fff;
 }
 
 .already .empty {
 	display: block;
-	width: 20px;
-	height: 20px;
+	width:0.2rem;
+	height: 0.2rem;
 	border: 1px solid #ccc;
-	border-radius: 20px;
+	border-radius: 0.2rem;
 	float: left;
-	margin: 16px 10px;
+	margin: 0.16rem 0.10rem;
 	background: url(../img/电商-选中.png) no-repeat center;
 }
 .already b{
 	color: #FD5A9C;
 }
 .already p {
-	margin-top: 16px;
+	margin-top: 0.16rem;
 	font-family: "微软雅黑";
 }
 
@@ -109,7 +118,7 @@ body {
 .nowPay button {
 	border: none;
 	width: 100%;
-	height: 50px;
+	height: 0.5rem;
 	background: #FD5A9C;
 	color: #fff;
 	font-family: "微软雅黑";

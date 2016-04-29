@@ -9,6 +9,7 @@
     <title>提交资料</title>
     <script src="/js/mui.min.js"></script>
     <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/rem.js" type="text/javascript" charset="utf-8"></script>
     <link href="/css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="/css/submitStudent.css"/>
 </head>
@@ -39,21 +40,24 @@
         </div>
         <!--拍摄身份证反面-->
         <div class="needImg ImageBox">
-            <input type="text" placeholder="拍摄身份证-反面"/><label for="idReturn"></label>
+            <input type="text" placeholder="拍摄身份证-反面"disabled/><label for="idReturn"></label>
             <input type="file" name="idReturn" id="idReturn" style="display: none;" onchange="choicePic(this)"/>
 
         </div>
         <!--学生证内页-->
         <div class="needImg ImageBox">
-            <input type="text" placeholder="拍摄名片或工牌"/><label for="studentCard"></label>
+            <input type="text" placeholder="拍摄学生证内页"disabled/><label for="studentCard"></label>
             <input type="file" name="studentCard" id="studentCard" style="display: none;" onchange="choicePic(this)"/>
-
         </div>
         <!--手持身份证自拍-->
         <div class="needImg ImageBox">
-            <input type="text" placeholder="手持身份证自拍"/><label for="studentSelf"></label>
+            <input type="text" placeholder="手持身份证自拍"disabled/><label for="studentSelf"></label>
             <input type="file" name="studentSelf" id="studentSelf" style="display: none;" onchange="choicePic(this)"/>
-
+        </div>
+        <!--学信网截图照片-->
+        <div class="needImg ImageBox">
+            <input type="text" placeholder="学信网截图照片"disabled/><label for="xuexinwang"></label>
+            <input type="file" name="xuexinwang" id="xuexinwang" style="display: none;" onchange="choicePic(this)"/>
         </div>
         <p></p>
         <!--学校省份-->
@@ -67,11 +71,23 @@
         </div>
         <!--学校名称-->
         <div class="other">
-            <input type="text" name="schoolName" id="schoolName" placeholder="学校名"/>
+            <input type="text" name="schoolName" id="schoolName" placeholder="学校名称"/>
         </div>
         <!--所在年级-->
         <div class="other">
             <input type="text" name="schoolClass" id="schoolClass" placeholder="所在年级"/>
+        </div>
+        <!--宿舍地址-->
+        <div class="other">
+            <input type="text" name="nowAddress" id="nowAddress" placeholder="宿舍地址"/>
+        </div>
+        <!--学历-->
+        <div class="other">
+            <input type="text" name="level" id="level" placeholder="学历"/>
+        </div>
+        <!--月生活费-->
+        <div class="other">
+            <input type="text" name="salary" id="salary" placeholder="月生活费"/>
         </div>
         <!--QQ号-->
         <div class="other">
@@ -91,7 +107,7 @@
         </div>
         <!--微信号-->
         <div class="other">
-            <input type="text" name="webChat" id="webChat" placeholder="微信号(选填)"/>
+            <input type="text" name="weChat" id="weChat" class="wechat" placeholder="微信号(选填)"/>
         </div>
         <div class="agree">
             <div id="">
@@ -112,14 +128,19 @@
     $("#next2").click(function () {
         var $input = $("input")
         var length = $input.length;
-        for(var i = 0;i<length;i++){
+        for (var i = 0; i < length; i++) {
             var thisInput = $input.get(i);
+
             if ($(thisInput).val() == "" || $(thisInput).val() == null || typeof($(thisInput).val()) == 'undefined') {
-                $(".alert").html("都得填上哦").show();
-                return false;
+                if (thisInput.className.indexOf("wechat") == -1) {
+                    $(".alert").html("都得填上哦").show();
+                    return false;
+                }
             }
         }
-        if(!$("#agreeItem").get(0).checked){return false}
+        if (!$("#agreeItem").get(0).checked) {
+            return false
+        }
 
         window.location.href = "/apply/success";
     })
